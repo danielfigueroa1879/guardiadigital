@@ -1,4 +1,162 @@
-<!DOCTYPE html>
+// Validación básica
+                    if (!nombre || !formData.get('email')) {
+                        alert('Por favor, completa los campos obligatorios.');
+                        return;
+                    }
+                    
+                    // Mensaje personalizado
+                    let mensaje = `¡Gracias ${nombre}!`;
+                    if (empresa) {
+                        mensaje += ` Hemos recibido tu solicitud de evaluación gratuita para ${empresa}`;
+                    }
+                    if (sector && sector !== '') {
+                        const sectores = {
+                            'servicios-financieros': 'Servicios Financieros',
+                            'salud-farmaceutico': 'Salud y Farmacéutico',
+                            'tecnologia-software': 'Tecnología y Software',
+                            'retail-digital': 'Retail con Presencia Digital',
+                            'otros': 'otros sectores'
+                        };
+                        mensaje += ` en el sector de ${sectores[sector]}`;
+                    }
+                    mensaje += '. Nuestro equipo de expertos te contactará pronto para programar tu evaluación gratuita de seguridad.';
+                    
+                    alert(mensaje);
+                    
+                    // Limpiar formulario
+                    this.reset();
+                });
+            }
+
+            // Scroll suave para links internos
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        const headerHeight = document.querySelector('.header').offsetHeight;
+                        const targetPosition = target.offsetTop - headerHeight - 20;
+                        
+                        window.scrollTo({
+                            top: Math.max(0, targetPosition),
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Intersection Observer para animaciones
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            // Observar elementos para animaciones
+            document.querySelectorAll('.service-card-new, .iot-card, .mv-card').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+
+            // Header dinámico al hacer scroll
+            let lastScroll = 0;
+            const header = document.querySelector('.header');
+            
+            function updateHeader() {
+                const currentScroll = window.pageYOffset;
+                
+                if (currentScroll > 100) {
+                    header.style.background = 'rgba(40, 40, 40, 0.98)';
+                    header.style.backdropFilter = 'blur(20px)';
+                    header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.3)';
+                } else {
+                    header.style.background = 'rgba(40, 40, 40, 0.95)';
+                    header.style.backdropFilter = 'blur(10px)';
+                    header.style.boxShadow = 'none';
+                }
+                
+                lastScroll = currentScroll;
+            }
+
+            // Throttle scroll events para mejor performance
+            let ticking = false;
+            window.addEventListener('scroll', function() {
+                if (!ticking) {
+                    requestAnimationFrame(function() {
+                        updateHeader();
+                        toggleScrollButton();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+
+            // Detectar cambios de orientación móvil
+            window.addEventListener('orientationchange', function() {
+                setTimeout(() => {
+                    // Cerrar menú si está abierto
+                    if (mobileMenu && mobileMenu.classList.contains('active')) {
+                        menuButton.classList.remove('active');
+                        mobileMenu.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                    
+                    // Reajustar elementos
+                    toggleScrollButton();
+                }, 500);
+            });
+
+            // Prevenir zoom en inputs en iOS
+            const inputs = document.querySelectorAll('input, textarea, select');
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    // En móviles, hacer scroll suave al input
+                    if (window.innerWidth <= 768) {
+                        setTimeout(() => {
+                            this.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'center'
+                            });
+                        }, 300);
+                    }
+                });
+            });
+
+            // Mejorar experiencia táctil
+            if ('ontouchstart' in window) {
+                const touchElements = document.querySelectorAll('.service-card-new, .iot-card, .mv-card, .cta-button, .nav-link');
+                
+                touchElements.forEach(element => {
+                    element.addEventListener('touchstart', function() {
+                        this.style.transform = 'scale(0.98)';
+                    }, { passive: true });
+                    
+                    element.addEventListener('touchend', function() {
+                        setTimeout(() => {
+                            this.style.transform = '';
+                        }, 150);
+                    }, { passive: true });
+                });
+            }
+
+            // Log de carga completa
+            console.log('✅ Guardia Digital - Sitio web responsive cargado');
+            console.log('📱 Optimizaciones móviles activas');
+            console.log('🛡️ Funcionalidades de ciberseguridad listas');
+        });
+
+        <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -15,7 +173,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            color: #E0FD2C;
+            color: #FFD700;
             font-size: 16px;
             font-weight: 600;
             background-color: rgba(255, 255, 255, 0.1);
@@ -26,7 +184,7 @@
         }
 
         .visitor-counter-container:hover {
-            background-color: rgba(224, 253, 44, 0.2);
+            background-color: rgba(255, 215, 0, 0.2);
             transform: scale(1.05);
         }
 
@@ -83,7 +241,7 @@
 
         .service-card-new {
             background: linear-gradient(145deg, rgba(15,15,15,0.9), rgba(40,40,40,0.8));
-            border: 2px solid rgba(224, 253, 44, 0.3);
+            border: 2px solid rgba(255, 215, 0, 0.3);
             padding: 30px 25px;
             border-radius: 15px;
             text-align: center;
@@ -97,18 +255,18 @@
 
         .service-card-new:hover {
             transform: translateY(-10px);
-            border-color: #E0FD2C;
-            box-shadow: 0 20px 40px rgba(224, 253, 44, 0.2);
+            border-color: #FFD700;
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.2);
         }
 
         .service-card-new .service-icon {
             font-size: 48px;
-            color: #E0FD2C;
+            color: #FFD700;
             margin-bottom: 20px;
         }
 
         .pricing-highlight {
-            background: linear-gradient(135deg, #E0FD2C, #C7E525);
+            background: linear-gradient(135deg, #FFD700, #FFA500);
             color: #000;
             padding: 8px 16px;
             border-radius: 20px;
@@ -244,7 +402,7 @@
             
             .hero-description {
                 font-size: 18px !important;
-                text-align: center !important;
+                text-align: justify !important;
                 padding: 0 10px;
                 line-height: 1.6;
             }
@@ -267,7 +425,7 @@
             .main-services p,
             .iot-description {
                 font-size: 16px;
-                text-align: center;
+                text-align: justify;
                 margin-bottom: 40px;
             }
             
@@ -334,7 +492,7 @@
             
             .mv-card p {
                 font-size: 14px;
-                text-align: center;
+                text-align: justify;
             }
             
             /* Contacto móvil */
@@ -458,6 +616,7 @@
             .main-services p,
             .iot-description {
                 font-size: 14px;
+                text-align: justify;
             }
             
             .service-card-new {
@@ -761,27 +920,29 @@
                 CIBERSEGURIDAD EMPRESARIAL
             </h1>
             <p class="hero-description">
-                En un mundo digital incierto, Guardia Digital se convierte en el escudo protector de las 
-                organizaciones chilenas. Más allá de vender servicios, construimos relaciones a largo plazo 
-                basadas en la confianza y el entendimiento profundo de los desafíos que enfrentan las empresas 
-                en Chile, especialmente las PYMES. Nuestro enfoque humano y cercano traduce la complejidad 
-                técnica en tranquilidad y confianza para nuestros clientes.
+                En un mundo digital cada vez más complejo, sabemos que lo que realmente importa para tu empresa 
+                es tener la tranquilidad de que tus datos y sistemas están protegidos. En Guardia Digital, 
+                convertimos la ciberseguridad en algo simple y comprensible. No usamos tecnicismos complicados, 
+                sino que hablamos en tu idioma para que puedas tomar decisiones informadas. Nuestro equipo local 
+                entiende los desafíos específicos de las empresas chilenas, especialmente las PYMES, y trabajamos 
+                contigo para crear un escudo de protección que te permita dormir tranquilo sabiendo que tu negocio 
+                está seguro.
             </p>
         </div>
     </section>
 
     <section class="main-services">
         <div class="container">
-            <h2>Soluciones Robustas de Ciberseguridad</h2>
-            <p>Protegemos el presente y el futuro digital de las empresas en Chile, entregando soluciones de ciberseguridad comprensibles y efectivas.</p>
+            <h2>Protección Simple y Confiable</h2>
+            <p>Te ayudamos a proteger tu empresa sin complicaciones. Hablamos en términos claros para que entiendas exactamente cómo mantenemos tu negocio seguro.</p>
             
             <div class="services-grid">
                 <div class="service-card-new">
                     <div class="service-icon">
                         <i class="fas fa-shield-alt"></i>
                     </div>
-                    <h3>Auditorías de Seguridad Digital</h3>
-                    <p>Evaluación completa de tu infraestructura digital para identificar vulnerabilidades y fortalecer defensas.</p>
+                    <h3>Revisión Completa de Seguridad</h3>
+                    <p>Analizamos todos los puntos donde tu empresa podría estar en riesgo y te explicamos de manera simple qué necesitas proteger.</p>
                     <span class="pricing-highlight">Evaluación Gratuita</span>
                 </div>
                 
@@ -789,8 +950,8 @@
                     <div class="service-icon">
                         <i class="fas fa-eye"></i>
                     </div>
-                    <h3>Monitoreo 24/7 - Guardia Permanente</h3>
-                    <p>Supervisión constante de tu red corporativa con respuesta inmediata ante amenazas.</p>
+                    <h3>Vigilancia 24/7 - Tu Guardia Digital</h3>
+                    <p>Cuidamos tu empresa las 24 horas del día, todos los días del año. Si algo extraño sucede, actuamos inmediatamente.</p>
                     <span class="pricing-highlight">20% más económico</span>
                 </div>
                 
@@ -798,8 +959,8 @@
                     <div class="service-icon">
                         <i class="fas fa-users-cog"></i>
                     </div>
-                    <h3>Consultoría en Compliance</h3>
-                    <p>Asesoramiento experto para cumplir con regulaciones y estándares de ciberseguridad.</p>
+                    <h3>Cumplimiento Legal Simplificado</h3>
+                    <p>Te ayudamos a cumplir con todas las normas y regulaciones de seguridad sin que tengas que convertirte en un experto legal.</p>
                     <span class="pricing-highlight">Paquetes Escalables</span>
                 </div>
                 
@@ -807,8 +968,8 @@
                     <div class="service-icon">
                         <i class="fas fa-graduation-cap"></i>
                     </div>
-                    <h3>Capacitación en Ciberseguridad</h3>
-                    <p>Programas educativos para empoderar a tu equipo contra amenazas digitales.</p>
+                    <h3>Capacitación Práctica para tu Equipo</h3>
+                    <p>Enseñamos a tu equipo cómo mantenerse seguro en el día a día, con consejos prácticos y fáciles de aplicar.</p>
                     <span class="pricing-highlight">Descuentos Anuales</span>
                 </div>
             </div>
@@ -817,46 +978,46 @@
 
     <section id="servicios" class="iot-section">
         <div class="container">
-            <h2>Diagnóstico de Guardia - Freemium</h2>
+            <h2>Evaluación Gratuita - Sin Compromiso</h2>
             <p class="iot-description">
-                Comenzamos con nuestro servicio gratuito "Diagnóstico de Guardia", una evaluación inicial 
-                de la seguridad de tu empresa. Este análisis nos permite identificar las áreas de mayor 
-                riesgo y diseñar una estrategia de protección personalizada. Creemos en la transparencia 
-                y la confianza, por eso ofrecemos valor desde el primer contacto.
+                Comenzamos ofreciéndote una evaluación completamente gratuita de la seguridad de tu empresa. 
+                Sin tecnicismos, sin compromisos. Solo queremos que sepas exactamente dónde estás parado y cómo 
+                podemos ayudarte a estar más tranquilo. Creemos que la confianza se construye paso a paso, 
+                y por eso te damos valor desde el primer día, sin pedir nada a cambio.
             </p>
             
             <div class="iot-services">
                 <div class="iot-card">
                     <div class="iot-image">
-                        <i class="fas fa-search" style="font-size: 48px; color: #E0FD2C;"></i>
+                        <i class="fas fa-search" style="font-size: 48px; color: #FFD700;"></i>
                     </div>
-                    <h3>1. Evaluación Gratuita de Vulnerabilidades</h3>
+                    <h3>1. Te Contamos Qué Encontramos</h3>
                     <div class="iot-details">
-                        <p><strong>Análisis inicial sin costo para identificar brechas de seguridad.</strong></p>
+                        <p><strong>Revisamos tu empresa y te explicamos de manera simple dónde están los riesgos.</strong></p>
                         <ul>
-                            <li>Revisión de infraestructura básica</li>
-                            <li>Identificación de puntos críticos</li>
-                            <li><strong>Beneficios:</strong></li>
-                            <li>Conocimiento inmediato de tu situación actual</li>
-                            <li>Recomendaciones prioritarias sin compromiso</li>
+                            <li>Revisión básica de tus sistemas</li>
+                            <li>Identificamos los puntos más importantes a proteger</li>
+                            <li><strong>Lo que obtienes:</strong></li>
+                            <li>Sabes exactamente cómo está tu empresa hoy</li>
+                            <li>Recomendaciones claras de qué hacer primero</li>
                         </ul>
                     </div>
-                    <button class="cta-button">Solicitar Diagnóstico</button>
+                    <button class="cta-button">Solicitar Evaluación Gratuita</button>
                 </div>
                 
                 <div class="iot-card">
                     <div class="iot-image">
-                        <i class="fas fa-chart-line" style="font-size: 48px; color: #E0FD2C;"></i>
+                        <i class="fas fa-chart-line" style="font-size: 48px; color: #FFD700;"></i>
                     </div>
-                    <h3>2. Plan de Acción Personalizado</h3>
+                    <h3>2. Creamos Tu Plan de Protección</h3>
                     <div class="iot-details">
-                        <p><strong>Estrategia diseñada específicamente para las necesidades de tu empresa.</strong></p>
+                        <p><strong>Diseñamos un plan paso a paso, pensado específicamente para tu empresa y tu presupuesto.</strong></p>
                         <ul>
-                            <li>Análisis de riesgos específicos de tu sector</li>
-                            <li>Hoja de ruta clara y accionable</li>
-                            <li><strong>Beneficios:</strong></li>
-                            <li>Implementación gradual y sostenible</li>
-                            <li>Inversión optimizada en seguridad</li>
+                            <li>Plan adaptado a tu tipo de negocio</li>
+                            <li>Pasos claros y fechas realistas</li>
+                            <li><strong>Lo que obtienes:</strong></li>
+                            <li>Avanzas de a poco, sin grandes inversiones de una vez</li>
+                            <li>Cada peso que inviertas tiene un propósito claro</li>
                         </ul>
                     </div>
                     <button class="cta-button">Ver Ejemplo</button>
@@ -864,16 +1025,16 @@
                 
                 <div class="iot-card">
                     <div class="iot-image">
-                        <i class="fas fa-handshake" style="font-size: 48px; color: #E0FD2C;"></i>
+                        <i class="fas fa-handshake" style="font-size: 48px; color: #FFD700;"></i>
                     </div>
-                    <h3>3. Acompañamiento Continuo</h3>
+                    <h3>3. Te Acompañamos en el Camino</h3>
                     <div class="iot-details">
-                        <p><strong>Relación a largo plazo con tu equipo de expertos locales de confianza.</strong></p>
+                        <p><strong>No te dejamos solo. Nuestro equipo está siempre disponible para ayudarte y responder tus dudas.</strong></p>
                         <ul>
-                            <li><strong>Beneficios:</strong></li>
-                            <li>Soporte técnico en español adaptado a la realidad chilena</li>
-                            <li>Evolución constante de tu estrategia de seguridad</li>
-                            <li>Tranquilidad para enfocarte en tu negocio principal</li>
+                            <li><strong>Lo que obtienes:</strong></li>
+                            <li>Soporte en español cuando lo necesites</li>
+                            <li>Tu seguridad mejora constantemente</li>
+                            <li>Puedes concentrarte en hacer crecer tu negocio con tranquilidad</li>
                         </ul>
                     </div>
                     <button class="cta-button">Conocer Más</button>
@@ -911,7 +1072,7 @@
 
             <!-- Objetivos Estratégicos -->
             <div style="margin-top: 60px;">
-                <h2 style="color: #E0FD2C; text-align: center; margin-bottom: 40px;">Objetivos Estratégicos</h2>
+                <h2 style="color: #FFD700; text-align: center; margin-bottom: 40px;">Objetivos Estratégicos</h2>
                 <div class="services-grid">
                     <div class="service-card-new">
                         <div class="service-icon">
@@ -971,7 +1132,7 @@
                 
                 <!-- Formulario -->
                 <div class="contact-form-wrapper">
-                    <h2>Solicitar Diagnóstico Gratuito</h2>
+                    <h2>Solicitar Evaluación Gratuita</h2>
                     
                     <form class="newsletter-form" method="post" action="#" id="contactForm">
                         <input type="text" name="nombre" placeholder="Nombre completo" maxlength="100" required>
@@ -988,7 +1149,7 @@
                         </select>
                         <textarea name="mensaje" placeholder="Describe brevemente tus necesidades de ciberseguridad..." rows="4" maxlength="1000"></textarea>
                         
-                        <button type="submit">Solicitar Diagnóstico Gratuito</button>
+                        <button type="submit">Solicitar Evaluación Gratuita</button>
                     </form>
                 </div>
             </div>
@@ -1149,7 +1310,28 @@
                         };
                         mensaje += ` en el sector de ${sectores[sector]}`;
                     }
-                    mensaje += '. Nuestro equipo de expertos te contactará pronto para programar tu diagnóstico gratuito de ciberseguridad.';
+                    // Validación básica
+                    if (!nombre || !formData.get('email')) {
+                        alert('Por favor, completa los campos obligatorios.');
+                        return;
+                    }
+                    
+                    // Mensaje personalizado
+                    let mensaje = `¡Gracias ${nombre}!`;
+                    if (empresa) {
+                        mensaje += ` Hemos recibido tu solicitud de evaluación gratuita para ${empresa}`;
+                    }
+                    if (sector && sector !== '') {
+                        const sectores = {
+                            'servicios-financieros': 'Servicios Financieros',
+                            'salud-farmaceutico': 'Salud y Farmacéutico',
+                            'tecnologia-software': 'Tecnología y Software',
+                            'retail-digital': 'Retail con Presencia Digital',
+                            'otros': 'otros sectores'
+                        };
+                        mensaje += ` en el sector de ${sectores[sector]}`;
+                    }
+                    mensaje += '. Nuestro equipo de expertos te contactará pronto para programar tu evaluación gratuita de seguridad.';
                     
                     alert(mensaje);
                     
