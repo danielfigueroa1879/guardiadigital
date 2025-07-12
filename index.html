@@ -36,7 +36,6 @@
 
         /* --- MODIFICACIÓN PARA MÓVILES --- */
         @media screen and (max-width: 992px) {
-            /* Estilos para el contador */
             .visitor-counter-container {
                 position: absolute; 
                 top: 24px;
@@ -45,8 +44,6 @@
                 font-size: 12px;
                 padding: 6px 10px;
                 gap: 5px;
-                
-                /* Cambio a fondo transparente */
                 background-color: transparent;
                 color: #ffffff;
                 box-shadow: none;
@@ -58,7 +55,6 @@
                 font-size: 14px;
             }
 
-            /* Mover el título a la derecha */
             .nav-logo {
                 padding-left: 80px; 
                 transition: all 0.3s ease;
@@ -118,594 +114,159 @@
             display: inline-block;
         }
 
-        /* ============= RESPONSIVE DESIGN MEJORADO ============= */
-
-        /* Tablets */
+        /* ============= RESPONSIVE DESIGN ============= */
         @media screen and (max-width: 1024px) {
-            .hero-title {
-                font-size: 48px;
-            }
-            
-            .hero-description {
-                font-size: 24px !important;
-            }
-            
-            .services-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .iot-services {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .mv-grid {
-                grid-template-columns: 1fr;
-            }
+            .hero-title { font-size: 48px; }
+            .hero-description { font-size: 24px !important; }
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .iot-services { grid-template-columns: repeat(2, 1fr); }
+            .mv-grid { grid-template-columns: 1fr; }
         }
 
-        /* Móviles */
         @media screen and (max-width: 768px) {
-            /* Header móvil */
-            .nav-container {
-                padding: 0 15px;
-                flex-wrap: wrap;
-                position: relative;
-            }
-            
-            .nav-logo {
-                order: 1;
-                flex: 1;
-                text-align: center;
-            }
-            
-            .nav-logo h2 {
-                font-size: 24px;
-            }
-            
-            .nav-toggle {
-                order: 2;
-                display: flex;
-                margin-left: auto;
-            }
-            
-            .search-container {
-                display: none;
-            }
+            .nav-container { padding: 0 15px; flex-wrap: wrap; position: relative; }
+            .nav-logo { order: 1; flex: 1; text-align: center; }
+            .nav-logo h2 { font-size: 24px; }
+            .nav-toggle { order: 2; display: flex; margin-left: auto; }
+            .search-container { display: none; }
             
             .nav-menu {
-                position: fixed;
-                left: 0;
-                top: -100vh;
-                flex-direction: column;
-                background: rgba(26, 26, 46, 0.98);
-                width: 100%;
-                height: 50vh;
-                text-align: center;
-                transition: all 0.4s ease;
-                padding: 30px 0;
-                z-index: 1001;
-                border-bottom-left-radius: 30px;
-                border-bottom-right-radius: 30px;
-                backdrop-filter: blur(20px);
-                border: 2px solid rgba(255, 215, 0, 0.3);
-                opacity: 0;
-                transform: translateY(-20px);
+                position: fixed; left: 0; top: -100vh; flex-direction: column;
+                background: rgba(26, 26, 46, 0.98); width: 100%; height: 50vh;
+                text-align: center; transition: all 0.4s ease; padding: 30px 0;
+                z-index: 1001; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px;
+                backdrop-filter: blur(20px); border: 2px solid rgba(255, 215, 0, 0.3);
+                opacity: 0; transform: translateY(-20px);
             }
             
-            .nav-menu.active {
-                top: 80px;
-                opacity: 1;
-                transform: translateY(0);
-            }
+            .nav-menu.active { top: 80px; opacity: 1; transform: translateY(0); }
+            .nav-menu li { margin: 15px 0; width: 100%; }
+            .nav-link { font-size: 18px; color: #fff; padding: 12px 20px; display: block; border-radius: 25px; transition: all 0.3s ease; }
+            .nav-link:hover { background: rgba(255, 215, 0, 0.2); color: #FFD700; }
             
-            .nav-menu li {
-                margin: 15px 0;
-                width: 100%;
-            }
+            .nav-toggle.active .bar:nth-child(2) { opacity: 0; transform: translateX(20px); }
+            .nav-toggle.active .bar:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+            .nav-toggle.active .bar:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
             
-            .nav-link {
-                font-size: 18px;
-                color: #fff;
-                padding: 12px 20px;
-                display: block;
-                border-radius: 25px;
-                transition: all 0.3s ease;
-            }
+            .hero { padding: 100px 15px 60px; min-height: 80vh; }
+            .hero-title { font-size: 32px; margin-bottom: 25px; line-height: 1.2; }
+            .hero-description { font-size: 18px !important; text-align: justify !important; padding: 0 10px; line-height: 1.6; }
             
-            .nav-link:hover {
-                background: rgba(255, 215, 0, 0.2);
-                color: #FFD700;
-            }
+            .main-services, .iot-section, .mission-vision, .contact-section { padding: 60px 15px; }
+            .main-services h2, .iot-section h2, .mission-vision h2 { font-size: 32px; margin-bottom: 20px; }
+            .main-services p, .iot-description { font-size: 16px; text-align: justify; margin-bottom: 40px; }
             
-            .nav-toggle.active .bar:nth-child(2) {
-                opacity: 0;
-                transform: translateX(20px);
-            }
+            .services-grid { grid-template-columns: 1fr; gap: 25px; margin-top: 40px; }
+            .service-card-new { padding: 30px 20px; min-height: 300px; }
+            .service-card-new .service-icon { font-size: 48px; }
+            .service-card-new h3 { font-size: 20px; }
+            .service-card-new p { font-size: 14px; }
             
-            .nav-toggle.active .bar:nth-child(1) {
-                transform: translateY(6px) rotate(45deg);
-            }
+            .iot-services { grid-template-columns: 1fr; gap: 25px; margin-top: 40px; }
+            .iot-card { padding: 30px 20px; }
+            .iot-card h3 { font-size: 18px; }
+            .iot-details li { font-size: 13px; }
+            .cta-button { padding: 12px 25px; font-size: 14px; }
             
-            .nav-toggle.active .bar:nth-child(3) {
-                transform: translateY(-6px) rotate(-45deg);
-            }
+            .mv-grid { grid-template-columns: 1fr; gap: 30px; }
+            .mv-card { padding: 30px 20px; }
+            .mv-card h3 { font-size: 24px; }
+            .mv-card p { font-size: 14px; text-align: justify; }
             
-            /* Hero móvil */
-            .hero {
-                padding: 100px 15px 60px;
-                min-height: 80vh;
-            }
+            .contact-content-wrapper { display: flex; flex-direction: column; gap: 30px; }
+            .contact-info-wrapper, .contact-form-wrapper { padding: 25px 20px; }
+            .contact-info-wrapper h3, .contact-form-wrapper h2 { font-size: 22px; margin-bottom: 20px; }
+            .contact-item { font-size: 14px; margin-bottom: 15px; }
+            .contact-item i { font-size: 16px; width: 20px; margin-right: 12px; }
+            .newsletter-form input, .newsletter-form textarea, .newsletter-form select { padding: 12px 15px; font-size: 14px; border-radius: 8px; }
+            .newsletter-form button { padding: 15px 25px; font-size: 16px; margin-top: 15px; }
             
-            .hero-title {
-                font-size: 32px;
-                margin-bottom: 25px;
-                line-height: 1.2;
-            }
-            
-            .hero-description {
-                font-size: 18px !important;
-                text-align: justify !important;
-                padding: 0 10px;
-                line-height: 1.6;
-            }
-            
-            /* Servicios móvil */
-            .main-services,
-            .iot-section,
-            .mission-vision,
-            .contact-section {
-                padding: 60px 15px;
-            }
-            
-            .main-services h2,
-            .iot-section h2,
-            .mission-vision h2 {
-                font-size: 32px;
-                margin-bottom: 20px;
-            }
-            
-            .main-services p,
-            .iot-description {
-                font-size: 16px;
-                text-align: justify;
-                margin-bottom: 40px;
-            }
-            
-            .services-grid {
-                grid-template-columns: 1fr;
-                gap: 25px;
-                margin-top: 40px;
-            }
-            
-            .service-card-new {
-                padding: 30px 20px;
-                min-height: 300px;
-            }
-            
-            .service-card-new .service-icon {
-                font-size: 48px;
-            }
-            
-            .service-card-new h3 {
-                font-size: 20px;
-            }
-            
-            .service-card-new p {
-                font-size: 14px;
-            }
-            
-            /* IoT sección móvil */
-            .iot-services {
-                grid-template-columns: 1fr;
-                gap: 25px;
-                margin-top: 40px;
-            }
-            
-            .iot-card {
-                padding: 30px 20px;
-            }
-            
-            .iot-card h3 {
-                font-size: 18px;
-            }
-            
-            .iot-details li {
-                font-size: 13px;
-            }
-            
-            .cta-button {
-                padding: 12px 25px;
-                font-size: 14px;
-            }
-            
-            /* Misión y Visión móvil */
-            .mv-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-            
-            .mv-card {
-                padding: 30px 20px;
-            }
-            
-            .mv-card h3 {
-                font-size: 24px;
-            }
-            
-            .mv-card p {
-                font-size: 14px;
-                text-align: justify;
-            }
-            
-            /* Contacto móvil */
-            .contact-content-wrapper {
-                display: flex;
-                flex-direction: column;
-                gap: 30px;
-            }
-            
-            .contact-info-wrapper,
-            .contact-form-wrapper {
-                padding: 25px 20px;
-            }
-            
-            .contact-info-wrapper h3,
-            .contact-form-wrapper h2 {
-                font-size: 22px;
-                margin-bottom: 20px;
-            }
-            
-            .contact-item {
-                font-size: 14px;
-                margin-bottom: 15px;
-            }
-            
-            .contact-item i {
-                font-size: 16px;
-                width: 20px;
-                margin-right: 12px;
-            }
-            
-            .newsletter-form input,
-            .newsletter-form textarea,
-            .newsletter-form select {
-                padding: 12px 15px;
-                font-size: 14px;
-                border-radius: 8px;
-            }
-            
-            .newsletter-form button {
-                padding: 15px 25px;
-                font-size: 16px;
-                margin-top: 15px;
-            }
-            
-            /* Footer móvil */
-            .footer {
-                padding: 40px 15px 20px;
-            }
-            
-            .footer-section h3 {
-                font-size: 20px;
-            }
-            
-            .footer-section p {
-                font-size: 14px;
-            }
-            
-            .social-links {
-                gap: 15px;
-                margin-top: 20px;
-            }
-            
-            .social-links a {
-                width: 45px;
-                height: 45px;
-                font-size: 24px;
-            }
-            
-            .footer-bottom {
-                padding-top: 20px;
-            }
-            
-            .signature p {
-                font-size: 14px;
-            }
+            .footer { padding: 40px 15px 20px; }
+            .footer-section h3 { font-size: 20px; }
+            .footer-section p { font-size: 14px; }
+            .social-links { gap: 15px; margin-top: 20px; }
+            .social-links a { width: 45px; height: 45px; font-size: 24px; }
+            .footer-bottom { padding-top: 20px; }
+            .signature p { font-size: 14px; }
         }
 
-        /* Móviles pequeños */
         @media screen and (max-width: 480px) {
-            .nav-logo h2 {
-                font-size: 20px;
-            }
-            
-            .visitor-counter-container {
-                font-size: 10px;
-                padding: 4px 8px;
-                top: 12px;
-                left: 10px;
-            }
-            
-            .hero {
-                padding: 90px 10px 50px;
-                min-height: 70vh;
-            }
-            
-            .hero-title {
-                font-size: 28px;
-                margin-bottom: 20px;
-            }
-            
-            .hero-description {
-                font-size: 16px !important;
-                padding: 0 5px;
-                line-height: 1.5;
-            }
-            
-            .main-services,
-            .iot-section,
-            .mission-vision,
-            .contact-section {
-                padding: 50px 10px;
-            }
-            
-            .main-services h2,
-            .iot-section h2,
-            .mission-vision h2 {
-                font-size: 28px;
-            }
-            
-            .main-services p,
-            .iot-description {
-                font-size: 14px;
-                text-align: justify;
-            }
-            
-            .service-card-new {
-                padding: 25px 15px;
-                min-height: 280px;
-            }
-            
-            .service-card-new .service-icon {
-                font-size: 40px;
-                margin-bottom: 20px;
-            }
-            
-            .service-card-new h3 {
-                font-size: 18px;
-                margin-bottom: 15px;
-            }
-            
-            .service-card-new p {
-                font-size: 13px;
-            }
-            
-            .pricing-highlight {
-                font-size: 12px;
-                padding: 8px 16px;
-            }
-            
-            .iot-card {
-                padding: 25px 15px;
-            }
-            
-            .iot-card h3 {
-                font-size: 16px;
-            }
-            
-            .iot-details p {
-                font-size: 13px;
-            }
-            
-            .iot-details li {
-                font-size: 12px;
-                padding: 3px 0;
-            }
-            
-            .cta-button {
-                padding: 10px 20px;
-                font-size: 12px;
-            }
-            
-            .mv-card {
-                padding: 25px 15px;
-            }
-            
-            .mv-card h3 {
-                font-size: 22px;
-            }
-            
-            .mv-card p {
-                font-size: 13px;
-            }
-            
-            .contact-info-wrapper,
-            .contact-form-wrapper {
-                padding: 20px 15px;
-            }
-            
-            .contact-info-wrapper h3,
-            .contact-form-wrapper h2 {
-                font-size: 20px;
-                margin-bottom: 18px;
-            }
-            
-            .contact-item {
-                font-size: 13px;
-            }
-            
-            .newsletter-form input,
-            .newsletter-form textarea,
-            .newsletter-form select {
-                padding: 10px 12px;
-                font-size: 13px;
-            }
-            
-            .newsletter-form button {
-                padding: 12px 20px;
-                font-size: 14px;
-            }
-            
-            .social-links a {
-                width: 40px;
-                height: 40px;
-                font-size: 20px;
-            }
+            .nav-logo h2 { font-size: 20px; }
+            .visitor-counter-container { font-size: 10px; padding: 4px 8px; top: 12px; left: 10px; }
+            .hero { padding: 90px 10px 50px; min-height: 70vh; }
+            .hero-title { font-size: 28px; margin-bottom: 20px; }
+            .hero-description { font-size: 16px !important; padding: 0 5px; line-height: 1.5; }
+            .main-services, .iot-section, .mission-vision, .contact-section { padding: 50px 10px; }
+            .main-services h2, .iot-section h2, .mission-vision h2 { font-size: 28px; }
+            .main-services p, .iot-description { font-size: 14px; text-align: justify; }
+            .service-card-new { padding: 25px 15px; min-height: 280px; }
+            .service-card-new .service-icon { font-size: 40px; margin-bottom: 20px; }
+            .service-card-new h3 { font-size: 18px; margin-bottom: 15px; }
+            .service-card-new p { font-size: 13px; }
+            .pricing-highlight { font-size: 12px; padding: 8px 16px; }
+            .iot-card { padding: 25px 15px; }
+            .iot-card h3 { font-size: 16px; }
+            .iot-details p { font-size: 13px; }
+            .iot-details li { font-size: 12px; padding: 3px 0; }
+            .cta-button { padding: 10px 20px; font-size: 12px; }
+            .mv-card { padding: 25px 15px; }
+            .mv-card h3 { font-size: 22px; }
+            .mv-card p { font-size: 13px; }
+            .contact-info-wrapper, .contact-form-wrapper { padding: 20px 15px; }
+            .contact-info-wrapper h3, .contact-form-wrapper h2 { font-size: 20px; margin-bottom: 18px; }
+            .contact-item { font-size: 13px; }
+            .newsletter-form input, .newsletter-form textarea, .newsletter-form select { padding: 10px 12px; font-size: 13px; }
+            .newsletter-form button { padding: 12px 20px; font-size: 14px; }
+            .social-links a { width: 40px; height: 40px; font-size: 20px; }
         }
 
-        /* Móviles muy pequeños */
         @media screen and (max-width: 360px) {
-            .nav-logo h2 {
-                font-size: 18px;
-            }
-            
-            .hero-title {
-                font-size: 24px;
-            }
-            
-            .hero-description {
-                font-size: 14px !important;
-            }
-            
-            .main-services h2,
-            .iot-section h2,
-            .mission-vision h2 {
-                font-size: 24px;
-            }
-            
-            .service-card-new {
-                padding: 20px 12px;
-                min-height: 260px;
-            }
-            
-            .service-card-new .service-icon {
-                font-size: 36px;
-            }
-            
-            .service-card-new h3 {
-                font-size: 16px;
-            }
-            
-            .iot-card {
-                padding: 20px 12px;
-            }
-            
-            .mv-card {
-                padding: 20px 12px;
-            }
-            
-            .contact-info-wrapper,
-            .contact-form-wrapper {
-                padding: 18px 12px;
-            }
-            
-            .contact-info-wrapper h3,
-            .contact-form-wrapper h2 {
-                font-size: 18px;
-            }
+            .nav-logo h2 { font-size: 18px; }
+            .hero-title { font-size: 24px; }
+            .hero-description { font-size: 14px !important; }
+            .main-services h2, .iot-section h2, .mission-vision h2 { font-size: 24px; }
+            .service-card-new { padding: 20px 12px; min-height: 260px; }
+            .service-card-new .service-icon { font-size: 36px; }
+            .service-card-new h3 { font-size: 16px; }
+            .iot-card { padding: 20px 12px; }
+            .mv-card { padding: 20px 12px; }
+            .contact-info-wrapper, .contact-form-wrapper { padding: 18px 12px; }
+            .contact-info-wrapper h3, .contact-form-wrapper h2 { font-size: 18px; }
         }
 
-        /* Landscape móvil */
         @media screen and (max-height: 500px) and (orientation: landscape) {
-            .hero {
-                min-height: 90vh;
-                padding: 80px 20px 40px;
-            }
-            
-            .hero-title {
-                font-size: 32px;
-                margin-bottom: 15px;
-            }
-            
-            .hero-description {
-                font-size: 16px !important;
-            }
-            
-            .nav-menu {
-                height: 40vh;
-            }
+            .hero { min-height: 90vh; padding: 80px 20px 40px; }
+            .hero-title { font-size: 32px; margin-bottom: 15px; }
+            .hero-description { font-size: 16px !important; }
+            .nav-menu { height: 40vh; }
         }
 
-        /* Desktop large */
         @media screen and (min-width: 1200px) {
-            .container {
-                max-width: 1400px;
-            }
-            
-            .hero-title {
-                font-size: 64px;
-            }
-            
-            .hero-description {
-                font-size: 32px !important;
-            }
-            
-            .services-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-            
-            .iot-services {
-                grid-template-columns: repeat(3, 1fr);
-            }
+            .container { max-width: 1400px; }
+            .hero-title { font-size: 64px; }
+            .hero-description { font-size: 32px !important; }
+            .services-grid { grid-template-columns: repeat(4, 1fr); }
+            .iot-services { grid-template-columns: repeat(3, 1fr); }
         }
 
-        /* Mejoras de accesibilidad */
         @media (prefers-reduced-motion: reduce) {
-            * {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
+            * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
         }
 
-        /* Tema de alto contraste */
         @media (prefers-contrast: high) {
-            .nav-link,
-            .hero-title {
-                text-shadow: none;
-            }
-            
-            .service-card-new,
-            .iot-card,
-            .mv-card {
-                border-width: 3px;
-            }
+            .nav-link, .hero-title { text-shadow: none; }
+            .service-card-new, .iot-card, .mv-card { border-width: 3px; }
         }
 
-        /* Print styles */
         @media print {
-            .nav-toggle,
-            .search-container,
-            .cta-button,
-            .newsletter-form button,
-            .scroll-to-top {
-                display: none;
-            }
-            
-            body {
-                background: white;
-                color: black;
-            }
-            
-            .hero-title,
-            .nav-link {
-                color: black;
-            }
+            .nav-toggle, .search-container, .cta-button, .newsletter-form button, .scroll-to-top { display: none; }
+            body { background: white; color: black; }
+            .hero-title, .nav-link { color: black; }
         }
 
-        /* Optimizaciones para touch */
         @media (hover: none) {
-            .service-card-new:hover,
-            .iot-card:hover,
-            .mv-card:hover {
-                transform: none;
-            }
-            
-            .service-card-new:active,
-            .iot-card:active,
-            .mv-card:active {
-                transform: scale(0.98);
-            }
+            .service-card-new:hover, .iot-card:hover, .mv-card:hover { transform: none; }
+            .service-card-new:active, .iot-card:active, .mv-card:active { transform: scale(0.98); }
         }
     </style>
 </head>
@@ -731,10 +292,10 @@
                         <a href="#servicios" class="nav-link">Servicios</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#contacto" class="nav-link">Contacto</a>
+                        <a href="#mision" class="nav-link">Misión</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#contacto" class="nav-link">Consultoría</a>
+                        <a href="#contacto" class="nav-link">Contacto</a>
                     </li>
                 </ul>
                 
@@ -745,12 +306,10 @@
                     </button>
                 </div>
 
-                <!-- Contador de Visitas -->
                 <div class="visitor-counter-container">
                      <i class="fas fa-eye"></i>
                      <span id="visitor-count">0</span>
                 </div>
-
             </div>
         </nav>
     </header>
@@ -773,412 +332,13 @@
         </div>
     </section>
 
-    <section class="main-services">
+    <section id="servicios" class="main-services">
         <div class="container">
             <h2>Protección Simple y Confiable</h2>
             <p>Te ayudamos a proteger tu empresa sin complicaciones. Hablamos en términos claros para que entiendas exactamente cómo mantenemos tu negocio seguro.</p>
             
             <div class="services-grid">
-                                        <div class="service-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <h3>Crecimiento Estratégico</h3>
-                        <p>Incrementar la cartera de clientes activos en un 40% durante los próximos tres años, enfocándonos en sectores de alto valor.</p>
-                    </div>
-                    
-                    <div class="service-card-new">
-                        <div class="service-icon">
-                            <i class="fas fa-building"></i>
-                        </div>
-                        <h3>Construcción de Marca</h3>
-                        <p>Alcanzar un reconocimiento de marca del 25% dentro de nuestro mercado objetivo (gerentes de TI, CISO y dueños de PYMES).</p>
-                    </div>
-                    
-                    <div class="service-card-new">
-                        <div class="service-icon">
-                            <i class="fas fa-lightbulb"></i>
-                        </div>
-                        <h3>Innovación de Servicios</h3>
-                        <p>Desarrollar y lanzar 3 nuevos servicios especializados que respondan a amenazas emergentes del mercado chileno.</p>
-                    </div>
-                    
-                    <div class="service-card-new">
-                        <div class="service-icon">
-                            <i class="fas fa-certificate"></i>
-                        </div>
-                        <h3>Excelencia Certificada</h3>
-                        <p>Obtener y mantener certificaciones ISO 27001 y SOC 2 como prueba tangible de nuestra excelencia operativa.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contacto" class="contact-section">
-        <div class="container">
-            <div class="contact-content-wrapper">
-                <!-- Información de contacto -->
-                <div class="contact-info-wrapper">
-                    <h3>Información de Contacto</h3>
-                    <div class="contact-info-items">
-                        <div class="contact-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Santiago, Chile</span>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <span>contacto@guardiadigital.cl</span>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-phone"></i>
-                            <span>+56 9 XXXX XXXX</span>
-                        </div>
-                        <div class="contact-item whatsapp-item">
-                            <i class="fab fa-whatsapp"></i>
-                            <a href="#" target="_blank" rel="noopener noreferrer">
-                                <span>WhatsApp</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Formulario -->
-                <div class="contact-form-wrapper">
-                    <h2>Solicitar Evaluación Gratuita</h2>
-                    
-                    <form class="newsletter-form" method="post" action="#" id="contactForm">
-                        <input type="text" name="nombre" placeholder="Nombre completo" maxlength="100" required>
-                        <input type="email" name="email" placeholder="Correo electrónico" required maxlength="100">
-                        <input type="tel" name="telefono" placeholder="Teléfono" maxlength="20">
-                        <input type="text" name="empresa" placeholder="Nombre de la empresa" maxlength="200">
-                        <select name="sector" required style="padding: 15px; border: 2px solid rgba(255,255,255,0.2); border-radius: 8px; background-color: rgba(255,255,255,0.1); color: #fff; font-family: 'Poppins', sans-serif;">
-                            <option value="">Selecciona tu sector</option>
-                            <option value="servicios-financieros">Servicios Financieros</option>
-                            <option value="salud-farmaceutico">Salud y Farmacéutico</option>
-                            <option value="tecnologia-software">Tecnología y Software</option>
-                            <option value="retail-digital">Retail con Presencia Digital</option>
-                            <option value="otros">Otros</option>
-                        </select>
-                        <textarea name="mensaje" placeholder="Describe brevemente tus necesidades de seguridad..." rows="4" maxlength="1000"></textarea>
-                        
-                        <button type="submit">Solicitar Evaluación Gratuita</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>GUARDIA DIGITAL</h3>
-                    <p>Tu aliado confiable en ciberseguridad</p>
-                    <p>+56 9 XXXX XXXX</p>
-                    <div class="social-links">
-                        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" onclick="window.print(); return false;" aria-label="Imprimir"><i class="fas fa-print"></i></a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy;2025 by Guardia Digital. Todos los derechos reservados.</p>
-                <div class="signature">
-                    <p><strong>Universidad SEK</strong></p>
-                    <p>Plan de Marketing Digital</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <button id="scrollToTop" class="scroll-to-top" aria-label="Volver arriba">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <path d="M12 4L4 12H8V20H16V12H20L12 4Z" fill="currentColor"/>
-        </svg>
-    </button>
-
-    <script>
-        // Script completo para funcionalidad móvil optimizada
-        document.addEventListener('DOMContentLoaded', function() {
-            const menuButton = document.getElementById('mobile-menu');
-            const mobileMenu = document.getElementById('nav-menu');
-            const scrollToTopBtn = document.getElementById('scrollToTop');
-            
-            // Menú móvil mejorado
-            if (menuButton && mobileMenu) {
-                menuButton.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    
-                    menuButton.classList.toggle('active');
-                    mobileMenu.classList.toggle('active');
-                    
-                    // Prevenir scroll del body cuando el menú está abierto
-                    if (mobileMenu.classList.contains('active')) {
-                        document.body.style.overflow = 'hidden';
-                    } else {
-                        document.body.style.overflow = '';
-                    }
-                });
-
-                // Cerrar menú al hacer click en enlaces
-                const navLinks = document.querySelectorAll('.nav-link');
-                navLinks.forEach(link => {
-                    link.addEventListener('click', function() {
-                        if (window.innerWidth <= 768) {
-                            menuButton.classList.remove('active');
-                            mobileMenu.classList.remove('active');
-                            document.body.style.overflow = '';
-                        }
-                    });
-                });
-
-                // Cerrar menú al hacer click fuera
-                document.addEventListener('click', function(e) {
-                    if (!menuButton.contains(e.target) && 
-                        !mobileMenu.contains(e.target) && 
-                        mobileMenu.classList.contains('active')) {
-                        menuButton.classList.remove('active');
-                        mobileMenu.classList.remove('active');
-                        document.body.style.overflow = '';
-                    }
-                });
-            }
-
-            // Scroll to top button (solo móviles)
-            function toggleScrollButton() {
-                if (window.innerWidth <= 768) {
-                    if (window.pageYOffset > 300) {
-                        scrollToTopBtn.classList.add('show');
-                    } else {
-                        scrollToTopBtn.classList.remove('show');
-                    }
-                } else {
-                    scrollToTopBtn.classList.remove('show');
-                }
-            }
-            
-            window.addEventListener('scroll', toggleScrollButton);
-            window.addEventListener('resize', toggleScrollButton);
-            
-            scrollToTopBtn.addEventListener('click', function() {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
-
-            // Contador de visitas simulado con animación
-            function animateCounter() {
-                const counter = document.getElementById('visitor-count');
-                const target = Math.floor(Math.random() * 1500) + 800;
-                let current = 0;
-                const increment = target / 100;
-                
-                const timer = setInterval(() => {
-                    current += increment;
-                    if (current >= target) {
-                        current = target;
-                        clearInterval(timer);
-                    }
-                    counter.textContent = Math.floor(current).toLocaleString();
-                }, 20);
-            }
-            
-            animateCounter();
-
-            // Formulario de contacto mejorado
-            const contactForm = document.getElementById('contactForm');
-            if (contactForm) {
-                contactForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    
-                    // Obtener datos del formulario
-                    const formData = new FormData(this);
-                    const nombre = formData.get('nombre');
-                    const empresa = formData.get('empresa');
-                    const sector = formData.get('sector');
-                    
-                    // Validación básica
-                    if (!nombre || !formData.get('email')) {
-                        alert('Por favor, completa los campos obligatorios.');
-                        return;
-                    }
-                    
-                    // Mensaje personalizado
-                    let mensajeRespuesta = `¡Gracias ${nombre}!`;
-                    if (empresa) {
-                        mensajeRespuesta += ` Hemos recibido tu solicitud de evaluación gratuita para ${empresa}`;
-                    }
-                    if (sector && sector !== '') {
-                        const sectores = {
-                            'servicios-financieros': 'Servicios Financieros',
-                            'salud-farmaceutico': 'Salud y Farmacéutico',
-                            'tecnologia-software': 'Tecnología y Software',
-                            'retail-digital': 'Retail con Presencia Digital',
-                            'otros': 'otros sectores'
-                        };
-                        mensajeRespuesta += ` en el sector de ${sectores[sector]}`;
-                    }
-                    mensajeRespuesta += '. Nuestro equipo de expertos te contactará pronto para programar tu evaluación gratuita de seguridad.';
-                    
-                    alert(mensajeRespuesta);
-                    
-                    // Limpiar formulario
-                    this.reset();
-                });
-            }
-
-            // Scroll suave para links internos
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        const headerHeight = document.querySelector('.header').offsetHeight;
-                        const targetPosition = target.offsetTop - headerHeight - 20;
-                        
-                        window.scrollTo({
-                            top: Math.max(0, targetPosition),
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-
-            // Intersection Observer para animaciones
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-
-            const observer = new IntersectionObserver(function(entries) {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, observerOptions);
-
-            // Observar elementos para animaciones
-            document.querySelectorAll('.service-card-new, .iot-card, .mv-card').forEach(el => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(30px)';
-                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                observer.observe(el);
-            });
-
-            // Header dinámico al hacer scroll
-            let lastScroll = 0;
-            const header = document.querySelector('.header');
-            
-            function updateHeader() {
-                const currentScroll = window.pageYOffset;
-                
-                if (currentScroll > 100) {
-                    header.style.background = 'rgba(40, 40, 40, 0.98)';
-                    header.style.backdropFilter = 'blur(20px)';
-                    header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.3)';
-                } else {
-                    header.style.background = 'rgba(40, 40, 40, 0.95)';
-                    header.style.backdropFilter = 'blur(10px)';
-                    header.style.boxShadow = 'none';
-                }
-                
-                lastScroll = currentScroll;
-            }
-
-            // Throttle scroll events para mejor performance
-            let ticking = false;
-            window.addEventListener('scroll', function() {
-                if (!ticking) {
-                    requestAnimationFrame(function() {
-                        updateHeader();
-                        toggleScrollButton();
-                        ticking = false;
-                    });
-                    ticking = true;
-                }
-            });
-
-            // Detectar cambios de orientación móvil
-            window.addEventListener('orientationchange', function() {
-                setTimeout(() => {
-                    // Cerrar menú si está abierto
-                    if (mobileMenu && mobileMenu.classList.contains('active')) {
-                        menuButton.classList.remove('active');
-                        mobileMenu.classList.remove('active');
-                        document.body.style.overflow = '';
-                    }
-                    
-                    // Reajustar elementos
-                    toggleScrollButton();
-                }, 500);
-            });
-
-            // Prevenir zoom en inputs en iOS
-            const inputs = document.querySelectorAll('input, textarea, select');
-            inputs.forEach(input => {
-                input.addEventListener('focus', function() {
-                    // En móviles, hacer scroll suave al input
-                    if (window.innerWidth <= 768) {
-                        setTimeout(() => {
-                            this.scrollIntoView({
-                                behavior: 'smooth',
-                                block: 'center'
-                            });
-                        }, 300);
-                    }
-                });
-            });
-
-            // Mejorar experiencia táctil
-            if ('ontouchstart' in window) {
-                const touchElements = document.querySelectorAll('.service-card-new, .iot-card, .mv-card, .cta-button, .nav-link');
-                
-                touchElements.forEach(element => {
-                    element.addEventListener('touchstart', function() {
-                        this.style.transform = 'scale(0.98)';
-                    }, { passive: true });
-                    
-                    element.addEventListener('touchend', function() {
-                        setTimeout(() => {
-                            this.style.transform = '';
-                        }, 150);
-                    }, { passive: true });
-                });
-            }
-
-            // Log de carga completa
-            console.log('✅ Guardia Digital - Sitio web responsive cargado');
-            console.log('📱 Optimizaciones móviles activas');
-            console.log('🛡️ Funcionalidades de ciberseguridad listas');
-        });
-
-        // Función de utilidad para detectar dispositivo móvil
-        function isMobile() {
-            return window.innerWidth <= 768;
-        }
-
-        // Función de utilidad para formatear números
-        function formatNumber(num) {
-            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        }
-
-        // Optimización de performance
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                console.log('🔧 Service Worker compatible - PWA ready');
-            });
-        }
-    </script>
-
-</body>
-</html>
+                <div class="service-card-new">
                     <div class="service-icon">
                         <i class="fas fa-shield-alt"></i>
                     </div>
@@ -1217,7 +377,7 @@
         </div>
     </section>
 
-    <section id="servicios" class="iot-section">
+    <section class="iot-section">
         <div class="container">
             <h2>Evaluación Gratuita - Sin Compromiso</h2>
             <p class="iot-description">
@@ -1284,7 +444,7 @@
         </div>
     </section>
 
-    <section class="mission-vision">
+    <section id="mision" class="mission-vision">
         <div class="container">
             <h2>Misión y Visión</h2>
             
@@ -1311,792 +471,11 @@
                 </div>
             </div>
 
-            <!-- Objetivos Estratégicos -->
             <div style="margin-top: 60px;">
                 <h2 style="color: #FFD700; text-align: center; margin-bottom: 40px;">Objetivos Estratégicos</h2>
                 <div class="services-grid">
-                    <div class="service-card-new"><!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guardia Digital</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        /* Estilos para el contador de visitas en el header */
-        .visitor-counter-container {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #FFD700;
-            font-size: 16px;
-            font-weight: 600;
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 8px 15px;
-            border-radius: 25px;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-            transition: all 0.3s ease;
-        }
-
-        .visitor-counter-container:hover {
-            background-color: rgba(255, 215, 0, 0.2);
-            transform: scale(1.05);
-        }
-
-        .visitor-counter-container .fa-eye {
-            font-size: 18px;
-        }
-
-        /* --- MODIFICACIÓN PARA MÓVILES --- */
-        @media screen and (max-width: 992px) {
-            /* Estilos para el contador */
-            .visitor-counter-container {
-                position: absolute; 
-                top: 24px;
-                left: 20px;
-                z-index: 1001;
-                font-size: 12px;
-                padding: 6px 10px;
-                gap: 5px;
-                
-                /* Cambio a fondo transparente */
-                background-color: transparent;
-                color: #ffffff;
-                box-shadow: none;
-                text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
-                border: none;
-            }
-
-            .visitor-counter-container .fa-eye {
-                font-size: 14px;
-            }
-
-            /* Mover el título a la derecha */
-            .nav-logo {
-                padding-left: 80px; 
-                transition: all 0.3s ease;
-            }
-        }
-
-        @media screen and (max-width: 480px) {
-            .nav-logo {
-                padding-left: 50px; 
-            }
-        }
-
-        /* Estilos adicionales para la nueva temática */
-        .hero-description {
-            font-size: 30px !important;
-            font-weight: 200 !important;
-            font-family: 'Poppins', Arial, sans-serif !important;
-            text-align: justify !important;
-            line-height: 1.8 !important;
-            color: #fff !important;
-        }
-
-        .service-card-new {
-            background: linear-gradient(145deg, rgba(15,15,15,0.9), rgba(40,40,40,0.8));
-            border: 2px solid rgba(255, 215, 0, 0.3);
-            padding: 30px 25px;
-            border-radius: 15px;
-            text-align: center;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            min-height: 200px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .service-card-new:hover {
-            transform: translateY(-10px);
-            border-color: #FFD700;
-            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.2);
-        }
-
-        .service-card-new .service-icon {
-            font-size: 48px;
-            color: #FFD700;
-            margin-bottom: 20px;
-        }
-
-        .pricing-highlight {
-            background: linear-gradient(135deg, #FFD700, #FFA500);
-            color: #000;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: 700;
-            font-size: 14px;
-            margin-top: 15px;
-            display: inline-block;
-        }
-
-        /* ============= RESPONSIVE DESIGN MEJORADO ============= */
-
-        /* Tablets */
-        @media screen and (max-width: 1024px) {
-            .hero-title {
-                font-size: 48px;
-            }
-            
-            .hero-description {
-                font-size: 24px !important;
-            }
-            
-            .services-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .iot-services {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .mv-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Móviles */
-        @media screen and (max-width: 768px) {
-            /* Header móvil */
-            .nav-container {
-                padding: 0 15px;
-                flex-wrap: wrap;
-                position: relative;
-            }
-            
-            .nav-logo {
-                order: 1;
-                flex: 1;
-                text-align: center;
-            }
-            
-            .nav-logo h2 {
-                font-size: 24px;
-            }
-            
-            .nav-toggle {
-                order: 2;
-                display: flex;
-                margin-left: auto;
-            }
-            
-            .search-container {
-                display: none;
-            }
-            
-            .nav-menu {
-                position: fixed;
-                left: 0;
-                top: -100vh;
-                flex-direction: column;
-                background: rgba(26, 26, 46, 0.98);
-                width: 100%;
-                height: 50vh;
-                text-align: center;
-                transition: all 0.4s ease;
-                padding: 30px 0;
-                z-index: 1001;
-                border-bottom-left-radius: 30px;
-                border-bottom-right-radius: 30px;
-                backdrop-filter: blur(20px);
-                border: 2px solid rgba(255, 215, 0, 0.3);
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            
-            .nav-menu.active {
-                top: 80px;
-                opacity: 1;
-                transform: translateY(0);
-            }
-            
-            .nav-menu li {
-                margin: 15px 0;
-                width: 100%;
-            }
-            
-            .nav-link {
-                font-size: 18px;
-                color: #fff;
-                padding: 12px 20px;
-                display: block;
-                border-radius: 25px;
-                transition: all 0.3s ease;
-            }
-            
-            .nav-link:hover {
-                background: rgba(255, 215, 0, 0.2);
-                color: #FFD700;
-            }
-            
-            .nav-toggle.active .bar:nth-child(2) {
-                opacity: 0;
-                transform: translateX(20px);
-            }
-            
-            .nav-toggle.active .bar:nth-child(1) {
-                transform: translateY(6px) rotate(45deg);
-            }
-            
-            .nav-toggle.active .bar:nth-child(3) {
-                transform: translateY(-6px) rotate(-45deg);
-            }
-            
-            /* Hero móvil */
-            .hero {
-                padding: 100px 15px 60px;
-                min-height: 80vh;
-            }
-            
-            .hero-title {
-                font-size: 32px;
-                margin-bottom: 25px;
-                line-height: 1.2;
-            }
-            
-            .hero-description {
-                font-size: 18px !important;
-                text-align: justify !important;
-                padding: 0 10px;
-                line-height: 1.6;
-            }
-            
-            /* Servicios móvil */
-            .main-services,
-            .iot-section,
-            .mission-vision,
-            .contact-section {
-                padding: 60px 15px;
-            }
-            
-            .main-services h2,
-            .iot-section h2,
-            .mission-vision h2 {
-                font-size: 32px;
-                margin-bottom: 20px;
-            }
-            
-            .main-services p,
-            .iot-description {
-                font-size: 16px;
-                text-align: justify;
-                margin-bottom: 40px;
-            }
-            
-            .services-grid {
-                grid-template-columns: 1fr;
-                gap: 25px;
-                margin-top: 40px;
-            }
-            
-            .service-card-new {
-                padding: 30px 20px;
-                min-height: 300px;
-            }
-            
-            .service-card-new .service-icon {
-                font-size: 48px;
-            }
-            
-            .service-card-new h3 {
-                font-size: 20px;
-            }
-            
-            .service-card-new p {
-                font-size: 14px;
-            }
-            
-            /* IoT sección móvil */
-            .iot-services {
-                grid-template-columns: 1fr;
-                gap: 25px;
-                margin-top: 40px;
-            }
-            
-            .iot-card {
-                padding: 30px 20px;
-            }
-            
-            .iot-card h3 {
-                font-size: 18px;
-            }
-            
-            .iot-details li {
-                font-size: 13px;
-            }
-            
-            .cta-button {
-                padding: 12px 25px;
-                font-size: 14px;
-            }
-            
-            /* Misión y Visión móvil */
-            .mv-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-            
-            .mv-card {
-                padding: 30px 20px;
-            }
-            
-            .mv-card h3 {
-                font-size: 24px;
-            }
-            
-            .mv-card p {
-                font-size: 14px;
-                text-align: justify;
-            }
-            
-            /* Contacto móvil */
-            .contact-content-wrapper {
-                display: flex;
-                flex-direction: column;
-                gap: 30px;
-            }
-            
-            .contact-info-wrapper,
-            .contact-form-wrapper {
-                padding: 25px 20px;
-            }
-            
-            .contact-info-wrapper h3,
-            .contact-form-wrapper h2 {
-                font-size: 22px;
-                margin-bottom: 20px;
-            }
-            
-            .contact-item {
-                font-size: 14px;
-                margin-bottom: 15px;
-            }
-            
-            .contact-item i {
-                font-size: 16px;
-                width: 20px;
-                margin-right: 12px;
-            }
-            
-            .newsletter-form input,
-            .newsletter-form textarea,
-            .newsletter-form select {
-                padding: 12px 15px;
-                font-size: 14px;
-                border-radius: 8px;
-            }
-            
-            .newsletter-form button {
-                padding: 15px 25px;
-                font-size: 16px;
-                margin-top: 15px;
-            }
-            
-            /* Footer móvil */
-            .footer {
-                padding: 40px 15px 20px;
-            }
-            
-            .footer-section h3 {
-                font-size: 20px;
-            }
-            
-            .footer-section p {
-                font-size: 14px;
-            }
-            
-            .social-links {
-                gap: 15px;
-                margin-top: 20px;
-            }
-            
-            .social-links a {
-                width: 45px;
-                height: 45px;
-                font-size: 24px;
-            }
-            
-            .footer-bottom {
-                padding-top: 20px;
-            }
-            
-            .signature p {
-                font-size: 14px;
-            }
-        }
-
-        /* Móviles pequeños */
-        @media screen and (max-width: 480px) {
-            .nav-logo h2 {
-                font-size: 20px;
-            }
-            
-            .visitor-counter-container {
-                font-size: 10px;
-                padding: 4px 8px;
-                top: 12px;
-                left: 10px;
-            }
-            
-            .hero {
-                padding: 90px 10px 50px;
-                min-height: 70vh;
-            }
-            
-            .hero-title {
-                font-size: 28px;
-                margin-bottom: 20px;
-            }
-            
-            .hero-description {
-                font-size: 16px !important;
-                padding: 0 5px;
-                line-height: 1.5;
-            }
-            
-            .main-services,
-            .iot-section,
-            .mission-vision,
-            .contact-section {
-                padding: 50px 10px;
-            }
-            
-            .main-services h2,
-            .iot-section h2,
-            .mission-vision h2 {
-                font-size: 28px;
-            }
-            
-            .main-services p,
-            .iot-description {
-                font-size: 14px;
-                text-align: justify;
-            }
-            
-            .service-card-new {
-                padding: 25px 15px;
-                min-height: 280px;
-            }
-            
-            .service-card-new .service-icon {
-                font-size: 40px;
-                margin-bottom: 20px;
-            }
-            
-            .service-card-new h3 {
-                font-size: 18px;
-                margin-bottom: 15px;
-            }
-            
-            .service-card-new p {
-                font-size: 13px;
-            }
-            
-            .pricing-highlight {
-                font-size: 12px;
-                padding: 8px 16px;
-            }
-            
-            .iot-card {
-                padding: 25px 15px;
-            }
-            
-            .iot-card h3 {
-                font-size: 16px;
-            }
-            
-            .iot-details p {
-                font-size: 13px;
-            }
-            
-            .iot-details li {
-                font-size: 12px;
-                padding: 3px 0;
-            }
-            
-            .cta-button {
-                padding: 10px 20px;
-                font-size: 12px;
-            }
-            
-            .mv-card {
-                padding: 25px 15px;
-            }
-            
-            .mv-card h3 {
-                font-size: 22px;
-            }
-            
-            .mv-card p {
-                font-size: 13px;
-            }
-            
-            .contact-info-wrapper,
-            .contact-form-wrapper {
-                padding: 20px 15px;
-            }
-            
-            .contact-info-wrapper h3,
-            .contact-form-wrapper h2 {
-                font-size: 20px;
-                margin-bottom: 18px;
-            }
-            
-            .contact-item {
-                font-size: 13px;
-            }
-            
-            .newsletter-form input,
-            .newsletter-form textarea,
-            .newsletter-form select {
-                padding: 10px 12px;
-                font-size: 13px;
-            }
-            
-            .newsletter-form button {
-                padding: 12px 20px;
-                font-size: 14px;
-            }
-            
-            .social-links a {
-                width: 40px;
-                height: 40px;
-                font-size: 20px;
-            }
-        }
-
-        /* Móviles muy pequeños */
-        @media screen and (max-width: 360px) {
-            .nav-logo h2 {
-                font-size: 18px;
-            }
-            
-            .hero-title {
-                font-size: 24px;
-            }
-            
-            .hero-description {
-                font-size: 14px !important;
-            }
-            
-            .main-services h2,
-            .iot-section h2,
-            .mission-vision h2 {
-                font-size: 24px;
-            }
-            
-            .service-card-new {
-                padding: 20px 12px;
-                min-height: 260px;
-            }
-            
-            .service-card-new .service-icon {
-                font-size: 36px;
-            }
-            
-            .service-card-new h3 {
-                font-size: 16px;
-            }
-            
-            .iot-card {
-                padding: 20px 12px;
-            }
-            
-            .mv-card {
-                padding: 20px 12px;
-            }
-            
-            .contact-info-wrapper,
-            .contact-form-wrapper {
-                padding: 18px 12px;
-            }
-            
-            .contact-info-wrapper h3,
-            .contact-form-wrapper h2 {
-                font-size: 18px;
-            }
-        }
-
-        /* Landscape móvil */
-        @media screen and (max-height: 500px) and (orientation: landscape) {
-            .hero {
-                min-height: 90vh;
-                padding: 80px 20px 40px;
-            }
-            
-            .hero-title {
-                font-size: 32px;
-                margin-bottom: 15px;
-            }
-            
-            .hero-description {
-                font-size: 16px !important;
-            }
-            
-            .nav-menu {
-                height: 40vh;
-            }
-        }
-
-        /* Desktop large */
-        @media screen and (min-width: 1200px) {
-            .container {
-                max-width: 1400px;
-            }
-            
-            .hero-title {
-                font-size: 64px;
-            }
-            
-            .hero-description {
-                font-size: 32px !important;
-            }
-            
-            .services-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-            
-            .iot-services {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        /* Mejoras de accesibilidad */
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-
-        /* Tema de alto contraste */
-        @media (prefers-contrast: high) {
-            .nav-link,
-            .hero-title {
-                text-shadow: none;
-            }
-            
-            .service-card-new,
-            .iot-card,
-            .mv-card {
-                border-width: 3px;
-            }
-        }
-
-        /* Print styles */
-        @media print {
-            .nav-toggle,
-            .search-container,
-            .cta-button,
-            .newsletter-form button,
-            .scroll-to-top {
-                display: none;
-            }
-            
-            body {
-                background: white;
-                color: black;
-            }
-            
-            .hero-title,
-            .nav-link {
-                color: black;
-            }
-        }
-
-        /* Optimizaciones para touch */
-        @media (hover: none) {
-            .service-card-new:hover,
-            .iot-card:hover,
-            .mv-card:hover {
-                transform: none;
-            }
-            
-            .service-card-new:active,
-            .iot-card:active,
-            .mv-card:active {
-                transform: scale(0.98);
-            }
-        }
-    </style>
-</head>
-<body>
-    <header class="header">
-        <nav class="navbar">
-            <div class="nav-container">
-                <div class="nav-logo">
-                    <h2>GUARDIA DIGITAL</h2>
-                </div>
-                
-                <div class="nav-toggle" id="mobile-menu">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </div>
-                
-                <ul class="nav-menu" id="nav-menu">
-                    <li class="nav-item">
-                        <a href="#inicio" class="nav-link">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#servicios" class="nav-link">Servicios</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#contacto" class="nav-link">Contacto</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#contacto" class="nav-link">Consultoría</a>
-                    </li>
-                </ul>
-                
-                <div class="search-container">
-                    <input type="text" class="search-input" placeholder="Buscar...">
-                    <button class="search-btn">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-
-                <!-- Contador de Visitas -->
-                <div class="visitor-counter-container">
-                     <i class="fas fa-eye"></i>
-                     <span id="visitor-count">0</span>
-                </div>
-
-            </div>
-        </nav>
-    </header>
-
-    <section id="inicio" class="hero">
-        <div class="hero-content">
-            <h1 class="hero-title">
-                TU ALIADO CONFIABLE EN<br>
-                CIBERSEGURIDAD EMPRESARIAL
-            </h1>
-            <p class="hero-description">
-                En un mundo digital cada vez más complejo, sabemos que lo que realmente importa para tu empresa 
-                es tener la tranquilidad de que tus datos y sistemas están protegidos. En Guardia Digital, 
-                convertimos la ciberseguridad en algo simple y comprensible. No usamos tecnicismos complicados, 
-                sino que hablamos en tu idioma para que puedas tomar decisiones informadas. Nuestro equipo local 
-                entiende los desafíos específicos de las empresas chilenas, especialmente las PYMES, y trabajamos 
-                contigo para crear un escudo de protección que te permita dormir tranquilo sabiendo que tu negocio 
-                está seguro.
-            </p>
-        </div>
-    </section>
-
-    <section class="main-services">
-        <div class="container">
-            <h2>Protección Simple y Confiable</h2>
-            <p>Te ayudamos a proteger tu empresa sin complicaciones. Hablamos en términos claros para que entiendas exactamente cómo mantenemos tu negocio seguro.</p>
-            
-            <div class="services-grid">
-                                        <div class="service-icon">
+                    <div class="service-card-new">
+                        <div class="service-icon">
                             <i class="fas fa-chart-line"></i>
                         </div>
                         <h3>Crecimiento Estratégico</h3>
@@ -2134,7 +513,6 @@
     <section id="contacto" class="contact-section">
         <div class="container">
             <div class="contact-content-wrapper">
-                <!-- Información de contacto -->
                 <div class="contact-info-wrapper">
                     <h3>Información de Contacto</h3>
                     <div class="contact-info-items">
@@ -2159,7 +537,6 @@
                     </div>
                 </div>
                 
-                <!-- Formulario -->
                 <div class="contact-form-wrapper">
                     <h2>Solicitar Evaluación Gratuita</h2>
                     
@@ -2169,7 +546,6 @@
                         <input type="tel" name="telefono" placeholder="Teléfono" maxlength="20">
                         <input type="text" name="empresa" placeholder="Nombre de la empresa" maxlength="200">
                         <select name="sector" required style="padding: 15px; border: 2px solid rgba(255,255,255,0.2); border-radius: 8px; background-color: rgba(255,255,255,0.1); color: #fff; font-family: 'Poppins', sans-serif;">
-                            <option value="">Selecciona tu sector</option>
                             <option value="servicios-financieros">Servicios Financieros</option>
                             <option value="salud-farmaceutico">Salud y Farmacéutico</option>
                             <option value="tecnologia-software">Tecnología y Software</option>
@@ -2217,13 +593,12 @@
     </button>
 
     <script>
-        // Script completo para funcionalidad móvil optimizada
         document.addEventListener('DOMContentLoaded', function() {
             const menuButton = document.getElementById('mobile-menu');
             const mobileMenu = document.getElementById('nav-menu');
             const scrollToTopBtn = document.getElementById('scrollToTop');
             
-            // Menú móvil mejorado
+            // Menú móvil
             if (menuButton && mobileMenu) {
                 menuButton.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -2232,7 +607,6 @@
                     menuButton.classList.toggle('active');
                     mobileMenu.classList.toggle('active');
                     
-                    // Prevenir scroll del body cuando el menú está abierto
                     if (mobileMenu.classList.contains('active')) {
                         document.body.style.overflow = 'hidden';
                     } else {
@@ -2287,7 +661,7 @@
                 });
             });
 
-            // Contador de visitas simulado con animación
+            // Contador de visitas
             function animateCounter() {
                 const counter = document.getElementById('visitor-count');
                 const target = Math.floor(Math.random() * 1500) + 800;
@@ -2306,25 +680,22 @@
             
             animateCounter();
 
-            // Formulario de contacto mejorado
+            // Formulario de contacto
             const contactForm = document.getElementById('contactForm');
             if (contactForm) {
                 contactForm.addEventListener('submit', function(e) {
                     e.preventDefault();
                     
-                    // Obtener datos del formulario
                     const formData = new FormData(this);
                     const nombre = formData.get('nombre');
                     const empresa = formData.get('empresa');
                     const sector = formData.get('sector');
                     
-                    // Validación básica
                     if (!nombre || !formData.get('email')) {
                         alert('Por favor, completa los campos obligatorios.');
                         return;
                     }
                     
-                    // Mensaje personalizado
                     let mensajeRespuesta = `¡Gracias ${nombre}!`;
                     if (empresa) {
                         mensajeRespuesta += ` Hemos recibido tu solicitud de evaluación gratuita para ${empresa}`;
@@ -2342,8 +713,6 @@
                     mensajeRespuesta += '. Nuestro equipo de expertos te contactará pronto para programar tu evaluación gratuita de seguridad.';
                     
                     alert(mensajeRespuesta);
-                    
-                    // Limpiar formulario
                     this.reset();
                 });
             }
@@ -2365,7 +734,7 @@
                 });
             });
 
-            // Intersection Observer para animaciones
+            // Animaciones de entrada
             const observerOptions = {
                 threshold: 0.1,
                 rootMargin: '0px 0px -50px 0px'
@@ -2381,7 +750,6 @@
                 });
             }, observerOptions);
 
-            // Observar elementos para animaciones
             document.querySelectorAll('.service-card-new, .iot-card, .mv-card').forEach(el => {
                 el.style.opacity = '0';
                 el.style.transform = 'translateY(30px)';
@@ -2389,10 +757,8 @@
                 observer.observe(el);
             });
 
-            // Header dinámico al hacer scroll
-            let lastScroll = 0;
+            // Header dinámico
             const header = document.querySelector('.header');
-            
             function updateHeader() {
                 const currentScroll = window.pageYOffset;
                 
@@ -2405,11 +771,9 @@
                     header.style.backdropFilter = 'blur(10px)';
                     header.style.boxShadow = 'none';
                 }
-                
-                lastScroll = currentScroll;
             }
 
-            // Throttle scroll events para mejor performance
+            // Throttle scroll events
             let ticking = false;
             window.addEventListener('scroll', function() {
                 if (!ticking) {
@@ -2422,26 +786,22 @@
                 }
             });
 
-            // Detectar cambios de orientación móvil
+            // Cambios de orientación móvil
             window.addEventListener('orientationchange', function() {
                 setTimeout(() => {
-                    // Cerrar menú si está abierto
                     if (mobileMenu && mobileMenu.classList.contains('active')) {
                         menuButton.classList.remove('active');
                         mobileMenu.classList.remove('active');
                         document.body.style.overflow = '';
                     }
-                    
-                    // Reajustar elementos
                     toggleScrollButton();
                 }, 500);
             });
 
-            // Prevenir zoom en inputs en iOS
+            // Optimización para inputs en móviles
             const inputs = document.querySelectorAll('input, textarea, select');
             inputs.forEach(input => {
                 input.addEventListener('focus', function() {
-                    // En móviles, hacer scroll suave al input
                     if (window.innerWidth <= 768) {
                         setTimeout(() => {
                             this.scrollIntoView({
@@ -2453,7 +813,7 @@
                 });
             });
 
-            // Mejorar experiencia táctil
+            // Experiencia táctil mejorada
             if ('ontouchstart' in window) {
                 const touchElements = document.querySelectorAll('.service-card-new, .iot-card, .mv-card, .cta-button, .nav-link');
                 
@@ -2470,166 +830,23 @@
                 });
             }
 
-            // Log de carga completa
-            console.log('✅ Guardia Digital - Sitio web responsive cargado');
-            console.log('📱 Optimizaciones móviles activas');
-            console.log('🛡️ Funcionalidades de ciberseguridad listas');
+            console.log('✅ Guardia Digital - Sitio web cargado correctamente');
         });
 
-        // Función de utilidad para detectar dispositivo móvil
         function isMobile() {
             return window.innerWidth <= 768;
         }
 
-        // Función de utilidad para formatear números
         function formatNumber(num) {
             return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
 
-        // Optimización de performance
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {
-                console.log('🔧 Service Worker compatible - PWA ready');
+                console.log('🔧 Service Worker compatible');
             });
         }
     </script>
 
 </body>
 </html>
-                    <div class="service-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3>Revisión Completa de Seguridad</h3>
-                    <p>Analizamos todos los puntos donde tu empresa podría estar en riesgo y te explicamos de manera simple qué necesitas proteger.</p>
-                    <span class="pricing-highlight">Evaluación Gratuita</span>
-                </div>
-                
-                <div class="service-card-new">
-                    <div class="service-icon">
-                        <i class="fas fa-eye"></i>
-                    </div>
-                    <h3>Vigilancia 24/7 - Tu Guardia Digital</h3>
-                    <p>Cuidamos tu empresa las 24 horas del día, todos los días del año. Si algo extraño sucede, actuamos inmediatamente.</p>
-                    <span class="pricing-highlight">20% más económico</span>
-                </div>
-                
-                <div class="service-card-new">
-                    <div class="service-icon">
-                        <i class="fas fa-users-cog"></i>
-                    </div>
-                    <h3>Cumplimiento Legal Simplificado</h3>
-                    <p>Te ayudamos a cumplir con todas las normas y regulaciones de seguridad sin que tengas que convertirte en un experto legal.</p>
-                    <span class="pricing-highlight">Paquetes Escalables</span>
-                </div>
-                
-                <div class="service-card-new">
-                    <div class="service-icon">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <h3>Capacitación Práctica para tu Equipo</h3>
-                    <p>Enseñamos a tu equipo cómo mantenerse seguro en el día a día, con consejos prácticos y fáciles de aplicar.</p>
-                    <span class="pricing-highlight">Descuentos Anuales</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="servicios" class="iot-section">
-        <div class="container">
-            <h2>Evaluación Gratuita - Sin Compromiso</h2>
-            <p class="iot-description">
-                Comenzamos ofreciéndote una evaluación completamente gratuita de la seguridad de tu empresa. 
-                Sin tecnicismos, sin compromisos. Solo queremos que sepas exactamente dónde estás parado y cómo 
-                podemos ayudarte a estar más tranquilo. Creemos que la confianza se construye paso a paso, 
-                y por eso te damos valor desde el primer día, sin pedir nada a cambio.
-            </p>
-            
-            <div class="iot-services">
-                <div class="iot-card">
-                    <div class="iot-image">
-                        <i class="fas fa-search" style="font-size: 48px; color: #FFD700;"></i>
-                    </div>
-                    <h3>1. Te Contamos Qué Encontramos</h3>
-                    <div class="iot-details">
-                        <p><strong>Revisamos tu empresa y te explicamos de manera simple dónde están los riesgos.</strong></p>
-                        <ul>
-                            <li>Revisión básica de tus sistemas</li>
-                            <li>Identificamos los puntos más importantes a proteger</li>
-                            <li><strong>Lo que obtienes:</strong></li>
-                            <li>Sabes exactamente cómo está tu empresa hoy</li>
-                            <li>Recomendaciones claras de qué hacer primero</li>
-                        </ul>
-                    </div>
-                    <button class="cta-button">Solicitar Evaluación Gratuita</button>
-                </div>
-                
-                <div class="iot-card">
-                    <div class="iot-image">
-                        <i class="fas fa-chart-line" style="font-size: 48px; color: #FFD700;"></i>
-                    </div>
-                    <h3>2. Creamos Tu Plan de Protección</h3>
-                    <div class="iot-details">
-                        <p><strong>Diseñamos un plan paso a paso, pensado específicamente para tu empresa y tu presupuesto.</strong></p>
-                        <ul>
-                            <li>Plan adaptado a tu tipo de negocio</li>
-                            <li>Pasos claros y fechas realistas</li>
-                            <li><strong>Lo que obtienes:</strong></li>
-                            <li>Avanzas de a poco, sin grandes inversiones de una vez</li>
-                            <li>Cada peso que inviertas tiene un propósito claro</li>
-                        </ul>
-                    </div>
-                    <button class="cta-button">Ver Ejemplo</button>
-                </div>
-                
-                <div class="iot-card">
-                    <div class="iot-image">
-                        <i class="fas fa-handshake" style="font-size: 48px; color: #FFD700;"></i>
-                    </div>
-                    <h3>3. Te Acompañamos en el Camino</h3>
-                    <div class="iot-details">
-                        <p><strong>No te dejamos solo. Nuestro equipo está siempre disponible para ayudarte y responder tus dudas.</strong></p>
-                        <ul>
-                            <li><strong>Lo que obtienes:</strong></li>
-                            <li>Soporte en español cuando lo necesites</li>
-                            <li>Tu seguridad mejora constantemente</li>
-                            <li>Puedes concentrarte en hacer crecer tu negocio con tranquilidad</li>
-                        </ul>
-                    </div>
-                    <button class="cta-button">Conocer Más</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="mission-vision">
-        <div class="container">
-            <h2>Misión y Visión</h2>
-            
-            <div class="mv-grid">
-                <div class="mv-card">
-                    <h3>Misión</h3>
-                    <p>
-                        Proteger el presente y el futuro digital de las empresas en Chile, entregando soluciones de 
-                        ciberseguridad robustas y fáciles de entender. Lo hacemos a través de un equipo de expertos 
-                        cercanos y comprometidos, que traducen la complejidad técnica en tranquilidad y confianza 
-                        para nuestros clientes.
-                    </p>
-                </div>
-                
-                <div class="mv-card">
-                    <h3>Visión</h3>
-                    <p>
-                        Ser reconocidos como líderes en soluciones tecnológicas de seguridad digital, destacándonos 
-                        por nuestra innovación, profesionalismo y capacidad de adaptación a las necesidades cambiantes 
-                        del mercado. Aspiramos a construir un mundo digital más seguro, donde la tecnología y la 
-                        confianza vayan de la mano, y donde las organizaciones y personas puedan prosperar sin 
-                        preocuparse por amenazas tecnológicas.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Objetivos Estratégicos -->
-            <div style="margin-top: 60px;">
-                <h2 style="color: #FFD700; text-align: center; margin-bottom: 40px;">Objetivos Estratégicos</h2>
-                <div class="services-grid">
-                    <div class="service-card-new">
