@@ -270,6 +270,58 @@
         }
 
 
+
+      /* Header optimizado */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(40, 40, 40, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            /* GPU acceleration */
+            will-change: transform, opacity;
+            transform: translateZ(0); /* Este transform en el header es seguro y común */
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+        
+        /* Hero section optimizada */
+        .hero {
+            padding: 140px 20px 80px;
+            text-align: center;
+            background: linear-gradient(rgba(26, 26, 26, 0.7), rgba(42, 42, 42, 0.7)), url('fotos/fondo.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            /* GPU acceleration */
+            will-change: transform;
+            transform: translateZ(0); /* Este transform en el hero es seguro y común */
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+        
+        /* Optimización para dispositivos móviles */
+        @media screen and (max-width: 768px) {
+            .hero {
+                background-attachment: scroll; /* Mejor rendimiento en móviles */
+                min-height: 70vh;
+                padding: 100px 15px 60px;
+            }
+            
+            body {
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+        
         /* Preload de imágenes críticas */
         .hero::before {
             content: '';
@@ -283,8 +335,9 @@
             background-position: center;
             opacity: 0;
             z-index: -1;
-            /* Preload hidden */
-        }
+            /
+        
+        
     </style>
 </head>
 <body>
