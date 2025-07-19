@@ -506,19 +506,19 @@
             .nav-logo { 
                 position: static;
                 transform: none;
-                flex: 1;
-                justify-content: flex-start;
+                flex-grow: 1; /* Permite que el logo ocupe espacio */
             }
             .nav-logo img { 
-                width: 45px; /* Logo un poco más grande en móvil */
+                width: 45px;
                 height: 45px;
             }
             .nav-logo h2 { 
-                font-size: 18px; /* Título más chico para simetría */
-                white-space: nowrap;
+                font-size: 18px;
+                white-space: nowrap; /* Evita que el título se divida */
             }
             .nav-toggle { 
                 display: flex; 
+                flex-shrink: 0; /* Evita que el botón se encoja */
             }
             .search-container, .visitor-counter-container { display: none; }
             
