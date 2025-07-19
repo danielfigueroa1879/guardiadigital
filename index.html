@@ -504,9 +504,10 @@
                 position: relative;
             }
             .nav-logo { 
-                position: absolute;
-                left: 50%;
-                transform: translateX(-50%);
+                position: static;
+                transform: none;
+                flex: 1;
+                justify-content: flex-start;
             }
             .nav-logo img { 
                 width: 45px; /* Logo un poco más grande en móvil */
@@ -514,10 +515,10 @@
             }
             .nav-logo h2 { 
                 font-size: 18px; /* Título más chico para simetría */
+                white-space: nowrap;
             }
             .nav-toggle { 
                 display: flex; 
-                margin-left: auto; /* Mueve el menú hamburguesa a la derecha */
             }
             .search-container, .visitor-counter-container { display: none; }
             
