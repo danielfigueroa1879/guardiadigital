@@ -139,7 +139,7 @@
         .hero {
             padding: 160px 20px 80px;
             text-align: center;
-            background: url('fotos/fondo.png') no-repeat center center;
+            background: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop') no-repeat center center;
             background-size: cover;
             background-attachment: fixed;
             min-height: 100vh;
@@ -150,11 +150,11 @@
 
         .hero-title {
             font-size: 56px;
-            color: #ffffff; /* Texto blanco para contraste con fondo de imagen */
+            color: #4f7da1; /* TITULOS */
             font-weight: 700;
             margin-bottom: 30px;
             line-height: 1.2;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 5px rgba(255, 255, 255, 0.9); /* Sombra/brillo blanco para legibilidad */
         }
 
         .hero-description {
@@ -179,12 +179,20 @@
             background-color: #ffffff; /* FONDO */
         }
 
+        h2, h3 {
+            color: #4f7da1; /* TITULOS */
+        }
+
         h2 {
             font-size: 36px;
-            color: #4f7da1; /* TITULOS */
             margin-bottom: 20px;
             font-weight: 600;
             text-align: center;
+        }
+        
+        h3 {
+           font-size: 20px;
+           margin-bottom: 15px;
         }
 
         .main-services > .container > p, .iot-description {
@@ -229,12 +237,6 @@
             margin-bottom: 20px;
         }
 
-        .service-card-new h3 {
-            font-size: 20px;
-            color: #4f7da1; /* TITULOS */
-            margin-bottom: 15px;
-        }
-
         .service-card-new p {
             color: #86868b; /* TEXTO */
             flex-grow: 1;
@@ -270,7 +272,6 @@
             box-shadow: 0 10px 30px rgba(79, 125, 161, 0.15);
         }
         .iot-card i { color: #0071e3; }
-        .iot-card h3 { color: #4f7da1; }
         .iot-card p, .iot-card li { color: #86868b; }
         .iot-details { text-align: left; }
         .iot-details ul { list-style: none; padding-left: 0; }
@@ -287,7 +288,6 @@
             padding: 30px;
             border-radius: 15px;
         }
-        .mv-card h3 { color: #4f7da1; }
         .mv-card p { color: #86868b; }
         
         /* Botones */
@@ -304,6 +304,7 @@
             display: block;
             margin-top: 20px;
             text-align: center;
+            text-decoration: none;
         }
 
         .cta-button:hover, .newsletter-form button:hover {
@@ -323,7 +324,6 @@
              padding: 40px;
              border-radius: 15px;
         }
-        .contact-info-wrapper h3, .contact-form-wrapper h2 { color: #4f7da1; }
         .contact-item { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; color: #86868b; }
         .contact-item i { color: #0071e3; font-size: 20px; }
         .contact-item a { color: #86868b; text-decoration: none; }
@@ -359,17 +359,92 @@
             text-align: center;
             gap: 20px;
         }
-        .footer-section h3 { color: #4f7da1; }
         .social-links { display: flex; justify-content: center; gap: 15px; margin-top: 15px; }
-        .social-links a { color: #86868b; font-size: 24px; }
+        .social-links a { color: #86868b; font-size: 24px; text-decoration: none; }
         .social-links a:hover { color: #0071e3; }
         .footer-bottom { border-top: 1px solid #dcdcdc; padding-top: 20px; margin-top: 30px; text-align: center; }
         .signature { margin-top: 10px; }
 
+        /* Estilos del Chatbot */
+        #chat-toggle-button {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 60px;
+            height: 60px;
+            background: #0071e3; /* BOTONES */
+            color: #ffffff;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0, 113, 227, 0.4);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            transition: all 0.3s ease;
+        }
+        #chat-toggle-button:hover { transform: scale(1.1); }
+
+        #chatbot-container {
+            position: fixed;
+            bottom: 100px;
+            right: 25px;
+            width: 350px;
+            height: 500px;
+            background: #ffffff; /* FONDO */
+            border: 1px solid #e1e1e1;
+            border-radius: 18px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px) scale(0.9);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+        }
+        #chatbot-container.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+        .chatbot-header {
+            background: #f0f0f2; /* BANNER */
+            color: #4f7da1; /* TITULOS */
+            padding: 15px 20px;
+            border-radius: 18px 18px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            border-bottom: 1px solid #e1e1e1;
+        }
+        #close-chat-btn { background: none; border: none; color: #86868b; font-size: 20px; cursor: pointer; }
+        #chatbot-messages { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
+        .chatbot-input-container { padding: 15px; border-top: 1px solid #e1e1e1; display: flex; gap: 10px; }
+        #chatbot-input { flex: 1; padding: 10px 15px; border: 1px solid #ccc; border-radius: 20px; font-size: 14px; }
+        #chatbot-input:focus { outline: none; border-color: #0071e3; }
+        .chatbot-input-container button { 
+            background: #0071e3; /* BOTON AZUL */
+            border: none; 
+            color: #ffffff; 
+            width: 40px; 
+            height: 40px; 
+            border-radius: 50%; 
+            cursor: pointer; 
+            font-size: 16px; 
+            flex-shrink: 0; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
         /* Responsive Design */
         @media screen and (max-width: 992px) {
             .nav-container { position: relative; }
-            .visitor-counter-container { display: none; } /* Ocultar en tablet para simplificar */
+            .visitor-counter-container { display: none; }
         }
 
         @media screen and (max-width: 768px) {
@@ -383,7 +458,9 @@
                 left: 0;
                 top: 75px; /* Altura del header */
                 flex-direction: column;
-                background: #ffffff; /* FONDO MENU HAMBURGUESA */
+                background: rgba(255, 255, 255, 0.9); /* FONDO MENU SEMITRANSPARENTE */
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
                 width: 100%;
                 height: 0;
                 overflow: hidden;
@@ -394,12 +471,15 @@
                 box-shadow: 0 10px 20px rgba(0,0,0,0.05);
             }
             
-            .nav-menu.active {
-                height: auto;
-                padding: 20px 0;
-            }
+            .nav-menu.active { height: auto; padding: 20px 0; }
             .nav-menu li { margin: 10px 0; width: 100%; }
-            .nav-link { font-size: 18px; color: #86868b; padding: 10px 20px; display: block; }
+            .nav-link { 
+                font-size: 20px; /* LETRAS MAS GRANDES */
+                color: #86868b; 
+                padding: 10px 20px; 
+                display: block; 
+                font-weight: 500;
+            }
             .nav-link:hover { background: rgba(0, 113, 227, 0.1); color: #0071e3; }
             
             .nav-toggle.active .bar:nth-child(2) { opacity: 0; }
@@ -415,6 +495,32 @@
             
             .services-grid, .iot-services, .mv-grid, .contact-content-wrapper { grid-template-columns: 1fr; }
             .contact-info-wrapper { margin-bottom: 30px; }
+
+            /* Chatbot para móviles - más pequeño */
+            #chat-toggle-button {
+                width: 55px;
+                height: 55px;
+                font-size: 24px;
+                bottom: 15px;
+                right: 15px;
+            }
+            #chatbot-container {
+                width: 320px;
+                height: 420px;
+                bottom: 80px;
+                right: 15px;
+            }
+        }
+        
+        @media screen and (max-width: 480px) {
+             #chatbot-container {
+                width: calc(100vw - 20px);
+                height: 65vh;
+                max-height: 400px;
+                bottom: 75px;
+                right: 10px;
+                left: 10px;
+             }
         }
     </style>
 </head>
@@ -656,6 +762,9 @@
             const header = document.getElementById('header');
             const menuButton = document.getElementById('mobile-menu');
             const mobileMenu = document.getElementById('nav-menu');
+            const chatToggleButton = document.getElementById('chat-toggle-button');
+            const chatbotContainer = document.getElementById('chatbot-container');
+            const closeChatBtn = document.getElementById('close-chat-btn');
             
             // Header con scroll
             window.addEventListener('scroll', function() {
@@ -678,6 +787,16 @@
                          mobileMenu.classList.remove('active');
                          menuButton.classList.remove('active');
                     });
+                });
+            }
+
+            // Lógica del Chatbot
+             if (chatToggleButton && chatbotContainer && closeChatBtn) {
+                chatToggleButton.addEventListener('click', () => {
+                    chatbotContainer.classList.toggle('active');
+                });
+                closeChatBtn.addEventListener('click', () => {
+                    chatbotContainer.classList.remove('active');
                 });
             }
         });
