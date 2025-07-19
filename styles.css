@@ -3899,7 +3899,7 @@ html {
     right: 25px;
     width: 60px;
     height: 60px;
-    background: linear-gradient(135deg, #00ff88, #00cc66);
+    background: linear-gradient(135deg, #c8ff00, hsl(59, 100%, 40%));
     border: none;
     border-radius: 50%;
     cursor: pointer;
@@ -4063,7 +4063,7 @@ html {
 .loading-dots span {
     width: 8px;
     height: 8px;
-    background: #00ff88;
+    background: #c8ff00;
     border-radius: 50%;
     animation: bounce 1.4s ease-in-out infinite both;
 }
@@ -4102,7 +4102,7 @@ html {
 }
 
 #chatbot-input:focus {
-    border-color: #7bff00;
+    border-color: #91ff00;
     box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
 }
 
@@ -4203,4 +4203,3 @@ html {
         font-size: 20px;
     }
 }
-
