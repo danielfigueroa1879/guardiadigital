@@ -3916,7 +3916,7 @@ html {
 
 #chat-toggle-button:hover {
     transform: scale(1.1);
-    box-shadow: 0 6px 25px rgba(0, 255, 136, 0.6);
+    box-shadow: 0 6px 25px rgba(217, 255, 0, 0.6);
 }
 
 @keyframes pulse {
@@ -3933,7 +3933,7 @@ html {
     width: 350px;
     height: 500px;
     background: linear-gradient(145deg, rgba(0, 0, 0, 0.95), rgba(20, 20, 20, 0.95));
-    border: 2px solid #00ff88;
+    border: 2px solid #d9ff00;
     border-radius: 20px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
     z-index: 999;
@@ -3954,7 +3954,7 @@ html {
 
 /* Header del chatbot */
 .chatbot-header {
-    background: linear-gradient(135deg, #00ff88, #00cc66);
+    background: linear-gradient(135deg, #bbff00, #b8cc00);
     color: #000;
     padding: 15px 20px;
     border-radius: 18px 18px 0 0;
