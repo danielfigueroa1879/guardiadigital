@@ -80,9 +80,8 @@
         }
 
         .nav-logo img {
-            width: 60px; /* Logo más grande en PC */
-            height: 60px;
-            transition: width 0.3s ease, height 0.3s ease;
+            width: 40px;
+            height: 40px;
         }
 
         .nav-logo h2 {
@@ -495,13 +494,8 @@
         }
 
         @media screen and (max-width: 768px) {
-            .container {
-                width: 98%;
-                padding: 0;
-            }
-            .nav-container { padding: 0 10px; }
-            .nav-logo { flex: 1; justify-content: center; } /* Logo centrado en móvil */
-            .nav-logo img { width: 40px; height: 40px; } /* Tamaño original del logo en móvil */
+            .nav-container { padding: 0 15px; }
+            .nav-logo { flex: 1; justify-content: center; }
             .nav-logo h2 { font-size: 20px; }
             .nav-toggle { display: flex; }
             .search-container, .visitor-counter-container { display: none; }
@@ -539,11 +533,11 @@
             .nav-toggle.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
             .nav-toggle.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
             
-            .hero { padding: 120px 1% 60px; min-height: 80vh; }
-            .hero-title { font-size: 32px; } /* Título más chico en móvil */
-            .hero-description { font-size: 16px !important; }
+            .hero { padding: 120px 15px 60px; min-height: 80vh; }
+            .hero-title { font-size: 36px; }
+            .hero-description { font-size: 18px !important; }
             
-            .main-services, .iot-section, .mission-vision, .contact-section { padding: 60px 1%; }
+            .main-services, .iot-section, .mission-vision, .contact-section { padding: 60px 15px; }
             h2 { font-size: 32px; }
             
             .services-grid, .iot-services, .mv-grid, .contact-content-wrapper { grid-template-columns: 1fr; }
@@ -551,16 +545,12 @@
 
             /* Ajustes Formulario Móvil */
             .contact-form-wrapper { padding: 25px; }
-            .contact-form-wrapper h2 { font-size: 24px; } /* Título del formulario más pequeño */
             .newsletter-form { gap: 10px; }
             .newsletter-form input, .newsletter-form textarea, .newsletter-form select {
                 font-size: 14px;
                 padding: 10px 12px;
             }
-            .newsletter-form button { 
-                font-size: 14px; 
-                padding: 12px 25px; /* Mismo tamaño que .cta-button */
-            }
+            .newsletter-form button { font-size: 14px; padding: 10px 20px; }
 
             /* Chatbot para móviles - más pequeño */
             #chat-toggle-button {
