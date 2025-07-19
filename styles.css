@@ -3,8 +3,8 @@
 ESTILOS GENERALES Y PALETA DE COLORES (NUEVO TEMA CLARO)
 ================================================
 * FONDO: #ffffff
-* BANNER: #f0f0f2 (Semitransparente)
-* CUERPO: #d5eaf6
+* BANNER (NAVBAR): #f0f0f2 (Semitransparente)
+* CUERPO (SECCIONES): #d5eaf6
 * TITULOS: #4f7da1
 * TEXTO: #86868b
 * BOTONES: #0071e3
@@ -38,7 +38,7 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(240, 240, 242, 0.85); /* BANNER Semitransparente */
+    background-color: rgba(240, 240, 242, 0.85); /* BANNER (NAVBAR) Semitransparente */
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     z-index: 1000;
@@ -163,7 +163,7 @@ body {
     border-radius: 2px;
 }
 
-/* Sección Hero */
+/* Sección Hero (Banner principal) */
 .hero {
     padding: 140px 20px 80px;
     text-align: center;
