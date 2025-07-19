@@ -73,10 +73,22 @@
             align-items: center;
         }
 
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-logo img {
+            width: 40px;
+            height: 40px;
+        }
+
         .nav-logo h2 {
             color: #000000; /* CAMBIO A NEGRO */
             font-size: 24px;
             font-weight: 600;
+            margin: 0;
         }
 
         .nav-menu {
@@ -161,7 +173,7 @@
             color: #4f7da1 !important; /* TITULOS */
             max-width: 800px;
             margin: 0 auto;
-            text-align: center !important;
+            text-align: justify !important; /* TEXTO JUSTIFICADO */
             line-height: 1.7 !important;
             text-shadow: none;
         }
@@ -193,15 +205,18 @@
            margin-bottom: 15px;
         }
 
-        .main-services > .container > p, .iot-description {
+        .main-services > .container > p, .iot-description, .service-card-new p, .mv-card p {
             font-size: 18px;
-            margin-bottom: 50px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            text-align: center;
+            text-align: justify; /* TEXTO JUSTIFICADO */
             color: #86868b; /* TEXTO */
         }
+        .main-services > .container > p, .iot-description {
+             margin-bottom: 50px;
+             max-width: 700px;
+             margin-left: auto;
+             margin-right: auto;
+        }
+
 
         /* Tarjetas de Servicio */
         .services-grid {
@@ -238,6 +253,7 @@
         .service-card-new p {
             color: #86868b; /* TEXTO */
             flex-grow: 1;
+            font-size: 16px;
         }
         
         .pricing-highlight {
@@ -286,7 +302,7 @@
             padding: 30px;
             border-radius: 15px;
         }
-        .mv-card p { color: #86868b; }
+        .mv-card p { color: #86868b; font-size: 16px; }
         
         /* Botones */
         .cta-button, .newsletter-form button {
@@ -479,7 +495,8 @@
 
         @media screen and (max-width: 768px) {
             .nav-container { padding: 0 15px; }
-            .nav-logo { flex: 1; text-align: center; }
+            .nav-logo { flex: 1; justify-content: center; }
+            .nav-logo h2 { font-size: 20px; }
             .nav-toggle { display: flex; }
             .search-container, .visitor-counter-container { display: none; }
             
@@ -526,6 +543,15 @@
             .services-grid, .iot-services, .mv-grid, .contact-content-wrapper { grid-template-columns: 1fr; }
             .contact-info-wrapper { margin-bottom: 30px; }
 
+            /* Ajustes Formulario Móvil */
+            .contact-form-wrapper { padding: 25px; }
+            .newsletter-form { gap: 10px; }
+            .newsletter-form input, .newsletter-form textarea, .newsletter-form select {
+                font-size: 14px;
+                padding: 10px 12px;
+            }
+            .newsletter-form button { font-size: 14px; padding: 10px 20px; }
+
             /* Chatbot para móviles - más pequeño */
             #chat-toggle-button {
                 width: 55px;
@@ -559,6 +585,7 @@
         <nav class="navbar container">
             <div class="nav-container">
                 <div class="nav-logo">
+                    <img src="fotos/logo.png" alt="Guardia Digital Logo">
                     <h2>GUARDIA DIGITAL</h2>
                 </div>
                 
