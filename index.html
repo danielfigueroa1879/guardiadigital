@@ -1,313 +1,955 @@
-/*
-================================================
-ESTILOS DEL CHATBOT (NUEVO TEMA CLARO)
-================================================
-* FONDO: #ffffff
-* BANNER: #f0f0f2
-* TITULOS: #4f7da1
-* TEXTO: #86868b
-* BOTONES: #0071e3
-*/
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guardia Digital</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* ================================================
+        PALETA DE COLORES ESTABLECIDA
+        ================================================
+        * BANNER: #f0f0f2 (Semitransparente)
+        * CUERPO: #d5eaf6
+        * BOTONES: #0071e3
+        * TITULOS: #4f7da1
+        * TEXTO: #86868b
+        * FONDO: #ffffff
+        * MENU HAMBURGUESA: #ffffff (fondo), #86868b (letras y barras)
+        ================================================
+        */
 
-/* Botón flotante del chatbot */
-#chat-toggle-button {
-    position: fixed;
-    bottom: 25px;
-    right: 25px;
-    width: 60px;
-    height: 60px;
-    background: #0071e3; /* BOTONES */
-    color: #ffffff;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    box-shadow: 0 4px 20px rgba(0, 113, 227, 0.4);
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    transition: all 0.3s ease;
-}
+        /* Estilos Base y Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-#chat-toggle-button:hover {
-    background: #005bb5; /* Tono más oscuro para hover */
-    transform: scale(1.1);
-}
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #ffffff; /* FONDO SÓLIDO */
+            color: #86868b; /* TEXTO */
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-/* Contenedor del chatbot */
-#chatbot-container {
-    position: fixed;
-    bottom: 100px;
-    right: 25px;
-    width: 350px;
-    height: 500px;
-    background: #ffffff; /* FONDO */
-    border: 1px solid #e1e1e1;
-    border-radius: 18px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-    z-index: 999;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(20px) scale(0.9);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    display: flex;
-    flex-direction: column;
-}
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-#chatbot-container.active {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0) scale(1);
-}
+        /* Header y Navegación */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(240, 240, 242, 0.85); /* BANNER Semitransparente */
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1000;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+        
+        .header.scrolled {
+             background-color: rgba(240, 240, 242, 0.95);
+             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
 
-/* Header del chatbot */
-.chatbot-header {
-    background: #f0f0f2; /* BANNER */
-    color: #4f7da1; /* TITULOS */
-    padding: 15px 20px;
-    border-radius: 18px 18px 0 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-weight: 600;
-    border-bottom: 1px solid #e1e1e1;
-}
+        .navbar {
+            padding: 15px 0;
+        }
 
-.chatbot-title {
-    font-size: 16px;
-    font-weight: 700;
-}
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-#close-chat-btn {
-    background: none;
-    border: none;
-    color: #86868b; /* TEXTO */
-    font-size: 20px;
-    cursor: pointer;
-    padding: 5px;
-    border-radius: 50%;
-    transition: background-color 0.3s ease;
-}
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-#close-chat-btn:hover {
-    background-color: rgba(0, 0, 0, 0.05);
-}
+        .nav-logo img {
+            width: 60px; /* Logo más grande en PC */
+            height: 60px;
+            transition: width 0.3s ease, height 0.3s ease;
+        }
 
-/* Área de mensajes */
-#chatbot-messages {
-    flex: 1;
-    padding: 20px;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
+        .nav-logo h2 {
+            color: #000000; /* CAMBIO A NEGRO */
+            font-size: 24px;
+            font-weight: 600;
+            margin: 0;
+        }
 
-/* Scrollbar personalizada */
-#chatbot-messages::-webkit-scrollbar {
-    width: 6px;
-}
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
 
-#chatbot-messages::-webkit-scrollbar-track {
-    background: #f0f0f2;
-    border-radius: 3px;
-}
+        .nav-link {
+            color: #86868b; /* TEXTO (Letras del menú) */
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+            padding-bottom: 5px;
+        }
 
-#chatbot-messages::-webkit-scrollbar-thumb {
-    background: #0071e3; /* BOTONES */
-    border-radius: 3px;
-}
+        .nav-link:hover {
+            color: #0071e3; /* BOTONES */
+        }
+        
+        /* Contador de Visitas */
+        .visitor-counter-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #0071e3; /* BOTONES */
+            font-size: 14px;
+            font-weight: 600;
+            background-color: rgba(0, 113, 227, 0.1);
+            padding: 8px 15px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+        .visitor-counter-container .fa-eye {
+            font-size: 16px;
+        }
 
-/* Mensajes */
-.message {
-    max-width: 85%;
-    margin-bottom: 10px;
-    animation: fadeInUp 0.4s ease-out;
-}
+        /* Menú Hamburguesa */
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 5px;
+        }
 
-.user-message {
-    align-self: flex-end;
-    margin-left: auto;
-}
+        .bar {
+            width: 25px;
+            height: 3px;
+            background-color: #86868b; /* TEXTO (barras) */
+            margin: 3px 0;
+            transition: all 0.4s ease;
+            border-radius: 3px;
+        }
 
-.user-message p {
-    background: #0071e3; /* BOTONES */
-    color: #ffffff;
-    padding: 12px 16px;
-    border-radius: 18px 18px 5px 18px;
-    margin: 0;
-    font-weight: 500;
-}
+        /* Sección Hero con Degradado */
+        .hero {
+            padding: 160px 20px 80px;
+            text-align: center;
+            background: linear-gradient(to bottom, #d5eaf6, #ffffff); /* DEGRADADO SOLO EN HERO */
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-.bot-message {
-    align-self: flex-start;
-}
+        .hero-title {
+            font-size: 56px;
+            color: #4f7da1; /* TITULOS */
+            font-weight: 700;
+            margin-bottom: 30px;
+            line-height: 1.2;
+            text-shadow: none;
+        }
 
-.bot-message p {
-    background: #f0f0f2; /* BANNER */
-    color: #1d1d1f; /* Texto oscuro para legibilidad */
-    padding: 12px 16px;
-    border-radius: 18px 18px 18px 5px;
-    margin: 0;
-    line-height: 1.5;
-}
+        .hero-description {
+            font-size: 22px !important;
+            font-weight: 400 !important;
+            color: #4f7da1 !important; /* TITULOS */
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: justify !important; /* TEXTO JUSTIFICADO */
+            line-height: 1.7 !important;
+            text-shadow: none;
+        }
 
-/* Indicador de carga */
-#chatbot-loading {
-    display: none;
-    align-items: center;
-    gap: 10px;
-    padding: 15px 20px;
-    color: #0071e3; /* BOTONES */
-    font-size: 14px;
-}
+        /* Secciones Generales */
+        .main-services, .iot-section, .mission-vision {
+            padding: 80px 20px;
+            background-color: #d5eaf6; /* FONDO CELESTE */
+        }
+        
+        .contact-section {
+            padding: 80px 20px;
+            background-color: #ffffff; /* FONDO sólido para esta sección */
+        }
 
-.loading-dots {
-    display: flex;
-    gap: 4px;
-}
+        h2, h3 {
+            color: #4f7da1; /* TITULOS */
+        }
 
-.loading-dots span {
-    width: 8px;
-    height: 8px;
-    background: #0071e3; /* BOTONES */
-    border-radius: 50%;
-    animation: bounce 1.4s ease-in-out infinite both;
-}
+        h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        h3 {
+           font-size: 20px;
+           margin-bottom: 15px;
+        }
 
-.loading-dots span:nth-child(1) { animation-delay: -0.32s; }
-.loading-dots span:nth-child(2) { animation-delay: -0.16s; }
+        .main-services > .container > p, .iot-description, .service-card-new p, .mv-card p {
+            font-size: 18px;
+            text-align: justify; /* TEXTO JUSTIFICADO */
+            color: #86868b; /* TEXTO */
+        }
+        .main-services > .container > p, .iot-description {
+             margin-bottom: 50px;
+             max-width: 700px;
+             margin-left: auto;
+             margin-right: auto;
+        }
 
-@keyframes bounce {
-    0%, 80%, 100% { transform: scale(0); }
-    40% { transform: scale(1); }
-}
 
-/* Formulario de entrada */
-.chatbot-input-container {
-    padding: 20px;
-    border-top: 1px solid #e1e1e1;
-}
+        /* Tarjetas de Servicio */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
 
-#chatbot-form {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-}
+        .service-card-new {
+            background: #ffffff; /* FONDO */
+            border: 1px solid #e1e1e1;
+            padding: 30px 25px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
 
-#chatbot-input {
-    flex: 1;
-    padding: 12px 15px;
-    border: 1px solid #ccc;
-    border-radius: 25px;
-    background: #f0f0f2; /* BANNER */
-    color: #1d1d1f;
-    font-size: 14px;
-    outline: none;
-    transition: border-color 0.3s ease;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-}
+        .service-card-new:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(79, 125, 161, 0.15);
+            border-color: #4f7da1;
+        }
 
-#chatbot-input:focus {
-    border-color: #0071e3; /* BOTONES */
-}
+        .service-card-new .service-icon {
+            font-size: 48px;
+            color: #0071e3; /* BOTONES */
+            margin-bottom: 20px;
+        }
 
-#chatbot-input::placeholder {
-    color: #86868b; /* TEXTO */
-}
+        .service-card-new p {
+            color: #86868b; /* TEXTO */
+            flex-grow: 1;
+            font-size: 16px;
+        }
+        
+        .pricing-highlight {
+            background: rgba(0, 113, 227, 0.1);
+            color: #0071e3;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 14px;
+            margin-top: 20px;
+            display: inline-block;
+        }
+        
+        /* Sección IoT */
+        .iot-services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .iot-card {
+             background: #ffffff;
+             border: 1px solid #e1e1e1;
+             padding: 30px;
+             border-radius: 15px;
+             transition: all 0.3s ease;
+             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .iot-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(79, 125, 161, 0.15);
+        }
+        .iot-card i { color: #0071e3; }
+        .iot-card p, .iot-card li { color: #86868b; }
+        .iot-details { text-align: left; }
+        .iot-details ul { list-style: none; padding-left: 0; }
+        .iot-details li { margin-bottom: 5px; }
+        
+        /* Misión y Visión */
+        .mv-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        .mv-card {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+        }
+        .mv-card p { color: #86868b; font-size: 16px; }
+        
+        /* Botones */
+        .cta-button, .newsletter-form button {
+            background-color: #0071e3; /* BOTONES */
+            color: #ffffff;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            text-decoration: none;
+        }
 
-.send-button {
-    background: #0071e3; /* BOTONES */
-    border: none;
-    color: #ffffff;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    transition: all 0.3s ease;
-}
+        .cta-button:hover, .newsletter-form button:hover {
+            background-color: #005bb5;
+            transform: scale(1.05);
+        }
+        
+        /* Sección Contacto */
+        .contact-content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 40px;
+            align-items: flex-start;
+        }
+        .contact-info-wrapper, .contact-form-wrapper {
+             background: #f0f0f2;
+             padding: 40px;
+             border-radius: 15px;
+        }
+        .contact-item { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; color: #86868b; }
+        .contact-item i { color: #0071e3; font-size: 20px; }
+        .contact-item a { color: #86868b; text-decoration: none; }
+        .contact-item a:hover { color: #0071e3; }
+        
+        .newsletter-form { display: flex; flex-direction: column; gap: 15px; }
+        .newsletter-form input, .newsletter-form textarea, .newsletter-form select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #ffffff;
+            color: #333;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        .newsletter-form input:focus, .newsletter-form textarea:focus, .newsletter-form select:focus {
+            outline: none;
+            border-color: #0071e3;
+        }
+        .newsletter-form button { width: 100%; margin-top: 10px; }
+        
+        /* Footer */
+        .footer {
+            background-color: #f0f0f2;
+            padding: 60px 20px 20px;
+            color: #86868b;
+        }
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            text-align: center;
+            gap: 20px;
+        }
+        .social-links { display: flex; justify-content: center; gap: 15px; margin-top: 15px; }
+        .social-links a { color: #86868b; font-size: 24px; text-decoration: none; }
+        .social-links a:hover { color: #0071e3; }
+        .footer-bottom { border-top: 1px solid #dcdcdc; padding-top: 20px; margin-top: 30px; text-align: center; }
+        .signature { margin-top: 10px; }
 
-.send-button:hover {
-    background: #005bb5;
-    transform: scale(1.1);
-}
+        /* Estilos del Chatbot */
+        #chat-toggle-button {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 60px;
+            height: 60px;
+            background: #0071e3; /* BOTONES */
+            color: #ffffff;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0, 113, 227, 0.4);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            transition: all 0.3s ease;
+        }
+        #chat-toggle-button:hover { transform: scale(1.1); }
 
-/* Mensaje de bienvenida */
-.welcome-message {
-    text-align: center;
-    color: #86868b; /* TEXTO */
-    font-size: 14px;
-    padding: 20px;
-    border-bottom: 1px solid #e1e1e1;
-}
+        #chatbot-container {
+            position: fixed;
+            bottom: 100px;
+            right: 25px;
+            width: 350px;
+            height: 500px;
+            background: #ffffff; /* FONDO */
+            border: 1px solid #e1e1e1;
+            border-radius: 18px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px) scale(0.9);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+        }
+        #chatbot-container.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+        .chatbot-header {
+            background: #f0f0f2; /* BANNER */
+            color: #4f7da1; /* TITULOS */
+            padding: 15px 20px;
+            border-radius: 18px 18px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            border-bottom: 1px solid #e1e1e1;
+        }
+        #close-chat-btn { background: none; border: none; color: #86868b; font-size: 20px; cursor: pointer; }
+        #chatbot-messages { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
+        .chatbot-input-container { padding: 15px; border-top: 1px solid #e1e1e1; display: flex; gap: 10px; }
+        #chatbot-input { flex: 1; padding: 10px 15px; border: 1px solid #ccc; border-radius: 20px; font-size: 14px; }
+        #chatbot-input:focus { outline: none; border-color: #0071e3; }
+        .chatbot-input-container button { 
+            background: #0071e3; /* BOTON AZUL */
+            border: none; 
+            color: #ffffff; 
+            width: 40px; 
+            height: 40px; 
+            border-radius: 50%; 
+            cursor: pointer; 
+            font-size: 16px; 
+            flex-shrink: 0; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-/* Badge de notificación */
-.chat-notification {
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    background: #ff4444;
-    color: white;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    font-size: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-}
+        /* Estilos para los mensajes del chatbot */
+        .message {
+            max-width: 85%;
+            margin-bottom: 10px;
+            display: flex;
+        }
+        .user-message {
+            justify-content: flex-end;
+            margin-left: auto;
+        }
+        .bot-message {
+            justify-content: flex-start;
+        }
+        .message p {
+            padding: 12px 16px;
+            border-radius: 18px;
+            margin: 0;
+            line-height: 1.5;
+            word-wrap: break-word;
+        }
+        .user-message p {
+            background: #0071e3;
+            color: #ffffff;
+            border-radius: 18px 5px 18px 18px;
+        }
+        .bot-message p {
+            background: #f0f0f2;
+            color: #1d1d1f;
+            border: 1px solid #e1e1e1;
+            border-radius: 5px 18px 18px 18px;
+        }
+        
+        /* Responsive Design */
+        @media screen and (max-width: 992px) {
+            .nav-container { position: relative; }
+            .visitor-counter-container { display: none; }
+        }
 
-/* Animaciones */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+        @media screen and (max-width: 768px) {
+            .container {
+                width: 98%;
+                padding: 0;
+            }
+            .nav-container { padding: 0 10px; }
+            .nav-logo { flex: 1; justify-content: center; } 
+            .nav-logo img { 
+                width: 45px; /* Logo un poco más grande en móvil */
+                height: 45px;
+            }
+            .nav-logo h2 { 
+                font-size: 18px; /* Título más chico para simetría */
+            }
+            .nav-toggle { display: flex; }
+            .search-container, .visitor-counter-container { display: none; }
+            
+            .nav-menu {
+                position: fixed;
+                left: 0;
+                top: 75px; /* Altura del header */
+                flex-direction: column;
+                background: rgba(255, 255, 255, 0.9); /* FONDO MENU SEMITRANSPARENTE */
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                width: 100%;
+                height: 0;
+                overflow: hidden;
+                text-align: center;
+                transition: height 0.4s ease, padding 0.4s ease;
+                z-index: 999;
+                padding: 0;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            }
+            
+            .nav-menu.active { height: auto; padding: 20px 0; }
+            .nav-menu li { margin: 10px 0; width: 100%; }
+            .nav-link { 
+                font-size: 20px; /* LETRAS MAS GRANDES */
+                color: #86868b; 
+                padding: 10px 20px; 
+                display: block; 
+                font-weight: 500;
+            }
+            .nav-link:hover { background: rgba(0, 113, 227, 0.1); color: #0071e3; }
+            
+            .nav-toggle.active .bar:nth-child(2) { opacity: 0; }
+            .nav-toggle.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+            .nav-toggle.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+            
+            .hero { padding: 120px 1% 60px; min-height: 80vh; }
+            .hero-title { font-size: 32px; } /* Título más chico en móvil */
+            .hero-description { font-size: 16px !important; }
+            
+            .main-services, .iot-section, .mission-vision, .contact-section { padding: 60px 1%; }
+            h2 { font-size: 32px; }
+            
+            .services-grid, .iot-services, .mv-grid, .contact-content-wrapper { grid-template-columns: 1fr; }
+            .contact-info-wrapper { margin-bottom: 30px; }
 
-/* Responsive para móviles */
-@media screen and (max-width: 768px) {
-    #chatbot-container {
-        width: calc(100vw - 20px);
-        height: calc(100vh - 140px);
-        right: 10px;
-        bottom: 90px;
-        max-width: 380px;
-    }
+            /* Ajustes Formulario Móvil */
+            .contact-form-wrapper { padding: 25px; }
+            .contact-form-wrapper h2 { font-size: 24px; } /* Título del formulario más pequeño */
+            .newsletter-form { gap: 10px; }
+            .newsletter-form input, .newsletter-form textarea, .newsletter-form select {
+                font-size: 14px;
+                padding: 10px 12px;
+            }
+            .newsletter-form button { 
+                font-size: 14px; 
+                padding: 12px 25px; /* Mismo tamaño que .cta-button */
+            }
 
-    #chat-toggle-button {
-        bottom: 20px;
-        right: 20px;
-        width: 55px;
-        height: 55px;
-        font-size: 22px;
-    }
-}
+            /* Chatbot para móviles - más pequeño */
+            #chat-toggle-button {
+                width: 55px;
+                height: 55px;
+                font-size: 24px;
+                bottom: 15px;
+                right: 15px;
+            }
+            #chatbot-container {
+                width: 320px;
+                height: 420px;
+                bottom: 80px;
+                right: 15px;
+            }
+        }
+        
+        @media screen and (max-width: 480px) {
+             #chatbot-container {
+                width: calc(100vw - 20px);
+                height: 65vh;
+                max-height: 400px;
+                bottom: 75px;
+                right: 10px;
+                left: 10px;
+             }
+        }
+    </style>
+</head>
+<body>
+    <header class="header" id="header">
+        <nav class="navbar container">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <img src="fotos/logo.png" alt="Guardia Digital Logo">
+                    <h2>GUARDIA DIGITAL</h2>
+                </div>
+                
+                <ul class="nav-menu" id="nav-menu">
+                    <li class="nav-item"><a href="#inicio" class="nav-link">Inicio</a></li>
+                    <li class="nav-item"><a href="#servicios" class="nav-link">Servicios</a></li>
+                    <li class="nav-item"><a href="#mision" class="nav-link">Misión</a></li>
+                    <li class="nav-item"><a href="#contacto" class="nav-link">Contacto</a></li>
+                </ul>
+                
+                <div class="visitor-counter-container">
+                     <i class="fas fa-eye"></i>
+                     <span id="visitor-count">0</span>
+                </div>
 
-@media screen and (max-width: 480px) {
-    #chatbot-container {
-        width: calc(100vw - 10px);
-        height: calc(100vh - 120px);
-        right: 5px;
-        bottom: 80px;
-    }
+                <button class="nav-toggle" id="mobile-menu" aria-label="Abrir menú">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
+        </nav>
+    </header>
 
-    #chat-toggle-button {
-        bottom: 15px;
-        right: 15px;
-        width: 50px;
-        height: 50px;
-        font-size: 20px;
-    }
-}
+    <section id="inicio" class="hero">
+        <div class="hero-content container">
+            <h1 class="hero-title">
+                TU ALIADO CONFIABLE EN<br>
+                CIBERSEGURIDAD EMPRESARIAL
+            </h1>
+            <p class="hero-description">
+                En un mundo digital cada vez más complejo, sabemos que lo que realmente importa para tu empresa 
+                es tener la tranquilidad de que tus datos y sistemas están protegidos. En Guardia Digital, 
+                convertimos la ciberseguridad en algo simple y comprensible.
+            </p>
+        </div>
+    </section>
+
+    <section id="servicios" class="main-services">
+        <div class="container">
+            <h2>Protección Simple y Confiable</h2>
+            <p>Te ayudamos a proteger tu empresa sin complicaciones. Hablamos en términos claros para que entiendas exactamente cómo mantenemos tu negocio seguro.</p>
+            
+            <div class="services-grid">
+                <div class="service-card-new">
+                    <div>
+                        <div class="service-icon"><i class="fas fa-shield-alt"></i></div>
+                        <h3>Revisión Completa de Seguridad</h3>
+                        <p>Analizamos todos los puntos donde tu empresa podría estar en riesgo y te explicamos de manera simple qué necesitas proteger.</p>
+                    </div>
+                    <span class="pricing-highlight">Evaluación Gratuita</span>
+                </div>
+                
+                <div class="service-card-new">
+                    <div>
+                        <div class="service-icon"><i class="fas fa-eye"></i></div>
+                        <h3>Vigilancia 24/7 - Tu Guardia Digital</h3>
+                        <p>Cuidamos tu empresa las 24 horas del día, todos los días del año. Si algo extraño sucede, actuamos inmediatamente.</p>
+                    </div>
+                    <span class="pricing-highlight">20% más económico</span>
+                </div>
+                
+                <div class="service-card-new">
+                    <div>
+                        <div class="service-icon"><i class="fas fa-users-cog"></i></div>
+                        <h3>Cumplimiento Legal Simplificado</h3>
+                        <p>Te ayudamos a cumplir con todas las normas y regulaciones de seguridad sin que tengas que convertirte en un experto legal.</p>
+                    </div>
+                    <span class="pricing-highlight">Paquetes Escalables</span>
+                </div>
+                
+                <div class="service-card-new">
+                    <div>
+                        <div class="service-icon"><i class="fas fa-graduation-cap"></i></div>
+                        <h3>Capacitación Práctica para tu Equipo</h3>
+                        <p>Enseñamos a tu equipo cómo mantenerse seguro en el día a día, con consejos prácticos y fáciles de aplicar.</p>
+                    </div>
+                    <span class="pricing-highlight">Descuentos Anuales</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="iot-section">
+        <div class="container">
+            <h2>Evaluación Gratuita - Sin Compromiso</h2>
+            <p class="iot-description">
+                Comenzamos ofreciéndote una evaluación completamente gratuita de la seguridad de tu empresa. 
+                Sin tecnicismos, sin compromisos. Solo queremos que sepas exactamente dónde estás parado.
+            </p>
+            
+            <div class="iot-services">
+                <div class="iot-card">
+                    <i class="fas fa-search" style="font-size: 48px;"></i>
+                    <h3>1. Te Contamos Qué Encontramos</h3>
+                    <div class="iot-details">
+                        <p><strong>Revisamos tu empresa y te explicamos de manera simple dónde están los riesgos.</strong></p>
+                        <ul>
+                            <li>✓ Revisión básica de tus sistemas</li>
+                            <li>✓ Identificamos los puntos más importantes a proteger</li>
+                            <li>✓ Sabes exactamente cómo está tu empresa hoy</li>
+                            <li>✓ Recomendaciones claras de qué hacer primero</li>
+                        </ul>
+                    </div>
+                    <a href="#contacto" class="cta-button">Solicitar Evaluación</a>
+                </div>
+                
+                <div class="iot-card">
+                    <i class="fas fa-chart-line" style="font-size: 48px;"></i>
+                    <h3>2. Creamos Tu Plan de Protección</h3>
+                    <div class="iot-details">
+                        <p><strong>Diseñamos un plan paso a paso, pensado específicamente para tu empresa y tu presupuesto.</strong></p>
+                        <ul>
+                            <li>✓ Plan adaptado a tu tipo de negocio</li>
+                            <li>✓ Pasos claros y fechas realistas</li>
+                            <li>✓ Avanzas de a poco, sin grandes inversiones</li>
+                            <li>✓ Cada peso que inviertas tiene un propósito claro</li>
+                        </ul>
+                    </div>
+                     <a href="#contacto" class="cta-button">Ver Ejemplo</a>
+                </div>
+                
+                <div class="iot-card">
+                    <i class="fas fa-handshake" style="font-size: 48px;"></i>
+                    <h3>3. Te Acompañamos en el Camino</h3>
+                    <div class="iot-details">
+                        <p><strong>No te dejamos solo. Nuestro equipo está siempre disponible para ayudarte y responder tus dudas.</strong></p>
+                        <ul>
+                            <li>✓ Soporte en español cuando lo necesites</li>
+                            <li>✓ Tu seguridad mejora constantemente</li>
+                            <li>✓ Te concentras en hacer crecer tu negocio</li>
+                        </ul>
+                    </div>
+                     <a href="#contacto" class="cta-button">Conocer Más</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="mision" class="mission-vision">
+        <div class="container">
+            <h2>Misión y Visión</h2>
+            <div class="mv-grid">
+                <div class="mv-card">
+                    <h3>Misión</h3>
+                    <p>
+                        Proteger el presente y el futuro digital de las empresas en Chile, entregando soluciones de 
+                        ciberseguridad robustas y fáciles de entender, a través de un equipo de expertos 
+                        cercanos y comprometidos.
+                    </p>
+                </div>
+                <div class="mv-card">
+                    <h3>Visión</h3>
+                    <p>
+                        Ser líderes en soluciones tecnológicas de seguridad digital, destacándonos por nuestra 
+                        innovación y profesionalismo, para construir un mundo digital más seguro donde las 
+                        organizaciones puedan prosperar.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto" class="contact-section">
+        <div class="container">
+            <div class="contact-content-wrapper">
+                <div class="contact-info-wrapper">
+                    <h3>Información de Contacto</h3>
+                    <div class="contact-info-items">
+                        <div class="contact-item"><i class="fas fa-map-marker-alt"></i><span>Santiago, Chile</span></div>
+                        <div class="contact-item"><i class="fas fa-envelope"></i><span>contacto@guardiadigital.cl</span></div>
+                        <div class="contact-item"><i class="fas fa-phone"></i><span>+56 9 XXXX XXXX</span></div>
+                        <div class="contact-item"><i class="fab fa-whatsapp"></i><a href="#" target="_blank" rel="noopener noreferrer"><span>WhatsApp</span></a></div>
+                    </div>
+                </div>
+                
+                <div class="contact-form-wrapper">
+                    <h2>Solicitar Evaluación Gratuita</h2>
+                    <form class="newsletter-form" id="contactForm">
+                        <input type="text" name="nombre" placeholder="Nombre completo" required>
+                        <input type="email" name="email" placeholder="Correo electrónico" required>
+                        <input type="tel" name="telefono" placeholder="Teléfono">
+                        <input type="text" name="empresa" placeholder="Nombre de la empresa">
+                        <textarea name="mensaje" placeholder="Describe brevemente tus necesidades..." rows="4"></textarea>
+                        <button type="submit">Solicitar Evaluación</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>GUARDIA DIGITAL</h3>
+                    <p>Tu aliado confiable en ciberseguridad</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" aria-label="Imprimir"><i class="fas fa-print"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy;2025 by Guardia Digital. Todos los derechos reservados.</p>
+                <div class="signature">
+                    <p><strong>Universidad SEK</strong> - Plan de Marketing Digital</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- CHATBOT Y SCRIPTS -->
+    <button id="chat-toggle-button" aria-label="Abrir chat"><i class="fas fa-comments"></i></button>
+    <div id="chatbot-container">
+        <div class="chatbot-header">
+             <div class="chatbot-title"><i class="fas fa-shield-alt"></i> Cyber Asistente</div>
+             <button id="close-chat-btn" aria-label="Cerrar chat"><i class="fas fa-times"></i></button>
+        </div>
+        <div id="chatbot-messages"></div>
+        <div id="chatbot-loading" style="display: none;">Escribiendo...</div>
+        <form id="chatbot-form" class="chatbot-input-container">
+            <input type="text" id="chatbot-input" placeholder="Escribe tu pregunta..." autocomplete="off">
+            <button type="submit" aria-label="Enviar"><i class="fas fa-paper-plane"></i></button>
+        </form>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Lógica General de la Página ---
+            const header = document.getElementById('header');
+            const menuButton = document.getElementById('mobile-menu');
+            const mobileMenu = document.getElementById('nav-menu');
+            
+            // Header con scroll
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Menú móvil
+            if (menuButton && mobileMenu) {
+                menuButton.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('active');
+                    menuButton.classList.toggle('active');
+                });
+
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.addEventListener('click', () => {
+                         mobileMenu.classList.remove('active');
+                         menuButton.classList.remove('active');
+                    });
+                });
+            }
+
+            // --- Lógica del Chatbot (Consolidada y Reparada) ---
+            const chatToggleButton = document.getElementById('chat-toggle-button');
+            const chatbotContainer = document.getElementById('chatbot-container');
+            const closeChatBtn = document.getElementById('close-chat-btn');
+            const chatbotForm = document.getElementById('chatbot-form');
+            const chatbotInput = document.getElementById('chatbot-input');
+            const chatbotMessages = document.getElementById('chatbot-messages');
+            const loadingIndicator = document.getElementById('chatbot-loading');
+
+            if (chatToggleButton && chatbotContainer && closeChatBtn) {
+                chatToggleButton.addEventListener('click', () => chatbotContainer.classList.toggle('active'));
+                closeChatBtn.addEventListener('click', () => chatbotContainer.classList.remove('active'));
+            }
+
+            const addMessage = (sender, text) => {
+                const messageContainer = document.createElement('div');
+                messageContainer.classList.add('message', `${sender}-message`);
+                
+                const messageBubble = document.createElement('p');
+                messageBubble.textContent = text;
+                
+                messageContainer.appendChild(messageBubble);
+                chatbotMessages.appendChild(messageContainer);
+                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+            };
+
+            const getAIResponse = async (userInput) => {
+                loadingIndicator.style.display = 'block';
+                
+                const prompt = `Eres un asistente virtual para RECYBERSEG, una empresa chilena de ciberseguridad. Tu nombre es 'Cyber Asistente'. Responde a las preguntas de los usuarios sobre nuestros servicios, que incluyen:
+                1.  **Auditorías de Seguridad**: Evaluación completa de infraestructura digital.
+                2.  **Monitoreo de Redes**: Supervisión 24/7.
+                3.  **Consultoría en Ciberseguridad**: Asesoramiento experto y personalizado.
+                4.  **Implementación de Sistemas de Seguridad**: Configuración de firewalls, etc.
+                5.  **Seguridad IoT**: Protección de dispositivos inteligentes.
+                
+                Nuestra misión es proteger el ecosistema digital de nuestros clientes con soluciones innovadoras.
+                Nuestra visión es ser líderes en soluciones tecnológicas de seguridad digital.
+                
+                Sé amable, profesional y conciso. Si no sabes la respuesta, di que consultarás con un especialista. No inventes información. Responde en español.
+                
+                Aquí está la pregunta del usuario: "${userInput}"`;
+
+                const apiKey = ""; // La clave se gestiona automáticamente por el entorno.
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+                const payload = { contents: [{ parts: [{ text: prompt }] }] };
+
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`Error en la API: ${response.status}`);
+                    }
+
+                    const result = await response.json();
+                    const botResponse = result.candidates[0]?.content?.parts[0]?.text || "Lo siento, no pude procesar la respuesta en este momento.";
+                    addMessage('bot', botResponse);
+
+                } catch (error) {
+                    console.error('Error al contactar la IA:', error);
+                    addMessage('bot', 'Hubo un problema al conectar con el asistente. Por favor, intenta de nuevo más tarde.');
+                } finally {
+                    loadingIndicator.style.display = 'none';
+                }
+            };
+
+            if (chatbotForm) {
+                chatbotForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const userInput = chatbotInput.value.trim();
+                    if (userInput) {
+                        addMessage('user', userInput);
+                        chatbotInput.value = '';
+                        getAIResponse(userInput);
+                    }
+                });
+            }
+        });
+    </script>
+    
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <script src="firebase-counter.js"></script>
+    <!-- El script del chatbot.js ya no es necesario, la lógica está en el script de arriba -->
+    <!-- <script src="chatbot.js"></script> -->
+
+</body>
+</html>
 
