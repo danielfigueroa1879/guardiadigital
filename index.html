@@ -592,13 +592,60 @@
         </svg>
     </button>
 
+    <!-- CHATBOT HTML - Agregar antes de </body> -->
+    <button id="chat-toggle-button" aria-label="Abrir chat de ayuda">
+        <i class="fas fa-comments"></i>
+        <span class="chat-notification" style="display: none;">1</span>
+    </button>
+
+    <div id="chatbot-container">
+        <div class="chatbot-header">
+            <div class="chatbot-title">
+                <i class="fas fa-shield-alt"></i>
+                Cyber Asistente
+            </div>
+            <button id="close-chat-btn" aria-label="Cerrar chat">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="welcome-message">
+            <p>👋 ¡Hola! Soy tu <strong>Cyber Asistente</strong> de Guardia Digital.<br>
+            ¿En qué puedo ayudarte hoy?</p>
+        </div>
+        <div id="chatbot-messages">
+        </div>
+        <div id="chatbot-loading">
+            <i class="fas fa-robot"></i>
+            <span>Escribiendo</span>
+            <div class="loading-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <div class="chatbot-input-container">
+            <form id="chatbot-form">
+                <input 
+                    type="text" 
+                    id="chatbot-input" 
+                    placeholder="Escribe tu pregunta sobre ciberseguridad..."
+                    autocomplete="off"
+                    maxlength="500"
+                >
+                <button type="submit" class="send-button" aria-label="Enviar mensaje">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Scripts Principales de la Página -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const menuButton = document.getElementById('mobile-menu');
             const mobileMenu = document.getElementById('nav-menu');
             const scrollToTopBtn = document.getElementById('scrollToTop');
             
-            // Menú móvil
             if (menuButton && mobileMenu) {
                 menuButton.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -614,7 +661,6 @@
                     }
                 });
 
-                // Cerrar menú al hacer click en enlaces
                 const navLinks = document.querySelectorAll('.nav-link');
                 navLinks.forEach(link => {
                     link.addEventListener('click', function() {
@@ -626,7 +672,6 @@
                     });
                 });
 
-                // Cerrar menú al hacer click fuera
                 document.addEventListener('click', function(e) {
                     if (!menuButton.contains(e.target) && 
                         !mobileMenu.contains(e.target) && 
@@ -638,7 +683,6 @@
                 });
             }
 
-            // Scroll to top button (solo móviles)
             function toggleScrollButton() {
                 if (window.innerWidth <= 768) {
                     if (window.pageYOffset > 300) {
@@ -661,26 +705,6 @@
                 });
             });
 
-            // Contador de visitas
-            function animateCounter() {
-                const counter = document.getElementById('visitor-count');
-                const target = Math.floor(Math.random() * 1500) + 800;
-                let current = 0;
-                const increment = target / 100;
-                
-                const timer = setInterval(() => {
-                    current += increment;
-                    if (current >= target) {
-                        current = target;
-                        clearInterval(timer);
-                    }
-                    counter.textContent = Math.floor(current).toLocaleString();
-                }, 20);
-            }
-            
-            animateCounter();
-
-            // Formulario de contacto
             const contactForm = document.getElementById('contactForm');
             if (contactForm) {
                 contactForm.addEventListener('submit', function(e) {
@@ -692,7 +716,8 @@
                     const sector = formData.get('sector');
                     
                     if (!nombre || !formData.get('email')) {
-                        alert('Por favor, completa los campos obligatorios.');
+                        // Reemplazar alert con un modal o mensaje en la página
+                        console.log('Por favor, completa los campos obligatorios.');
                         return;
                     }
                     
@@ -712,12 +737,11 @@
                     }
                     mensajeRespuesta += '. Nuestro equipo de expertos te contactará pronto para programar tu evaluación gratuita de seguridad.';
                     
-                    alert(mensajeRespuesta);
+                    console.log(mensajeRespuesta); // Usar console.log en lugar de alert
                     this.reset();
                 });
             }
 
-            // Scroll suave para links internos
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
@@ -734,7 +758,6 @@
                 });
             });
 
-            // Animaciones de entrada
             const observerOptions = {
                 threshold: 0.1,
                 rootMargin: '0px 0px -50px 0px'
@@ -757,7 +780,6 @@
                 observer.observe(el);
             });
 
-            // Header dinámico
             const header = document.querySelector('.header');
             function updateHeader() {
                 const currentScroll = window.pageYOffset;
@@ -773,7 +795,6 @@
                 }
             }
 
-            // Throttle scroll events
             let ticking = false;
             window.addEventListener('scroll', function() {
                 if (!ticking) {
@@ -786,293 +807,18 @@
                 }
             });
 
-            // Cambios de orientación móvil
-            window.addEventListener('orientationchange', function() {
-                setTimeout(() => {
-                    if (mobileMenu && mobileMenu.classList.contains('active')) {
-                        menuButton.classList.remove('active');
-                        mobileMenu.classList.remove('active');
-                        document.body.style.overflow = '';
-                    }
-                    toggleScrollButton();
-                }, 500);
-            });
-
-            // Optimización para inputs en móviles
-            const inputs = document.querySelectorAll('input, textarea, select');
-            inputs.forEach(input => {
-                input.addEventListener('focus', function() {
-                    if (window.innerWidth <= 768) {
-                        setTimeout(() => {
-                            this.scrollIntoView({
-                                behavior: 'smooth',
-                                block: 'center'
-                            });
-                        }, 300);
-                    }
-                });
-            });
-
-            // Experiencia táctil mejorada
-            if ('ontouchstart' in window) {
-                const touchElements = document.querySelectorAll('.service-card-new, .iot-card, .mv-card, .cta-button, .nav-link');
-                
-                touchElements.forEach(element => {
-                    element.addEventListener('touchstart', function() {
-                        this.style.transform = 'scale(0.98)';
-                    }, { passive: true });
-                    
-                    element.addEventListener('touchend', function() {
-                        setTimeout(() => {
-                            this.style.transform = '';
-                        }, 150);
-                    }, { passive: true });
-                });
-            }
-
             console.log('✅ Guardia Digital - Sitio web cargado correctamente');
         });
-
-        function isMobile() {
-            return window.innerWidth <= 768;
-        }
-
-        function formatNumber(num) {
-            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        }
-
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                console.log('🔧 Service Worker compatible');
-            });
-        }
     </script>
-<!-- CHATBOT HTML - Agregar antes de </body> -->
-
-<!-- Botón flotante del chatbot -->
-<button id="chat-toggle-button" aria-label="Abrir chat de ayuda">
-    <i class="fas fa-comments"></i>
-    <span class="chat-notification" style="display: none;">1</span>
-</button>
-
-<!-- Contenedor del chatbot -->
-<div id="chatbot-container">
-    <!-- Header del chatbot -->
-    <div class="chatbot-header">
-        <div class="chatbot-title">
-            <i class="fas fa-shield-alt"></i>
-            Cyber Asistente
-        </div>
-        <button id="close-chat-btn" aria-label="Cerrar chat">
-            <i class="fas fa-times"></i>
-        </button>
-    </div>
-
-    <!-- Mensaje de bienvenida -->
-    <div class="welcome-message">
-        <p>👋 ¡Hola! Soy tu <strong>Cyber Asistente</strong> de Guardia Digital.<br>
-        ¿En qué puedo ayudarte hoy?</p>
-    </div>
-
-    <!-- Área de mensajes -->
-    <div id="chatbot-messages">
-        <!-- Los mensajes aparecerán aquí dinámicamente -->
-    </div>
-
-    <!-- Indicador de carga -->
-    <div id="chatbot-loading">
-        <i class="fas fa-robot"></i>
-        <span>Escribiendo</span>
-        <div class="loading-dots">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </div>
-
-    <!-- Formulario de entrada -->
-    <div class="chatbot-input-container">
-        <form id="chatbot-form">
-            <input 
-                type="text" 
-                id="chatbot-input" 
-                placeholder="Escribe tu pregunta sobre ciberseguridad..."
-                autocomplete="off"
-                maxlength="500"
-            >
-            <button type="submit" class="send-button" aria-label="Enviar mensaje">
-                <i class="fas fa-paper-plane"></i>
-            </button>
-        </form>
-    </div>
-</div>
-
-// ===== SCRIPT DEL CHATBOT =====
-document.addEventListener('DOMContentLoaded', () => {
-    console.log("✅ Chatbot script loaded and DOM is ready.");
-
-    // Obtener referencias a todos los elementos HTML necesarios
-    const chatToggleButton = document.getElementById('chat-toggle-button');
-    const chatbotContainer = document.getElementById('chatbot-container');
-    const closeChatBtn = document.getElementById('close-chat-btn');
-    const chatbotForm = document.getElementById('chatbot-form');
-    const chatbotInput = document.getElementById('chatbot-input');
-    const chatbotMessages = document.getElementById('chatbot-messages');
-    const loadingIndicator = document.getElementById('chatbot-loading');
-
-    // Verificar si todos los elementos del chatbot existen
-    if (!chatToggleButton || !chatbotContainer || !closeChatBtn || !chatbotForm || !chatbotInput || !chatbotMessages || !loadingIndicator) {
-        console.error("❌ Error: No se encontraron uno o más elementos del chatbot en el DOM.");
-        return;
-    }
-
-    // Mostrar notificación inicial
-    setTimeout(() => {
-        const notification = chatToggleButton.querySelector('.chat-notification');
-        if (notification) {
-            notification.style.display = 'flex';
-            setTimeout(() => {
-                notification.style.display = 'none';
-            }, 5000);
-        }
-    }, 3000);
-
-    // --- Event Listeners ---
-
-    // Alternar la visibilidad del chatbot
-    chatToggleButton.addEventListener('click', () => {
-        chatbotContainer.classList.toggle('active');
-        
-        // Ocultar notificación al abrir chat
-        const notification = chatToggleButton.querySelector('.chat-notification');
-        if (notification) {
-            notification.style.display = 'none';
-        }
-
-        // Auto-focus en el input cuando se abre
-        if (chatbotContainer.classList.contains('active')) {
-            setTimeout(() => {
-                chatbotInput.focus();
-            }, 300);
-        }
-    });
-
-    // Cerrar el chatbot
-    closeChatBtn.addEventListener('click', () => {
-        chatbotContainer.classList.remove('active');
-    });
-
-    // Cerrar chatbot al presionar Escape
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && chatbotContainer.classList.contains('active')) {
-            chatbotContainer.classList.remove('active');
-        }
-    });
-
-    // Manejar el envío del formulario
-    chatbotForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const userInput = chatbotInput.value.trim();
-
-        if (userInput) {
-            addMessage(userInput, 'user');
-            chatbotInput.value = '';
-            getAIResponse(userInput);
-        }
-    });
-
-    // --- Funciones Principales ---
-
-    /**
-     * Agrega un mensaje a la ventana del chat
-     */
-    function addMessage(text, sender) {
-        const messageElement = document.createElement('div');
-        messageElement.classList.add('message', `${sender}-message`);
-        const p = document.createElement('p');
-        p.textContent = text;
-        messageElement.appendChild(p);
-        chatbotMessages.appendChild(messageElement);
-        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-    }
-
-    /**
-     * Obtiene una respuesta de la IA de Gemini
-     */
-    async function getAIResponse(userInput) {
-        loadingIndicator.style.display = 'flex';
-        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-
-        // Contexto e instrucción para el modelo de IA
-        const prompt = `Eres un asistente virtual para GUARDIA DIGITAL, una empresa chilena de ciberseguridad. Tu nombre es 'Cyber Asistente'. Responde a las preguntas de los usuarios sobre nuestros servicios, que incluyen:
-        
-        1. **Auditorías de Seguridad**: Evaluación completa de infraestructura digital.
-        2. **Monitoreo de Redes**: Supervisión 24/7.
-        3. **Consultoría en Ciberseguridad**: Asesoramiento experto y personalizado.
-        4. **Implementación de Sistemas de Seguridad**: Configuración de firewalls, etc.
-        5. **Seguridad IoT**: Protección de dispositivos inteligentes.
-        
-        Nuestra misión es proteger el ecosistema digital de nuestros clientes con soluciones innovadoras.
-        Nuestra visión es ser líderes en soluciones tecnológicas de seguridad digital.
-        
-        Sé amable, profesional y conciso. Si no sabes la respuesta, di que consultarás con un especialista. No inventes información. Responde en español con un máximo de 150 palabras.
-        
-        Aquí está la pregunta del usuario: "${userInput}"`;
-
-        // Clave de API (usa la tuya existente)
-        const apiKey = "AIzaSyB2Gv6BvDX5UpWUMnIsx-CxyL5s8fWezyc";
-        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-
-        try {
-            const payload = {
-                contents: [{
-                    parts: [{
-                        text: prompt
-                    }]
-                }]
-            };
-
-            const response = await fetch(apiUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(payload)
-            });
-
-            if (!response.ok) {
-                throw new Error(`Error en la API: ${response.status} ${response.statusText}`);
-            }
-
-            const result = await response.json();
-            
-            let botResponse;
-            if (result.candidates && result.candidates[0] && result.candidates[0].content && result.candidates[0].content.parts && result.candidates[0].content.parts[0]) {
-                botResponse = result.candidates[0].content.parts[0].text;
-            } else {
-                console.error("Respuesta de la API inesperada:", result);
-                botResponse = 'Lo siento, no pude procesar la respuesta. Inténtalo de nuevo.';
-            }
-            
-            addMessage(botResponse, 'bot');
-
-        } catch (error) {
-            console.error('❌ Error al contactar la IA:', error);
-            addMessage(`Hubo un problema al conectar con el asistente. Por favor, intenta de nuevo más tarde.`, 'bot');
-        } finally {
-            loadingIndicator.style.display = 'none';
-        }
-    }
-
-    // Mensaje inicial del bot
-    setTimeout(() => {
-        addMessage('¡Hola! 👋 Soy tu Cyber Asistente de Guardia Digital. ¿En qué tema de ciberseguridad puedo ayudarte hoy?', 'bot');
-    }, 1000);
-
-    console.log("🤖 Chatbot inicializado correctamente");
-});
-
-
     
+    <!-- Librerías de Firebase (necesarias para el contador) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+    <!-- Scripts Externos -->
+    <script src="firebase-counter.js"></script>
+    <script src="menu-script.js"></script>
+    <script src="chatbot.js"></script>
+
 </body>
 </html>
