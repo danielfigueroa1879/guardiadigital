@@ -457,6 +457,38 @@
             align-items: center;
             justify-content: center;
         }
+
+        /* Estilos para los mensajes del chatbot */
+        .message {
+            max-width: 85%;
+            margin-bottom: 10px;
+            display: flex;
+        }
+        .user-message {
+            justify-content: flex-end;
+            margin-left: auto;
+        }
+        .bot-message {
+            justify-content: flex-start;
+        }
+        .message p {
+            padding: 12px 16px;
+            border-radius: 18px;
+            margin: 0;
+            line-height: 1.5;
+            word-wrap: break-word;
+        }
+        .user-message p {
+            background: #0071e3;
+            color: #ffffff;
+            border-radius: 18px 5px 18px 18px;
+        }
+        .bot-message p {
+            background: #f0f0f2;
+            color: #1d1d1f;
+            border: 1px solid #e1e1e1;
+            border-radius: 5px 18px 18px 18px;
+        }
         
         /* Responsive Design */
         @media screen and (max-width: 992px) {
@@ -776,12 +808,10 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // --- Lógica General de la Página ---
             const header = document.getElementById('header');
             const menuButton = document.getElementById('mobile-menu');
             const mobileMenu = document.getElementById('nav-menu');
-            const chatToggleButton = document.getElementById('chat-toggle-button');
-            const chatbotContainer = document.getElementById('chatbot-container');
-            const closeChatBtn = document.getElementById('close-chat-btn');
             
             // Header con scroll
             window.addEventListener('scroll', function() {
@@ -807,13 +837,85 @@
                 });
             }
 
-            // Lógica del Chatbot
-             if (chatToggleButton && chatbotContainer && closeChatBtn) {
-                chatToggleButton.addEventListener('click', () => {
-                    chatbotContainer.classList.toggle('active');
-                });
-                closeChatBtn.addEventListener('click', () => {
-                    chatbotContainer.classList.remove('active');
+            // --- Lógica del Chatbot (Consolidada y Reparada) ---
+            const chatToggleButton = document.getElementById('chat-toggle-button');
+            const chatbotContainer = document.getElementById('chatbot-container');
+            const closeChatBtn = document.getElementById('close-chat-btn');
+            const chatbotForm = document.getElementById('chatbot-form');
+            const chatbotInput = document.getElementById('chatbot-input');
+            const chatbotMessages = document.getElementById('chatbot-messages');
+            const loadingIndicator = document.getElementById('chatbot-loading');
+
+            if (chatToggleButton && chatbotContainer && closeChatBtn) {
+                chatToggleButton.addEventListener('click', () => chatbotContainer.classList.toggle('active'));
+                closeChatBtn.addEventListener('click', () => chatbotContainer.classList.remove('active'));
+            }
+
+            const addMessage = (sender, text) => {
+                const messageContainer = document.createElement('div');
+                messageContainer.classList.add('message', `${sender}-message`);
+                
+                const messageBubble = document.createElement('p');
+                messageBubble.textContent = text;
+                
+                messageContainer.appendChild(messageBubble);
+                chatbotMessages.appendChild(messageContainer);
+                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+            };
+
+            const getAIResponse = async (userInput) => {
+                loadingIndicator.style.display = 'block';
+                
+                const prompt = `Eres un asistente virtual para RECYBERSEG, una empresa chilena de ciberseguridad. Tu nombre es 'Cyber Asistente'. Responde a las preguntas de los usuarios sobre nuestros servicios, que incluyen:
+                1.  **Auditorías de Seguridad**: Evaluación completa de infraestructura digital.
+                2.  **Monitoreo de Redes**: Supervisión 24/7.
+                3.  **Consultoría en Ciberseguridad**: Asesoramiento experto y personalizado.
+                4.  **Implementación de Sistemas de Seguridad**: Configuración de firewalls, etc.
+                5.  **Seguridad IoT**: Protección de dispositivos inteligentes.
+                
+                Nuestra misión es proteger el ecosistema digital de nuestros clientes con soluciones innovadoras.
+                Nuestra visión es ser líderes en soluciones tecnológicas de seguridad digital.
+                
+                Sé amable, profesional y conciso. Si no sabes la respuesta, di que consultarás con un especialista. No inventes información. Responde en español.
+                
+                Aquí está la pregunta del usuario: "${userInput}"`;
+
+                const apiKey = ""; // La clave se gestiona automáticamente por el entorno.
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+                const payload = { contents: [{ parts: [{ text: prompt }] }] };
+
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`Error en la API: ${response.status}`);
+                    }
+
+                    const result = await response.json();
+                    const botResponse = result.candidates[0]?.content?.parts[0]?.text || "Lo siento, no pude procesar la respuesta en este momento.";
+                    addMessage('bot', botResponse);
+
+                } catch (error) {
+                    console.error('Error al contactar la IA:', error);
+                    addMessage('bot', 'Hubo un problema al conectar con el asistente. Por favor, intenta de nuevo más tarde.');
+                } finally {
+                    loadingIndicator.style.display = 'none';
+                }
+            };
+
+            if (chatbotForm) {
+                chatbotForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const userInput = chatbotInput.value.trim();
+                    if (userInput) {
+                        addMessage('user', userInput);
+                        chatbotInput.value = '';
+                        getAIResponse(userInput);
+                    }
                 });
             }
         });
@@ -822,7 +924,8 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
     <script src="firebase-counter.js"></script>
-    <script src="chatbot.js"></script>
+    <!-- El script del chatbot.js ya no es necesario, la lógica está en el script de arriba -->
+    <!-- <script src="chatbot.js"></script> -->
 
 </body>
 </html>
