@@ -4102,7 +4102,7 @@ html {
 }
 
 #chatbot-input:focus {
-    border-color: #00ff88;
+    border-color: #7bff00;
     box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
 }
 
@@ -4111,7 +4111,7 @@ html {
 }
 
 .send-button {
-    background: linear-gradient(135deg, #00ff88, #00cc66);
+    background: linear-gradient(135deg, #d0ff00, #ccbe00);
     border: none;
     color: #000;
     width: 40px;
@@ -4203,3 +4203,4 @@ html {
         font-size: 20px;
     }
 }
+
