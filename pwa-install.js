@@ -55,7 +55,7 @@ function setupInstallation() {
     });
 }
 
-// Crear y mostrar banner BLANCO
+// Crear y mostrar banner con los nuevos estilos
 function showBanner() {
     // Si ya existe, no crear otro
     if (document.getElementById('install-banner-clean')) return;
@@ -63,39 +63,42 @@ function showBanner() {
     // Crear banner
     const banner = document.createElement('div');
     banner.id = 'install-banner-clean';
-    banner.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; background: rgba(255,255,255,0.95); padding: 15px 20px; z-index: 10000; display: flex; align-items: center; justify-content: space-between; font-family: Arial, sans-serif; color: #333; border-bottom: 1px solid #ddd; backdrop-filter: blur(10px);';
+    // Estilo del banner: blanco semitransparente
+    banner.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; background: rgba(255,255,255,0.9) !important; padding: 15px 20px; z-index: 10000; display: flex; align-items: center; justify-content: space-between; font-family: Arial, sans-serif; color: #333; border-bottom: 1px solid #ddd; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);';
     
-    // Texto
+    // Texto del banner
     const text = document.createElement('div');
-    text.textContent = 'Guardia Digital - Instala nuestra app para acceso rápido';
-    text.style.cssText = 'flex: 1; font-size: 14px; color: #333;';
+    text.textContent = 'Instala nuestra app para acceso rápido';
+    text.style.cssText = 'flex: 1; font-size: 14px; color: #333; margin-right: 10px;';
     
-    // Contenedor botones
+    // Contenedor de botones
     const buttons = document.createElement('div');
     buttons.style.cssText = 'display: flex; gap: 10px;';
     
-    // Boton instalar
+    // Botón de instalar (azul con letras blancas)
     const installBtn = document.createElement('button');
     installBtn.textContent = 'Instalar';
-    installBtn.style.cssText = 'background: rgba(255,255,255,0.9); border: 1px solid #ccc; color: #333; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 13px;';
+    // CAMBIO: Estilo del botón de instalación a azul con texto blanco
+    installBtn.style.cssText = 'background: #0071e3 !important; border: none !important; color: #ffffff !important; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 13px; font-weight: bold;';
     installBtn.onclick = () => installApp();
     
-    // Boton cerrar
+    // Botón de cerrar (discreto)
     const closeBtn = document.createElement('button');
-    closeBtn.textContent = '✕';
-    closeBtn.style.cssText = 'background: rgba(255,255,255,0.8); border: 1px solid #ccc; color: #666; padding: 8px 12px; border-radius: 50%; cursor: pointer; font-size: 14px;';
+    closeBtn.innerHTML = '&#x2715;'; // Ícono de 'X' (cruz)
+    // CAMBIO: Estilo del botón de cerrar a transparente
+    closeBtn.style.cssText = 'background: transparent !important; border: 1px solid #ccc !important; color: #888 !important; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; padding: 0;';
     closeBtn.onclick = () => hideBanner();
     
-    // Ensamblar
+    // Ensamblar el banner
     buttons.appendChild(installBtn);
     buttons.appendChild(closeBtn);
     banner.appendChild(text);
     banner.appendChild(buttons);
     document.body.appendChild(banner);
     
-    console.log('✅ Banner blanco mostrado');
+    console.log('✅ Banner mostrado con estilo azul y blanco');
     
-    // Auto-ocultar en 8 segundos
+    // Ocultar automáticamente después de 8 segundos
     setTimeout(() => hideBanner(), 8000);
 }
 
@@ -108,7 +111,7 @@ function hideBanner() {
     }
 }
 
-// Instalar app
+// Lógica para instalar la app
 async function installApp() {
     console.log('🚀 Iniciando instalacion...');
     
@@ -139,7 +142,7 @@ async function installApp() {
     }
 }
 
-// Verificar si app esta instalada
+// Verificar si la app ya está instalada
 function isAppInstalled() {
     return window.matchMedia('(display-mode: standalone)').matches || 
            window.navigator.standalone || 
