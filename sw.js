@@ -1,5 +1,5 @@
 // Service Worker para Guardia Digital PWA
-const CACHE_NAME = 'guardia-digital-v1';
+const CACHE_NAME = 'guardia-digital-v2';
 const urlsToCache = [
   './',
   './index.html',
@@ -12,9 +12,7 @@ const urlsToCache = [
   './fotos/favicon-96x96.png',
   './fotos/apple-touch-icon.png',
   'https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;700&display=swap',
-  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css',
-  'https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js',
-  'https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js'
+  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css'
 ];
 
 // Instalar el Service Worker
@@ -24,7 +22,9 @@ self.addEventListener('install', function(event) {
     caches.open(CACHE_NAME)
       .then(function(cache) {
         console.log('✅ Cache abierto');
-        return cache.addAll(urlsToCache.map(url => new Request(url, {cache: 'reload'})));
+        return cache.addAll(urlsToCache.map(function(url) {
+          return new Request(url, {cache: 'reload'});
+        }));
       })
       .catch(function(error) {
         console.error('❌ Error al cachear recursos:', error);
