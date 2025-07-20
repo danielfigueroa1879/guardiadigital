@@ -53,7 +53,7 @@ body {
 }
 
 .navbar {
-    padding: 15px 0;
+    padding: 10px 0;
 }
 
 .nav-container {
@@ -69,14 +69,14 @@ body {
 }
 
 .nav-logo img {
-    width: 90px; /* Logo más grande en PC */
-    height: 90px;
+    width: 65px; /* Logo más grande en PC */
+    height: 65px;
     transition: width 0.3s ease, height 0.3s ease;
 }
 
 .nav-logo h2 {
     color: #000000; /* CAMBIO A NEGRO */
-    font-size: 30px; /* Tamaño original para PC */
+    font-size: 25px; /* Tamaño original para PC */
     font-weight: 600;
     margin: 0;
 }
