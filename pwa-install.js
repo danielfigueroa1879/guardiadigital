@@ -430,5 +430,46 @@ window.pwaInstallBanner = {
     hide: hideInstallBanner,
     install: installApp,
     close: hideInstallBanner,
-    debugColors: debugBannerColors
+    debugColors: function() {
+        console.log('🔍 INVESTIGANDO COLORES DEL BANNER:');
+        
+        const banner = document.querySelector('#banner-content');
+        if (banner) {
+            const styles = getComputedStyle(banner);
+            console.log('- Background del banner:', styles.backgroundColor);
+            console.log('- Color de texto:', styles.color);
+            console.log('- Border:', styles.border);
+            
+            const allElements = banner.querySelectorAll('*');
+            allElements.forEach((el, index) => {
+                const elStyles = getComputedStyle(el);
+                console.log(`Elemento ${index}:`, {
+                    tag: el.tagName,
+                    background: elStyles.backgroundColor,
+                    color: elStyles.color,
+                    border: elStyles.border
+                });
+            });
+            
+            // Buscar elementos azules
+            const blueElements = [];
+            allElements.forEach(el => {
+                const styles = getComputedStyle(el);
+                if (styles.backgroundColor.includes('rgb(0, 113, 227)') || 
+                    styles.backgroundColor.includes('#0071e3') ||
+                    styles.color.includes('rgb(0, 113, 227)') ||
+                    styles.color.includes('#0071e3')) {
+                    blueElements.push(el);
+                }
+            });
+            
+            if (blueElements.length > 0) {
+                console.log('🔵 ELEMENTOS AZULES ENCONTRADOS:', blueElements);
+            } else {
+                console.log('✅ No se encontraron elementos azules');
+            }
+        } else {
+            console.log('❌ Banner no encontrado');
+        }
+    }
 };
