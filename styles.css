@@ -1409,13 +1409,13 @@ html {
     
     /* Logo mínimo pero funcional */
     .nav-logo img {
-        width: 45px !important; /* LOGO MÍNIMO - Puedes cambiar aquí */
-        height: 45px !important; /* LOGO MÍNIMO - Puedes cambiar aquí */
+        width: 55px !important; /* LOGO MÍNIMO - Puedes cambiar aquí */
+        height: 55px !important; /* LOGO MÍNIMO - Puedes cambiar aquí */
     }
     
     /* Título mínimo pero legible */
     .nav-logo h2 {
-        font-size: 18px !important; /* TÍTULO MÍNIMO - Puedes cambiar aquí */
+        font-size: 25px !important; /* TÍTULO MÍNIMO - Puedes cambiar aquí */
         letter-spacing: -0.8px !important;
         max-width: calc(100vw - 95px) !important;
     }
