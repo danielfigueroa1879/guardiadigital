@@ -387,7 +387,7 @@ window.pwaInstall = {
     install: installApp,
     checkInstalled: checkIfInstalled,
     debug: debugPWAStatus,
-    forceShow: () => {
+    forceShow: function() {
         console.log('🧪 Forzando mostrar botón para testing');
         showInstallButton();
     }
