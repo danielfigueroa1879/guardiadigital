@@ -336,24 +336,17 @@ h3 {
 .newsletter-form input, .newsletter-form textarea, .newsletter-form select {
     width: 100%;
     padding: 12px 15px;
-    border: 1px solid rgba(204, 204, 204, 0.6);
+    border: 1px solid #ccc;
     border-radius: 10px;
-    background: rgba(240, 240, 242, 0.6); /* BANNER SEMITRANSPARENTE */
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    color: #86868b; /* COLOR DEL TEXTO */
+    background-color: #ffffff;
+    color: #333;
     font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 16px;
-    transition: all 0.3s ease;
+    transition: border-color 0.3s ease;
 }
 .newsletter-form input:focus, .newsletter-form textarea:focus, .newsletter-form select:focus {
     outline: none;
-    border-color: rgba(0, 113, 227, 0.8);
-    background: rgba(255, 255, 255, 0.9); /* FONDO MÁS SÓLIDO AL HACER FOCUS */
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    box-shadow: 0 0 0 2px rgba(0, 113, 227, 0.2);
-    color: #1d1d1f; /* COLOR DEL TEXTO MÁS OSCURO AL ESCRIBIR */
+    border-color: #0071e3;
 }
 .newsletter-form button { width: 100%; margin-top: 10px; }
 
@@ -374,18 +367,6 @@ h3 {
 .social-links a:hover { color: #0071e3; }
 .footer-bottom { border-top: 1px solid #dcdcdc; padding-top: 20px; margin-top: 30px; text-align: center; }
 .signature { margin-top: 10px; }
-
-/* Estilos para los placeholders del chatbot y formularios */
-#chatbot-input::placeholder {
-    color: rgba(134, 134, 139, 0.7); /* PLACEHOLDER SEMITRANSPARENTE */
-    font-style: italic;
-}
-
-.newsletter-form input::placeholder,
-.newsletter-form textarea::placeholder {
-    color: rgba(134, 134, 139, 0.7) !important; /* PLACEHOLDER SEMITRANSPARENTE */
-    font-style: italic !important;
-}
 
 /* ===== ESTILOS DEL CHATBOT CORREGIDOS ===== */
 #chat-toggle-button {
@@ -513,26 +494,20 @@ h3 {
 #chatbot-input { 
     flex: 1; 
     padding: 12px 16px; 
-    border: 1px solid rgba(225, 225, 225, 0.5); 
+    border: 1px solid #ccc; 
     border-radius: 25px; 
     font-size: 14px;
-    background: rgba(240, 240, 242, 0.6); /* BANNER SEMITRANSPARENTE */
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: #f8f9fa;
     transition: all 0.3s ease;
     box-sizing: border-box; /* Incluir padding en el cálculo del ancho */
     min-width: 0; /* Permitir que se encoja si es necesario */
-    color: #86868b; /* COLOR DEL TEXTO */
 }
 
 #chatbot-input:focus { 
     outline: none; 
-    border-color: rgba(0, 113, 227, 0.8);
-    background: rgba(255, 255, 255, 0.9); /* FONDO MÁS SÓLIDO AL HACER FOCUS */
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
+    border-color: #0071e3;
+    background: #ffffff;
     box-shadow: 0 0 0 2px rgba(0, 113, 227, 0.2);
-    color: #1d1d1f; /* COLOR DEL TEXTO MÁS OSCURO AL ESCRIBIR */
 }
 
 /* BOTÓN DE ENVÍO - CORRIGIENDO POSICIÓN Y AÑADIENDO EFECTOS */
@@ -1166,25 +1141,10 @@ html {
         padding: 15px !important;
         font-size: 16px !important;
         border-radius: 8px !important;
-        border: 1px solid rgba(204, 204, 204, 0.6) !important;
-        background: rgba(240, 240, 242, 0.6) !important; /* BANNER SEMITRANSPARENTE */
-        backdrop-filter: blur(10px) !important;
-        -webkit-backdrop-filter: blur(10px) !important;
+        border: 1px solid #ccc !important;
+        background-color: #ffffff !important;
         box-sizing: border-box !important;
         text-align: left !important; /* Texto alineado a la izquierda en inputs */
-        color: #86868b !important; /* COLOR DEL TEXTO */
-        transition: all 0.3s ease !important;
-    }
-    
-    .newsletter-form input:focus,
-    .newsletter-form textarea:focus {
-        outline: none !important;
-        border-color: rgba(0, 113, 227, 0.8) !important;
-        background: rgba(255, 255, 255, 0.9) !important; /* FONDO MÁS SÓLIDO AL HACER FOCUS */
-        backdrop-filter: blur(15px) !important;
-        -webkit-backdrop-filter: blur(15px) !important;
-        box-shadow: 0 0 0 2px rgba(0, 113, 227, 0.2) !important;
-        color: #1d1d1f !important; /* COLOR DEL TEXTO MÁS OSCURO AL ESCRIBIR */
     }
     
     .newsletter-form textarea {
@@ -1218,6 +1178,376 @@ html {
     /* ===== SECCIÓN EVALUACIÓN GRATUITA - CONTAINERS OPTIMIZADOS ===== */
     .iot-section {
         padding: 60px 1.5% !important; /* Padding reducido con margen uniforme */
+    }
+    
+    .iot-section .container {
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 auto !important;
+    }
+    
+    .iot-services {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 15px !important; /* Gap reducido */
+        margin-top: 30px !important;
+        width: 100% !important;
+    }
+
+    .iot-card {
+        padding: 20px 15px !important; /* Padding reducido */
+        margin: 0 auto !important;
+        width: 97% !important; /* OCUPAR 97% DEL ANCHO TOTAL */
+        max-width: none !important; /* Eliminar max-width */
+        background: #ffffff !important;
+        border: 1px solid #e1e1e1 !important;
+        border-radius: 15px !important;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05) !important;
+        transition: all 0.3s ease !important;
+    }
+    
+    .iot-card:hover {
+        transform: translateY(-5px) !important; /* Menos movimiento en móvil */
+        box-shadow: 0 8px 25px rgba(79, 125, 161, 0.15) !important;
+    }
+    
+    /* Títulos de las tarjetas IoT */
+    .iot-card h3 {
+        font-size: 18px !important;
+        margin-bottom: 15px !important;
+        font-weight: 600 !important;
+        line-height: 1.3 !important;
+        text-align: center !important;
+        color: #4f7da1 !important;
+    }
+    
+    /* ===== TEXTOS JUSTIFICADOS ===== */
+    .iot-card p,
+    .iot-details p {
+        text-align: justify !important; /* JUSTIFICADO */
+        margin-bottom: 15px !important;
+        line-height: 1.6 !important;
+        color: #86868b !important;
+        font-size: 15px !important;
+    }
+    
+    .iot-details ul {
+        list-style: none !important;
+        padding-left: 0 !important;
+        margin: 15px 0 !important;
+    }
+    
+    .iot-details li {
+        padding: 6px 0 6px 20px !important;
+        position: relative !important;
+        font-size: 14px !important;
+        line-height: 1.4 !important;
+        text-align: justify !important; /* JUSTIFICADO */
+        color: #86868b !important;
+    }
+    
+    .iot-details li::before {
+        content: '✓' !important;
+        color: #0071e3 !important;
+        font-weight: bold !important;
+        position: absolute !important;
+        left: 0 !important;
+        top: 6px !important;
+    }
+    
+    /* Botones de las tarjetas IoT */
+    .iot-card .cta-button {
+        padding: 12px 25px !important;
+        font-size: 16px !important;
+        margin: 20px auto 0 auto !important; /* Centrado */
+        display: block !important;
+        width: auto !important;
+        text-align: center !important;
+        border-radius: 25px !important;
+    }
+
+    /* ===== DESCRIPCIÓN PRINCIPAL JUSTIFICADA ===== */
+    .iot-description {
+        font-size: 17px !important;
+        text-align: justify !important; /* JUSTIFICADO */
+        line-height: 1.6 !important;
+        max-width: 100% !important;
+        margin: 0 auto 40px auto !important;
+        padding: 0 1.5% !important; /* Margen uniforme */
+        color: #86868b !important;
+    }
+
+    .hero {
+        padding: 100px 15px 60px;
+        min-height: 70vh;
+    }
+
+    .hero-content {
+        max-width: 100%;
+    }
+
+    .hero-title {
+        font-size: 26px;
+        margin-bottom: 25px;
+        line-height: 1.3;
+    }
+
+    .hero-description {
+        font-size: 16px !important; 
+        padding: 0 15px;
+        text-align: justify !important; /* JUSTIFICADO */
+        line-height: 1.6;
+        max-width: 100%;
+        width: 100%;
+        margin: 0;
+    }
+
+    .main-services,
+    .mission-vision {
+        padding: 60px 1.5% !important; /* Margen uniforme */
+    }
+
+    .main-services h2,
+    .iot-section h2,
+    .mission-vision h2 {
+        font-size: 30px;
+    }
+
+    /* ===== MAIN SERVICES JUSTIFICADO ===== */
+    .main-services > .container > p {
+        text-align: justify !important; /* JUSTIFICADO */
+        padding: 0 1.5% !important;
+        margin-bottom: 40px !important;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        margin-top: 40px;
+        padding: 0 1.5% !important; /* Margen uniforme */
+    }
+
+    .service-card {
+        padding: 30px 20px;
+        margin: 0 auto;
+        max-width: 400px;
+    }
+
+    .iot-image {
+        height: 100px;
+        margin-bottom: 15px;
+    }
+
+    /* ===== MISIÓN Y VISIÓN JUSTIFICADA ===== */
+    .mv-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 0 1.5% !important; /* Margen uniforme */
+    }
+
+    .mv-card {
+        padding: 30px 20px;
+        width: 97% !important; /* Ocupar 97% del ancho */
+        margin: 0 auto !important;
+    }
+    
+    .mv-card p {
+        text-align: justify !important; /* JUSTIFICADO */
+        line-height: 1.6 !important;
+        color: #86868b !important;
+        font-size: 15px !important;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        text-align: center;
+    }
+    
+    .footer-section {
+        text-align: center;
+    }
+    
+    .social-links {
+        display: flex !important;
+        justify-content: center !important; 
+        align-items: center !important;
+        gap: 20px !important;
+        margin: 20px 0 !important;
+        padding: 0 !important;
+    }
+    
+    .social-links a {
+        color: #86868b !important;
+        font-size: 28px !important; 
+        transition: all 0.3s ease !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 50px !important;
+        height: 50px !important;
+        border-radius: 50% !important;
+        position: relative !important;
+        overflow: hidden !important;
+    }
+    
+    .social-links a:hover {
+        transform: scale(1.15) !important;
+        color: #0071e3 !important;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .signature {
+        text-align: center;
+    }
+
+    .header {
+        min-height: 80px !important; 
+    }
+    
+    .hero {
+        padding-top: 100px !important; 
+    }
+
+    .contact-item {
+        display: flex !important;
+        align-items: center !important;
+        margin-bottom: 15px !important;
+        font-size: 16px !important;
+        text-align: left !important;
+    }
+    
+    .contact-item i {
+        color: #0071e3 !important;
+        margin-right: 15px !important;
+        font-size: 20px !important;
+        width: 25px !important;
+        flex-shrink: 0 !important;
+    }
+    
+    .contact-item a {
+        color: #86868b !important;
+        text-decoration: none !important;
+        transition: color 0.3s ease !important;
+    }
+    
+    .contact-item a:hover {
+        color: #0071e3 !important;
+    }
+    
+    .whatsapp-item a {
+        display: inline-flex !important;
+        align-items: center !important;
+        padding: 5px 10px !important;
+        border-radius: 8px !important;
+        transition: all 0.3s ease !important;
+    }
+    
+    .whatsapp-item a:hover {
+        background-color: rgba(0, 113, 227, 0.1) !important;
+        transform: translateX(3px) !important;
+    }
+}
+
+/* ===== PANTALLAS EXTRA PEQUEÑAS (480px y menos) ===== */
+@media screen and (max-width: 480px) {
+    /* ===== 1. FORMULARIO OPTIMIZADO PARA 480px ===== */
+    .contact-section {
+        padding: 60px 8px !important; /* Padding más compacto */
+    }
+    
+    .contact-content-wrapper {
+        display: block !important;
+        padding: 0 1% !important; /* Margen más estrecho */
+    }
+    
+    .contact-info-wrapper {
+        margin-bottom: 30px !important;
+        text-align: left !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        width: 100% !important;
+        padding: 20px 15px !important; /* Padding muy compacto */
+    }
+    
+    .contact-info-wrapper h3 {
+        color: #4f7da1 !important;
+        font-size: 18px !important; /* TÍTULO MÁS PEQUEÑO */
+        margin-bottom: 20px !important;
+        font-weight: 600 !important;
+        text-align: center !important; /* Centrado */
+        line-height: 1.2 !important;
+    }
+    
+    .contact-form-wrapper {
+        padding: 20px 15px !important; /* Padding muy compacto */
+        max-width: 100% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        width: 100% !important;
+    }
+    
+    .contact-form-wrapper h2 {
+        color: #4f7da1 !important;
+        font-size: 19px !important; /* TÍTULO MÁS PEQUEÑO */
+        font-weight: 600 !important;
+        margin: 0 0 20px 0 !important;
+        text-align: center !important; /* CENTRADO */
+        line-height: 1.2 !important;
+    }
+    
+    /* Formulario ultra compacto */
+    .newsletter-form {
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important; /* Gap más pequeño */
+    }
+    
+    .newsletter-form input,
+    .newsletter-form textarea {
+        width: 100% !important;
+        padding: 12px !important; /* Padding reducido */
+        font-size: 15px !important; /* Font más pequeño */
+        border-radius: 6px !important;
+        border: 1px solid #ccc !important;
+        background-color: #ffffff !important;
+        box-sizing: border-box !important;
+        text-align: left !important;
+    }
+    
+    .newsletter-form textarea {
+        min-height: 80px !important; /* Altura reducida */
+        resize: vertical !important;
+    }
+    
+    /* ===== 2. BOTÓN CENTRADO Y DEL MISMO TAMAÑO ===== */
+    .newsletter-form button[type="submit"] {
+        font-size: 15px !important; /* Mismo tamaño que otros botones en móvil */
+        padding: 12px 25px !important; /* Mismo padding que otros botones */
+        font-weight: 600 !important;
+        letter-spacing: 0.3px !important;
+        min-width: auto !important;
+        width: auto !important;
+        align-self: center !important; /* CENTRADO */
+        margin: 15px auto 0 auto !important; /* Margen centrado */
+        border-radius: 25px !important; /* Mismo radio que otros botones */
+        background-color: #0071e3 !important;
+        color: #ffffff !important;
+        border: none !important;
+        cursor: pointer !important;
+        transition: all 0.3s ease !important;
+    }
+
+    /* ===== 3. SECCIÓN EVALUACIÓN GRATUITA - 97% ANCHO ===== */
+    .iot-section {
+        padding: 50px 1% !important; /* Padding ultra compacto */
     }
     
     .iot-section .container {
@@ -1756,388 +2086,3 @@ img {
     background-color: #0071e3;
     color: #ffffff;
 }
-        margin: 0 auto !important;
-    }
-    
-    .iot-services {
-        display: grid !important;
-        grid-template-columns: 1fr !important;
-        gap: 15px !important; /* Gap reducido */
-        margin-top: 30px !important;
-        width: 100% !important;
-    }
-
-    .iot-card {
-        padding: 20px 15px !important; /* Padding reducido */
-        margin: 0 auto !important;
-        width: 97% !important; /* OCUPAR 97% DEL ANCHO TOTAL */
-        max-width: none !important; /* Eliminar max-width */
-        background: #ffffff !important;
-        border: 1px solid #e1e1e1 !important;
-        border-radius: 15px !important;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.05) !important;
-        transition: all 0.3s ease !important;
-    }
-    
-    .iot-card:hover {
-        transform: translateY(-5px) !important; /* Menos movimiento en móvil */
-        box-shadow: 0 8px 25px rgba(79, 125, 161, 0.15) !important;
-    }
-    
-    /* Títulos de las tarjetas IoT */
-    .iot-card h3 {
-        font-size: 18px !important;
-        margin-bottom: 15px !important;
-        font-weight: 600 !important;
-        line-height: 1.3 !important;
-        text-align: center !important;
-        color: #4f7da1 !important;
-    }
-    
-    /* ===== TEXTOS JUSTIFICADOS ===== */
-    .iot-card p,
-    .iot-details p {
-        text-align: justify !important; /* JUSTIFICADO */
-        margin-bottom: 15px !important;
-        line-height: 1.6 !important;
-        color: #86868b !important;
-        font-size: 15px !important;
-    }
-    
-    .iot-details ul {
-        list-style: none !important;
-        padding-left: 0 !important;
-        margin: 15px 0 !important;
-    }
-    
-    .iot-details li {
-        padding: 6px 0 6px 20px !important;
-        position: relative !important;
-        font-size: 14px !important;
-        line-height: 1.4 !important;
-        text-align: justify !important; /* JUSTIFICADO */
-        color: #86868b !important;
-    }
-    
-    .iot-details li::before {
-        content: '✓' !important;
-        color: #0071e3 !important;
-        font-weight: bold !important;
-        position: absolute !important;
-        left: 0 !important;
-        top: 6px !important;
-    }
-    
-    /* Botones de las tarjetas IoT */
-    .iot-card .cta-button {
-        padding: 12px 25px !important;
-        font-size: 16px !important;
-        margin: 20px auto 0 auto !important; /* Centrado */
-        display: block !important;
-        width: auto !important;
-        text-align: center !important;
-        border-radius: 25px !important;
-    }
-
-    /* ===== DESCRIPCIÓN PRINCIPAL JUSTIFICADA ===== */
-    .iot-description {
-        font-size: 17px !important;
-        text-align: justify !important; /* JUSTIFICADO */
-        line-height: 1.6 !important;
-        max-width: 100% !important;
-        margin: 0 auto 40px auto !important;
-        padding: 0 1.5% !important; /* Margen uniforme */
-        color: #86868b !important;
-    }
-
-    .hero {
-        padding: 100px 15px 60px;
-        min-height: 70vh;
-    }
-
-    .hero-content {
-        max-width: 100%;
-    }
-
-    .hero-title {
-        font-size: 26px;
-        margin-bottom: 25px;
-        line-height: 1.3;
-    }
-
-    .hero-description {
-        font-size: 16px !important; 
-        padding: 0 15px;
-        text-align: justify !important; /* JUSTIFICADO */
-        line-height: 1.6;
-        max-width: 100%;
-        width: 100%;
-        margin: 0;
-    }
-
-    .main-services,
-    .mission-vision {
-        padding: 60px 1.5% !important; /* Margen uniforme */
-    }
-
-    .main-services h2,
-    .iot-section h2,
-    .mission-vision h2 {
-        font-size: 30px;
-    }
-
-    /* ===== MAIN SERVICES JUSTIFICADO ===== */
-    .main-services > .container > p {
-        text-align: justify !important; /* JUSTIFICADO */
-        padding: 0 1.5% !important;
-        margin-bottom: 40px !important;
-    }
-
-    .services-grid {
-        grid-template-columns: 1fr;
-        gap: 25px;
-        margin-top: 40px;
-        padding: 0 1.5% !important; /* Margen uniforme */
-    }
-
-    .service-card {
-        padding: 30px 20px;
-        margin: 0 auto;
-        max-width: 400px;
-    }
-
-    .iot-image {
-        height: 100px;
-        margin-bottom: 15px;
-    }
-
-    /* ===== MISIÓN Y VISIÓN JUSTIFICADA ===== */
-    .mv-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-        padding: 0 1.5% !important; /* Margen uniforme */
-    }
-
-    .mv-card {
-        padding: 30px 20px;
-        width: 97% !important; /* Ocupar 97% del ancho */
-        margin: 0 auto !important;
-    }
-    
-    .mv-card p {
-        text-align: justify !important; /* JUSTIFICADO */
-        line-height: 1.6 !important;
-        color: #86868b !important;
-        font-size: 15px !important;
-    }
-
-    .footer-content {
-        grid-template-columns: 1fr;
-        gap: 30px;
-        text-align: center;
-    }
-    
-    .footer-section {
-        text-align: center;
-    }
-    
-    .social-links {
-        display: flex !important;
-        justify-content: center !important; 
-        align-items: center !important;
-        gap: 20px !important;
-        margin: 20px 0 !important;
-        padding: 0 !important;
-    }
-    
-    .social-links a {
-        color: #86868b !important;
-        font-size: 28px !important; 
-        transition: all 0.3s ease !important;
-        display: inline-flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        width: 50px !important;
-        height: 50px !important;
-        border-radius: 50% !important;
-        position: relative !important;
-        overflow: hidden !important;
-    }
-    
-    .social-links a:hover {
-        transform: scale(1.15) !important;
-        color: #0071e3 !important;
-    }
-
-    .footer-bottom {
-        flex-direction: column;
-        text-align: center;
-        gap: 15px;
-    }
-
-    .signature {
-        text-align: center;
-    }
-
-    .header {
-        min-height: 80px !important; 
-    }
-    
-    .hero {
-        padding-top: 100px !important; 
-    }
-
-    .contact-item {
-        display: flex !important;
-        align-items: center !important;
-        margin-bottom: 15px !important;
-        font-size: 16px !important;
-        text-align: left !important;
-    }
-    
-    .contact-item i {
-        color: #0071e3 !important;
-        margin-right: 15px !important;
-        font-size: 20px !important;
-        width: 25px !important;
-        flex-shrink: 0 !important;
-    }
-    
-    .contact-item a {
-        color: #86868b !important;
-        text-decoration: none !important;
-        transition: color 0.3s ease !important;
-    }
-    
-    .contact-item a:hover {
-        color: #0071e3 !important;
-    }
-    
-    .whatsapp-item a {
-        display: inline-flex !important;
-        align-items: center !important;
-        padding: 5px 10px !important;
-        border-radius: 8px !important;
-        transition: all 0.3s ease !important;
-    }
-    
-    .whatsapp-item a:hover {
-        background-color: rgba(0, 113, 227, 0.1) !important;
-        transform: translateX(3px) !important;
-    }
-}
-
-/* ===== PANTALLAS EXTRA PEQUEÑAS (480px y menos) ===== */
-@media screen and (max-width: 480px) {
-    /* ===== 1. FORMULARIO OPTIMIZADO PARA 480px ===== */
-    .contact-section {
-        padding: 60px 8px !important; /* Padding más compacto */
-    }
-    
-    .contact-content-wrapper {
-        display: block !important;
-        padding: 0 1% !important; /* Margen más estrecho */
-    }
-    
-    .contact-info-wrapper {
-        margin-bottom: 30px !important;
-        text-align: left !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-        width: 100% !important;
-        padding: 20px 15px !important; /* Padding muy compacto */
-    }
-    
-    .contact-info-wrapper h3 {
-        color: #4f7da1 !important;
-        font-size: 18px !important; /* TÍTULO MÁS PEQUEÑO */
-        margin-bottom: 20px !important;
-        font-weight: 600 !important;
-        text-align: center !important; /* Centrado */
-        line-height: 1.2 !important;
-    }
-    
-    .contact-form-wrapper {
-        padding: 20px 15px !important; /* Padding muy compacto */
-        max-width: 100% !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-        width: 100% !important;
-    }
-    
-    .contact-form-wrapper h2 {
-        color: #4f7da1 !important;
-        font-size: 19px !important; /* TÍTULO MÁS PEQUEÑO */
-        font-weight: 600 !important;
-        margin: 0 0 20px 0 !important;
-        text-align: center !important; /* CENTRADO */
-        line-height: 1.2 !important;
-    }
-    
-    /* Formulario ultra compacto */
-    .newsletter-form {
-        max-width: 100% !important;
-        margin: 0 auto !important;
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 12px !important; /* Gap más pequeño */
-    }
-    
-    .newsletter-form input,
-    .newsletter-form textarea {
-        width: 100% !important;
-        padding: 12px !important; /* Padding reducido */
-        font-size: 15px !important; /* Font más pequeño */
-        border-radius: 6px !important;
-        border: 1px solid rgba(204, 204, 204, 0.6) !important;
-        background: rgba(240, 240, 242, 0.6) !important; /* BANNER SEMITRANSPARENTE */
-        backdrop-filter: blur(10px) !important;
-        -webkit-backdrop-filter: blur(10px) !important;
-        box-sizing: border-box !important;
-        text-align: left !important;
-        color: #86868b !important; /* COLOR DEL TEXTO */
-        transition: all 0.3s ease !important;
-    }
-    
-    .newsletter-form input:focus,
-    .newsletter-form textarea:focus {
-        outline: none !important;
-        border-color: rgba(0, 113, 227, 0.8) !important;
-        background: rgba(255, 255, 255, 0.9) !important; /* FONDO MÁS SÓLIDO AL HACER FOCUS */
-        backdrop-filter: blur(15px) !important;
-        -webkit-backdrop-filter: blur(15px) !important;
-        box-shadow: 0 0 0 2px rgba(0, 113, 227, 0.2) !important;
-        color: #1d1d1f !important; /* COLOR DEL TEXTO MÁS OSCURO AL ESCRIBIR */
-    }
-    
-    .newsletter-form textarea {
-        min-height: 80px !important; /* Altura reducida */
-        resize: vertical !important;
-    }
-    
-    /* ===== 2. BOTÓN CENTRADO Y DEL MISMO TAMAÑO ===== */
-    .newsletter-form button[type="submit"] {
-        font-size: 15px !important; /* Mismo tamaño que otros botones en móvil */
-        padding: 12px 25px !important; /* Mismo padding que otros botones */
-        font-weight: 600 !important;
-        letter-spacing: 0.3px !important;
-        min-width: auto !important;
-        width: auto !important;
-        align-self: center !important; /* CENTRADO */
-        margin: 15px auto 0 auto !important; /* Margen centrado */
-        border-radius: 25px !important; /* Mismo radio que otros botones */
-        background-color: #0071e3 !important;
-        color: #ffffff !important;
-        border: none !important;
-        cursor: pointer !important;
-        transition: all 0.3s ease !important;
-    }
-
-    /* ===== 3. SECCIÓN EVALUACIÓN GRATUITA - 97% ANCHO ===== */
-    .iot-section {
-        padding: 50px 1% !important; /* Padding ultra compacto */
-    }
-    
-    .iot-section .container {
-        max-width: 100% !important;
-        padding: 0 !important;
