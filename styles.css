@@ -440,7 +440,7 @@ h3 {
     transform: translateY(0) scale(1);
     /* CONTORNO AZUL ACTIVO */
     border-color: rgba(0, 113, 227, 0.5);
-    box-shadow: 0 10px 40px rgba(0,0,0,0.1), 0 0 20px rgba(0, 113, 227, 0.2);
+    
 /* Estilos para los placeholders del chatbot y formularios */
 #chatbot-input::placeholder {
     color: rgba(134, 134, 139, 0.7); /* PLACEHOLDER SEMITRANSPARENTE */
