@@ -178,6 +178,7 @@ function setupInstallPrompt() {
         if (isMobile) {
             setTimeout(() => showInstallBanner(), 1000);
         } else {
+            // En computadoras, mostrar el boton flotante
             showInstallButton();
         }
         
@@ -203,6 +204,16 @@ function setupInstallPrompt() {
     window.addEventListener('load', () => {
         setTimeout(checkIfInstalled, 1000);
     });
+    
+    // Para computadoras que no disparen beforeinstallprompt, mostrar boton despues de un tiempo
+    if (!isMobile) {
+        setTimeout(() => {
+            if (!deferredPrompt && !checkIfInstalled()) {
+                console.log('💻 Mostrando boton en computadora (fallback)');
+                showInstallButton();
+            }
+        }, 5000);
+    }
 }
 
 // Mostrar boton de instalacion
