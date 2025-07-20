@@ -583,7 +583,7 @@ h3 {
 
 @media screen and (max-width: 480px) {
     .nav-logo h2 {
-        font-size: 25px; /* Título aún más pequeño para celulares chicos */
+        font-size: 30px; /* Título aún más pequeño para celulares chicos */
     }
      #chatbot-container {
         width: calc(100vw - 20px);
