@@ -85,12 +85,7 @@ function showInstallBanner() {
             hideInstallBanner();
         }, 8000);
         
-        // Mostrar tambien el boton flotante despues de que se oculte el banner
-        setTimeout(() => {
-            if (!checkIfInstalled()) {
-                showInstallButton();
-            }
-        }, 8500);
+        // NO mostrar el boton flotante - solo el banner
     }
 }
 
@@ -231,8 +226,9 @@ async function installApp() {
     console.log('🚀 Intentando instalar PWA...');
     console.log('📱 Es movil:', isMobile);
     
-    // Ocultar banner si esta visible
+    // Ocultar banner Y boton si estan visibles
     hideInstallBanner();
+    hideInstallButton();
     
     if (!deferredPrompt) {
         console.log('❌ No hay prompt disponible');
@@ -258,8 +254,14 @@ async function installApp() {
         
         if (outcome === 'accepted') {
             console.log('✅ Usuario acepto instalar la PWA');
+            // Asegurar que todo se oculte cuando se instala
+            hideInstallBanner();
+            hideInstallButton();
         } else {
             console.log('❌ Usuario rechazo instalar la PWA');
+            // Si rechazo, no mostrar mas elementos de instalacion
+            hideInstallBanner();
+            hideInstallButton();
         }
         
         // Analiticas
@@ -267,6 +269,10 @@ async function installApp() {
         
     } catch (error) {
         console.error('❌ Error durante instalacion:', error);
+        
+        // En caso de error, ocultar elementos
+        hideInstallBanner();
+        hideInstallButton();
         
         // Fallback para moviles
         if (isMobile) {
@@ -276,8 +282,9 @@ async function installApp() {
         // Limpiar el prompt
         deferredPrompt = null;
         
-        // Ocultar el boton
+        // Asegurar que todo este oculto
         hideInstallButton();
+        hideInstallBanner();
     }
 }
 
