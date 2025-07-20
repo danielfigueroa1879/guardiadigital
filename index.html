@@ -10,384 +10,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* ================================================
-        PALETA DE COLORES ESTABLECIDA
-        ================================================
-        * BANNER: #f0f0f2 (Semitransparente)
-        * CUERPO: #d5eaf6
-        * BOTONES: #0071e3
-        * TITULOS: #4f7da1
-        * TEXTO: #86868b
-        * FONDO: #ffffff
-        * MENU HAMBURGUESA: #ffffff (fondo), #86868b (letras y barras)
-        ================================================
-        */
-
-        /* Estilos Base y Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #ffffff; /* FONDO SÓLIDO */
-            color: #86868b; /* TEXTO */
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header y Navegación */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(240, 240, 242, 0.85); /* BANNER Semitransparente */
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            z-index: 1000;
-            transition: background-color 0.3s ease, box-shadow 0.3s ease;
-            border-bottom: 1px solid transparent;
-        }
+        /* ===== SOLO ESTILOS DEL CHATBOT ===== */
         
-        .header.scrolled {
-             background-color: rgba(240, 240, 242, 0.95);
-             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .navbar {
-            padding: 15px 0;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .nav-logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .nav-logo img {
-            width: 60px; /* Logo más grande en PC */
-            height: 60px;
-            transition: width 0.3s ease, height 0.3s ease;
-        }
-
-        .nav-logo h2 {
-            color: #000000; /* CAMBIO A NEGRO */
-            font-size: 24px; /* Tamaño original para PC */
-            font-weight: 600;
-            margin: 0;
-        }
-
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-        }
-
-        .nav-link {
-            color: #86868b; /* TEXTO (Letras del menú) */
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
-            padding-bottom: 5px;
-        }
-
-        .nav-link:hover {
-            color: #0071e3; /* BOTONES */
-        }
-        
-        /* Contador de Visitas */
-        .visitor-counter-container {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #0071e3; /* BOTONES */
-            font-size: 14px;
-            font-weight: 600;
-            background-color: rgba(0, 113, 227, 0.1);
-            padding: 8px 15px;
-            border-radius: 25px;
-            transition: all 0.3s ease;
-        }
-        .visitor-counter-container .fa-eye {
-            font-size: 16px;
-        }
-
-        /* Menú Hamburguesa */
-        .nav-toggle {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            background: none;
-            border: none;
-            padding: 5px;
-        }
-
-        .bar {
-            width: 25px;
-            height: 3px;
-            background-color: #86868b; /* TEXTO (barras) */
-            margin: 3px 0;
-            transition: all 0.4s ease;
-            border-radius: 3px;
-        }
-
-        /* Sección Hero con Degradado */
-        .hero {
-            padding: 160px 20px 80px;
-            text-align: center;
-            background: linear-gradient(to bottom, #d5eaf6, #ffffff); /* DEGRADADO SOLO EN HERO */
-            min-height: 80vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .hero-title {
-            font-size: 56px;
-            color: #4f7da1; /* TITULOS */
-            font-weight: 700;
-            margin-bottom: 30px;
-            line-height: 1.2;
-            text-shadow: none;
-        }
-
-        .hero-description {
-            font-size: 22px !important;
-            font-weight: 400 !important;
-            color: #4f7da1 !important; /* TITULOS */
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: justify !important; /* TEXTO JUSTIFICADO */
-            line-height: 1.7 !important;
-            text-shadow: none;
-        }
-
-        /* Secciones Generales */
-        .main-services, .iot-section, .mission-vision {
-            padding: 80px 20px;
-            background-color: #d5eaf6; /* FONDO CELESTE */
-        }
-        
-        .contact-section {
-            padding: 80px 20px;
-            background-color: #ffffff; /* FONDO sólido para esta sección */
-        }
-
-        h2, h3 {
-            color: #4f7da1; /* TITULOS */
-        }
-
-        h2 {
-            font-size: 36px;
-            margin-bottom: 20px;
-            font-weight: 600;
-            text-align: center;
-        }
-        
-        h3 {
-           font-size: 20px;
-           margin-bottom: 15px;
-        }
-
-        .main-services > .container > p, .iot-description, .service-card-new p, .mv-card p {
-            font-size: 18px;
-            text-align: justify; /* TEXTO JUSTIFICADO */
-            color: #86868b; /* TEXTO */
-        }
-        .main-services > .container > p, .iot-description {
-             margin-bottom: 50px;
-             max-width: 700px;
-             margin-left: auto;
-             margin-right: auto;
-        }
-
-
-        /* Tarjetas de Servicio */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-
-        .service-card-new {
-            background: #ffffff; /* FONDO */
-            border: 1px solid #e1e1e1;
-            padding: 30px 25px;
-            border-radius: 15px;
-            text-align: center;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .service-card-new:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(79, 125, 161, 0.15);
-            border-color: #4f7da1;
-        }
-
-        .service-card-new .service-icon {
-            font-size: 48px;
-            color: #0071e3; /* BOTONES */
-            margin-bottom: 20px;
-        }
-
-        .service-card-new p {
-            color: #86868b; /* TEXTO */
-            flex-grow: 1;
-            font-size: 16px;
-        }
-        
-        .pricing-highlight {
-            background: rgba(0, 113, 227, 0.1);
-            color: #0071e3;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: 700;
-            font-size: 14px;
-            margin-top: 20px;
-            display: inline-block;
-        }
-        
-        /* Sección IoT */
-        .iot-services {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        .iot-card {
-             background: #ffffff;
-             border: 1px solid #e1e1e1;
-             padding: 30px;
-             border-radius: 15px;
-             transition: all 0.3s ease;
-             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-        .iot-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(79, 125, 161, 0.15);
-        }
-        .iot-card i { color: #0071e3; }
-        .iot-card p, .iot-card li { color: #86868b; }
-        .iot-details { text-align: left; }
-        .iot-details ul { list-style: none; padding-left: 0; }
-        .iot-details li { margin-bottom: 5px; }
-        
-        /* Misión y Visión */
-        .mv-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-        }
-        .mv-card {
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 15px;
-        }
-        .mv-card p { color: #86868b; font-size: 16px; }
-        
-        /* Botones */
-        .cta-button, .newsletter-form button {
-            background-color: #0071e3; /* BOTONES */
-            color: #ffffff;
-            border: none;
-            padding: 12px 25px;
-            font-size: 16px;
-            font-weight: 500;
-            cursor: pointer;
-            border-radius: 25px;
-            transition: all 0.3s ease;
-            display: block;
-            margin-top: 20px;
-            text-align: center;
-            text-decoration: none;
-        }
-
-        .cta-button:hover, .newsletter-form button:hover {
-            background-color: #005bb5;
-            transform: scale(1.05);
-        }
-        
-        /* Sección Contacto */
-        .contact-content-wrapper {
-            display: grid;
-            grid-template-columns: 1fr 1.2fr;
-            gap: 40px;
-            align-items: flex-start;
-        }
-        .contact-info-wrapper, .contact-form-wrapper {
-             background: #f0f0f2;
-             padding: 40px;
-             border-radius: 15px;
-        }
-        .contact-item { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; color: #86868b; }
-        .contact-item i { color: #0071e3; font-size: 20px; }
-        .contact-item a { color: #86868b; text-decoration: none; }
-        .contact-item a:hover { color: #0071e3; }
-        
-        .newsletter-form { display: flex; flex-direction: column; gap: 15px; }
-        .newsletter-form input, .newsletter-form textarea, .newsletter-form select {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            background-color: #ffffff;
-            color: #333;
-            font-family: 'Poppins', sans-serif;
-            font-size: 16px;
-            transition: border-color 0.3s ease;
-        }
-        .newsletter-form input:focus, .newsletter-form textarea:focus, .newsletter-form select:focus {
-            outline: none;
-            border-color: #0071e3;
-        }
-        .newsletter-form button { width: 100%; margin-top: 10px; }
-        
-        /* Footer */
-        .footer {
-            background-color: #f0f0f2;
-            padding: 60px 20px 20px;
-            color: #86868b;
-        }
-        .footer-content {
-            display: grid;
-            grid-template-columns: 1fr;
-            text-align: center;
-            gap: 20px;
-        }
-        .social-links { display: flex; justify-content: center; gap: 15px; margin-top: 15px; }
-        .social-links a { color: #86868b; font-size: 24px; text-decoration: none; }
-        .social-links a:hover { color: #0071e3; }
-        .footer-bottom { border-top: 1px solid #dcdcdc; padding-top: 20px; margin-top: 30px; text-align: center; }
-        .signature { margin-top: 10px; }
-
-        /* Estilos del Chatbot */
+        /* Botón flotante del chatbot */
         #chat-toggle-button {
             position: fixed;
             bottom: 25px;
             right: 25px;
             width: 60px;
             height: 60px;
-            background: #0071e3; /* BOTONES */
+            background: #0071e3;
             color: #ffffff;
             border: none;
             border-radius: 50%;
@@ -400,15 +32,18 @@
             font-size: 28px;
             transition: all 0.3s ease;
         }
-        #chat-toggle-button:hover { transform: scale(1.1); }
+        #chat-toggle-button:hover { 
+            transform: scale(1.1); 
+        }
 
+        /* Contenedor del chatbot */
         #chatbot-container {
             position: fixed;
             bottom: 100px;
             right: 25px;
             width: 350px;
             height: 500px;
-            background: #ffffff; /* FONDO */
+            background: #ffffff;
             border: 1px solid #e1e1e1;
             border-radius: 18px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.1);
@@ -425,9 +60,11 @@
             visibility: visible;
             transform: translateY(0) scale(1);
         }
+        
+        /* Header del chatbot */
         .chatbot-header {
-            background: #f0f0f2; /* BANNER */
-            color: #4f7da1; /* TITULOS */
+            background: #f0f0f2;
+            color: #4f7da1;
             padding: 15px 20px;
             border-radius: 18px 18px 0 0;
             display: flex;
@@ -436,13 +73,44 @@
             font-weight: 600;
             border-bottom: 1px solid #e1e1e1;
         }
-        #close-chat-btn { background: none; border: none; color: #86868b; font-size: 20px; cursor: pointer; }
-        #chatbot-messages { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
-        .chatbot-input-container { padding: 15px; border-top: 1px solid #e1e1e1; display: flex; gap: 10px; }
-        #chatbot-input { flex: 1; padding: 10px 15px; border: 1px solid #ccc; border-radius: 20px; font-size: 14px; }
-        #chatbot-input:focus { outline: none; border-color: #0071e3; }
+        #close-chat-btn { 
+            background: none; 
+            border: none; 
+            color: #86868b; 
+            font-size: 20px; 
+            cursor: pointer; 
+        }
+        
+        /* Área de mensajes */
+        #chatbot-messages { 
+            flex: 1; 
+            padding: 20px; 
+            overflow-y: auto; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 15px; 
+        }
+        
+        /* Formulario de entrada */
+        .chatbot-input-container { 
+            padding: 15px; 
+            border-top: 1px solid #e1e1e1; 
+            display: flex; 
+            gap: 10px; 
+        }
+        #chatbot-input { 
+            flex: 1; 
+            padding: 10px 15px; 
+            border: 1px solid #ccc; 
+            border-radius: 20px; 
+            font-size: 14px; 
+        }
+        #chatbot-input:focus { 
+            outline: none; 
+            border-color: #0071e3; 
+        }
         .chatbot-input-container button { 
-            background: #0071e3; /* BOTON AZUL */
+            background: #0071e3;
             border: none; 
             color: #ffffff; 
             width: 40px; 
@@ -488,88 +156,16 @@
             border-radius: 5px 18px 18px 18px;
         }
         
-        /* Responsive Design */
-        @media screen and (max-width: 992px) {
-            .nav-container { position: relative; }
-            .visitor-counter-container { display: none; }
+        /* Indicador de carga */
+        #chatbot-loading {
+            display: none;
+            padding: 15px 20px;
+            color: #0071e3;
+            font-size: 14px;
         }
 
+        /* Responsive para chatbot en móviles */
         @media screen and (max-width: 768px) {
-            .container {
-                width: 100%;
-                padding: 0;
-            }
-            .nav-container { 
-                padding: 0 10px; 
-            }
-            .nav-logo { 
-                flex-grow: 1; 
-            }
-            .nav-logo img { 
-                width: 45px;
-                height: 45px;
-            }
-            .nav-logo h2 { 
-                font-size: 16px;
-                white-space: nowrap;
-            }
-            .nav-toggle { 
-                display: flex; 
-                flex-shrink: 0;
-            }
-            .search-container, .visitor-counter-container, .nav-menu { display: none; }
-            
-            .nav-menu.active { 
-                display: flex;
-                position: fixed;
-                left: 0;
-                top: 75px; /* Altura del header */
-                flex-direction: column;
-                background: rgba(255, 255, 255, 0.9); /* FONDO MENU SEMITRANSPARENTE */
-                backdrop-filter: blur(10px);
-                -webkit-backdrop-filter: blur(10px);
-                width: 100%;
-                height: auto;
-                text-align: center;
-                z-index: 999;
-                padding: 20px 0;
-                box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-            }
-            
-            .nav-menu li { margin: 10px 0; width: 100%; }
-            .nav-link { 
-                font-size: 20px; /* LETRAS MAS GRANDES */
-                color: #86868b; 
-                padding: 10px 20px; 
-                display: block; 
-                font-weight: 500;
-            }
-            .nav-link:hover { background: rgba(0, 113, 227, 0.1); color: #0071e3; }
-            
-            .nav-toggle.active .bar:nth-child(2) { opacity: 0; }
-            .nav-toggle.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-            .nav-toggle.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-            
-            .hero { padding: 120px 1.5% 60px; min-height: 80vh; }
-            .hero-title { font-size: 28px; } /* Título más chico en móvil */
-            .hero-description { font-size: 16px !important; }
-            
-            .main-services, .iot-section, .mission-vision, .contact-section { padding: 60px 1.5%; }
-            h2 { font-size: 28px; }
-            
-            .services-grid, .iot-services, .mv-grid, .contact-content-wrapper { grid-template-columns: 1fr; }
-            .contact-info-wrapper { margin-bottom: 30px; }
-
-            /* Ajustes Formulario Móvil */
-            .contact-info-wrapper h3, .contact-form-wrapper h2 {
-                text-align: center;
-                font-size: 22px;
-            }
-            .newsletter-form button { 
-                padding: 12px 25px;
-            }
-
-            /* Chatbot para móviles - más pequeño */
             #chat-toggle-button {
                 width: 55px;
                 height: 55px;
@@ -586,27 +182,13 @@
         }
         
         @media screen and (max-width: 480px) {
-            .nav-logo h2 {
-                font-size: 14px; /* Título aún más pequeño para celulares chicos */
-            }
-             #chatbot-container {
+            #chatbot-container {
                 width: calc(100vw - 20px);
                 height: 65vh;
                 max-height: 400px;
                 bottom: 75px;
                 right: 10px;
                 left: 10px;
-             }
-        }
-        
-        @media screen and (max-width: 900px) and (max-height: 500px) and (orientation: landscape) {
-            .nav-logo h2 {
-                font-size: 16px; /* Reducir aún más para landscape */
-                white-space: nowrap; /* Evita que el texto se divida */
-            }
-            .nav-logo img {
-                width: 35px;
-                height: 35px;
             }
         }
     </style>
@@ -963,8 +545,6 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
     <script src="firebase-counter.js"></script>
-    <!-- El script del chatbot.js ya no es necesario, la lógica está en el script de arriba -->
-    <!-- <script src="chatbot.js"></script> -->
 
 </body>
 </html>
