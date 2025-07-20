@@ -69,8 +69,8 @@ body {
 }
 
 .nav-logo img {
-    width: 70px; /* Logo más grande en PC */
-    height: 70px;
+    width: 65px; /* Logo más grande en PC */
+    height: 65px;
     transition: width 0.3s ease, height 0.3s ease;
 }
 
