@@ -1,19 +1,26 @@
-// Crear boton de instalacion
+// Crear boton de instalacion BLANCO para computadoras
 function createInstallButton() {
     installButton = document.createElement('button');
     installButton.id = 'install-button';
-    installButton.innerHTML = isMobile ? '<i class="fas fa-download"></i> Instalar' : '<i class="fas fa-download"></i> Instalar App';
+    installButton.innerHTML = '<i class="fas fa-download" style="color: #333 !important;"></i> Instalar App';
     installButton.className = 'install-pwa-button';
     
-    // Estilos especificos para movil
-    const mobileStyles = isMobile ? 'bottom: 90px !important; left: 15px !important; padding: 12px 18px !important; font-size: 14px !important; gap: 6px !important;' : '';
+    // Boton BLANCO para computadoras
+    installButton.style.cssText = 'position: fixed !important; bottom: 25px !important; left: 25px !important; background: rgba(255, 255, 255, 0.95) !important; color: #333 !important; border: 2px solid rgba(0, 0, 0, 0.2) !important; padding: 12px 20px !important; border-radius: 25px !important; font-size: 14px !important; font-weight: 600 !important; cursor: pointer !important; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important; z-index: 1000 !important; display: none !important; align-items: center !important; gap: 8px !important; font-family: -apple-system, BlinkMacSystemFont, SF Pro Display, sans-serif !important; transition: all 0.3s ease !important; backdrop-filter: blur(15px) !important; -webkit-backdrop-filter: blur(15px) !important;';
     
-    installButton.style.cssText = 'position: fixed; bottom: 25px; left: 25px; background: rgba(255, 255, 255, 0.9); color: #333; border: 2px solid rgba(0, 0, 0, 0.1); padding: 12px 20px; border-radius: 25px; font-size: 14px; font-weight: 600; cursor: pointer; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); z-index: 1000; display: none; align-items: center; gap: 8px; font-family: -apple-system, BlinkMacSystemFont, SF Pro Display, sans-serif; transition: all 0.3s ease; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); ' + mobileStyles;
-    
-    // Agregar animacion
+    // Agregar animacion BLANCA
     const style = document.createElement('style');
-    style.textContent = '.install-pwa-button:hover { transform: scale(1.05); background: rgba(255, 255, 255, 1); box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15); } .install-pwa-button:active { transform: scale(0.95); }';
-    document.head.appendChild(style// PWA Installation Script para Guardia Digital
+    style.textContent = '.install-pwa-button:hover { transform: scale(1.05) !important; background: rgba(255, 255, 255, 1) !important; color: #333 !important; box-shadow: 0 6px 30px rgba(0, 0, 0, 0.2) !important; } .install-pwa-button:active { transform: scale(0.95) !important; } .install-pwa-button .fas { color: #333 !important; }';
+    document.head.appendChild(style);
+    
+    // Evento de clic
+    installButton.addEventListener('click', installApp);
+    
+    // Agregar al body
+    document.body.appendChild(installButton);
+    
+    console.log('✅ Boton de instalacion BLANCO creado para computadora');
+}// PWA Installation Script para Guardia Digital
 let deferredPrompt;
 let installButton;
 let installBanner;
@@ -421,5 +428,6 @@ window.pwaInstallBanner = {
     show: showInstallBanner,
     hide: hideInstallBanner,
     install: installApp,
-    close: hideInstallBanner
+    close: hideInstallBanner,
+    debugColors: debugBannerColors
 };
