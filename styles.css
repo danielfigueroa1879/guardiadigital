@@ -585,6 +585,14 @@ h3 {
     .nav-logo h2 {
         font-size: 30px; /* Título aún más pequeño para celulares chicos */
     }
+     .nav-logo img { 
+     width: 45px;     /* CAMBIAR AQUÍ */
+     height: 45px;    /* CAMBIAR AQUÍ */
+}
+
+
+
+    
      #chatbot-container {
         width: calc(100vw - 20px);
         height: 65vh;
