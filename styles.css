@@ -603,15 +603,15 @@ h3 {
     }
     
     .nav-logo img {
-        width: 50px !important; /* LOGO MÁS GRANDE - Puedes cambiar aquí */
-        height: 50px !important; /* LOGO MÁS GRANDE - Puedes cambiar aquí */
+        width: 65px !important; /* LOGO MÁS GRANDE - Puedes cambiar aquí */
+        height: 65px !important; /* LOGO MÁS GRANDE - Puedes cambiar aquí */
         flex-shrink: 0 !important;
         transition: all 0.3s ease !important;
     }
     
     /* TÍTULO - Segunda posición */
     .nav-logo h2 {
-        font-size: 18px !important; /* TÍTULO MÁS GRANDE - Puedes cambiar aquí */
+        font-size: 25px !important; /* TÍTULO MÁS GRANDE - Puedes cambiar aquí */
         font-weight: 600 !important;
         color: #000000 !important;
         margin: 0 !important;
