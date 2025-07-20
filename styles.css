@@ -740,7 +740,7 @@ html {
         flex-direction: column !important;
         background-color: transparent !important;
         border: none !important;
-        padding: 8px !important;
+        padding: 12px !important;
         cursor: pointer !important;
         z-index: 1002 !important;
         flex-shrink: 0 !important; /* No se encoge */
