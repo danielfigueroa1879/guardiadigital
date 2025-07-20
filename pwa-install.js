@@ -1,17 +1,18 @@
-// Crear boton de instalacion BLANCO para computadoras
+// Crear boton de instalacion SOLO para moviles (NO para computadoras)
 function createInstallButton() {
+    // NO crear boton en computadoras
+    if (!isMobile) {
+        console.log('💻 NO creando boton en computadora');
+        return;
+    }
+    
     installButton = document.createElement('button');
     installButton.id = 'install-button';
-    installButton.innerHTML = '<i class="fas fa-download" style="color: #333 !important;"></i> Instalar App';
+    installButton.innerHTML = '<i class="fas fa-download" style="color: #333 !important;"></i> Instalar';
     installButton.className = 'install-pwa-button';
     
-    // Boton BLANCO para computadoras
-    installButton.style.cssText = 'position: fixed !important; bottom: 25px !important; left: 25px !important; background: rgba(255, 255, 255, 0.95) !important; color: #333 !important; border: 2px solid rgba(0, 0, 0, 0.2) !important; padding: 12px 20px !important; border-radius: 25px !important; font-size: 14px !important; font-weight: 600 !important; cursor: pointer !important; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important; z-index: 1000 !important; display: none !important; align-items: center !important; gap: 8px !important; font-family: -apple-system, BlinkMacSystemFont, SF Pro Display, sans-serif !important; transition: all 0.3s ease !important; backdrop-filter: blur(15px) !important; -webkit-backdrop-filter: blur(15px) !important;';
-    
-    // Agregar animacion BLANCA
-    const style = document.createElement('style');
-    style.textContent = '.install-pwa-button:hover { transform: scale(1.05) !important; background: rgba(255, 255, 255, 1) !important; color: #333 !important; box-shadow: 0 6px 30px rgba(0, 0, 0, 0.2) !important; } .install-pwa-button:active { transform: scale(0.95) !important; } .install-pwa-button .fas { color: #333 !important; }';
-    document.head.appendChild(style);
+    // Boton BLANCO solo para moviles
+    installButton.style.cssText = 'position: fixed !important; bottom: 90px !important; left: 15px !important; background: rgba(255, 255, 255, 0.95) !important; color: #333 !important; border: 2px solid rgba(0, 0, 0, 0.2) !important; padding: 12px 18px !important; border-radius: 25px !important; font-size: 14px !important; font-weight: 600 !important; cursor: pointer !important; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important; z-index: 1000 !important; display: none !important; align-items: center !important; gap: 6px !important; font-family: -apple-system, BlinkMacSystemFont, SF Pro Display, sans-serif !important; transition: all 0.3s ease !important;';
     
     // Evento de clic
     installButton.addEventListener('click', installApp);
@@ -19,7 +20,7 @@ function createInstallButton() {
     // Agregar al body
     document.body.appendChild(installButton);
     
-    console.log('✅ Boton de instalacion BLANCO creado para computadora');
+    console.log('✅ Boton de instalacion creado SOLO para movil');
 }// PWA Installation Script para Guardia Digital
 let deferredPrompt;
 let installButton;
@@ -196,13 +197,11 @@ function setupInstallPrompt() {
         // Guardar el evento para usarlo despues
         deferredPrompt = e;
         
-        // En moviles, mostrar banner; en desktop, mostrar boton
+        // SOLO en moviles mostrar banner, en computadoras NO mostrar nada
         if (isMobile) {
             setTimeout(() => showInstallBanner(), 1000);
-        } else {
-            // En computadoras, mostrar el boton flotante
-            showInstallButton();
         }
+        // NO mostrar boton en computadoras
         
         // Analiticas (opcional)
         trackEvent('PWA', 'install_prompt_shown');
@@ -227,22 +226,20 @@ function setupInstallPrompt() {
         setTimeout(checkIfInstalled, 1000);
     });
     
-    // Para computadoras que no disparen beforeinstallprompt, mostrar boton despues de un tiempo
-    if (!isMobile) {
-        setTimeout(() => {
-            if (!deferredPrompt && !checkIfInstalled()) {
-                console.log('💻 Mostrando boton en computadora (fallback)');
-                showInstallButton();
-            }
-        }, 5000);
-    }
+    // NO mostrar boton en computadoras - eliminar fallback
 }
 
-// Mostrar boton de instalacion
+// Mostrar boton de instalacion SOLO en moviles
 function showInstallButton() {
+    // NO mostrar boton en computadoras
+    if (!isMobile) {
+        console.log('💻 NO mostrando boton en computadora');
+        return;
+    }
+    
     if (installButton) {
         installButton.style.display = 'flex';
-        console.log('👀 Boton de instalacion mostrado');
+        console.log('👀 Boton de instalacion mostrado en movil');
     }
 }
 
