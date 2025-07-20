@@ -53,7 +53,7 @@ body {
 }
 
 .navbar {
-    padding: 4px 0;
+    padding: 3px 0;
 }
 
 .nav-container {
@@ -65,18 +65,18 @@ body {
 .nav-logo {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
 }
 
 .nav-logo img {
-    width: 55px; /* Logo más grande en PC */
-    height: 55px;
+    width: 50px; /* Logo más grande en PC */
+    height: 50px;
     transition: width 0.3s ease, height 0.3s ease;
 }
 
 .nav-logo h2 {
     color: #000000; /* CAMBIO A NEGRO */
-    font-size: 22px; /* Tamaño original para PC */
+    font-size: 20px; /* Tamaño original para PC */
     font-weight: 600;
     margin: 0;
 }
