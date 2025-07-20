@@ -506,7 +506,7 @@ h3 {
         height: 45px;
     }
     .nav-logo h2 { 
-        font-size: 25px;
+        font-size: 16px;
         white-space: nowrap;
     }
     .nav-toggle { 
@@ -582,25 +582,122 @@ h3 {
 }
 
 @media screen and (max-width: 480px) {
-    .nav-logo h2 {
-        font-size: 30px; /* Título aún más pequeño para celulares chicos */
+    /* ===== LAYOUT OPTIMIZADO PARA PANTALLAS PEQUEÑAS ===== */
+    .nav-container {
+        display: flex !important;
+        justify-content: flex-start !important;
+        align-items: center !important;
+        padding: 0 12px !important;
+        gap: 10px !important; /* Espacio entre elementos */
+        min-height: 70px !important;
+        flex-wrap: nowrap !important; /* Forzar una sola línea */
     }
-     .nav-logo img { 
-     width: 45px;     /* CAMBIAR AQUÍ */
-     height: 45px;    /* CAMBIAR AQUÍ */
-}
-
-
-
     
-     #chatbot-container {
-        width: calc(100vw - 20px);
-        height: 65vh;
-        max-height: 400px;
-        bottom: 75px;
-        right: 10px;
-        left: 10px;
-     }
+    /* LOGO - Primera posición */
+    .nav-logo {
+        order: 1 !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        flex-shrink: 0 !important; /* No se encoge */
+    }
+    
+    .nav-logo img {
+        width: 50px !important; /* LOGO MÁS GRANDE - Puedes cambiar aquí */
+        height: 50px !important; /* LOGO MÁS GRANDE - Puedes cambiar aquí */
+        flex-shrink: 0 !important;
+        transition: all 0.3s ease !important;
+    }
+    
+    /* TÍTULO - Segunda posición */
+    .nav-logo h2 {
+        font-size: 18px !important; /* TÍTULO MÁS GRANDE - Puedes cambiar aquí */
+        font-weight: 600 !important;
+        color: #000000 !important;
+        margin: 0 !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        flex: 1 !important; /* Ocupa el espacio disponible */
+        text-align: left !important;
+        transition: all 0.3s ease !important;
+    }
+    
+    /* MENÚ HAMBURGUESA - Tercera posición */
+    .nav-toggle {
+        order: 3 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        background-color: transparent !important;
+        border: none !important;
+        padding: 10px !important; /* MENÚ MÁS GRANDE - Puedes cambiar aquí */
+        cursor: pointer !important;
+        z-index: 1002 !important;
+        flex-shrink: 0 !important;
+        margin-left: 8px !important;
+        min-width: 45px !important; /* MENÚ MÁS GRANDE - Puedes cambiar aquí */
+        min-height: 45px !important; /* MENÚ MÁS GRANDE - Puedes cambiar aquí */
+        justify-content: center !important;
+        align-items: center !important;
+        border-radius: 8px !important;
+        transition: all 0.3s ease !important;
+    }
+    
+    /* Barras del menú hamburguesa más grandes */
+    .bar {
+        width: 24px !important; /* BARRAS MÁS GRANDES - Puedes cambiar aquí */
+        height: 3px !important; /* BARRAS MÁS GRUESAS - Puedes cambiar aquí */
+        background-color: #86868b !important;
+        margin: 3px 0 !important; /* ESPACIO ENTRE BARRAS - Puedes cambiar aquí */
+        transition: all 0.4s ease !important;
+        border-radius: 2px !important;
+    }
+    
+    /* Efectos hover para mejor interacción */
+    .nav-toggle:hover {
+        background-color: rgba(0, 113, 227, 0.1) !important;
+        transform: scale(1.05) !important;
+    }
+    
+    .nav-toggle:active {
+        transform: scale(0.95) !important;
+    }
+    
+    /* Animaciones del menú activo */
+    .nav-toggle.active .bar:nth-child(2) {
+        opacity: 0 !important;
+        transform: translateX(20px) !important;
+    }
+    
+    .nav-toggle.active .bar:nth-child(1) {
+        transform: translateY(6px) rotate(45deg) !important;
+    }
+    
+    .nav-toggle.active .bar:nth-child(3) {
+        transform: translateY(-6px) rotate(-45deg) !important;
+    }
+    
+    /* Asegurar que no haya elementos que interfieran */
+    .search-container,
+    .visitor-counter-container {
+        display: none !important;
+    }
+    
+    /* Menú desplegable ajustado */
+    .nav-menu.active {
+        top: 70px !important;
+        background: rgba(240, 240, 242, 0.95) !important;
+    }
+    
+    /* Chatbot para pantallas pequeñas */
+    #chatbot-container {
+        width: calc(100vw - 20px) !important;
+        height: 65vh !important;
+        max-height: 400px !important;
+        bottom: 75px !important;
+        right: 10px !important;
+        left: 10px !important;
+    }
 }
 
 @media screen and (max-width: 900px) and (max-height: 500px) and (orientation: landscape) {
@@ -1214,8 +1311,43 @@ html {
     }
 }
 
-/* ===== PANTALLAS EXTREMADAMENTE PEQUEÑAS ===== */
+/* ===== PANTALLAS EXTREMADAMENTE PEQUEÑAS (360px y menos) ===== */
 @media screen and (max-width: 360px) {
+    /* Layout para pantallas muy pequeñas */
+    .nav-container {
+        padding: 0 8px !important;
+        gap: 6px !important; /* Espacio más compacto */
+    }
+    
+    /* Logo más compacto pero visible */
+    .nav-logo img {
+        width: 40px !important; /* LOGO COMPACTO - Puedes cambiar aquí */
+        height: 40px !important; /* LOGO COMPACTO - Puedes cambiar aquí */
+    }
+    
+    /* Título compacto pero legible */
+    .nav-logo h2 {
+        font-size: 15px !important; /* TÍTULO COMPACTO - Puedes cambiar aquí */
+        letter-spacing: -0.5px !important; /* Compactar letras */
+        max-width: calc(100vw - 110px) !important; /* Limitar ancho */
+    }
+    
+    /* Menú hamburguesa compacto */
+    .nav-toggle {
+        padding: 8px !important; /* MENÚ COMPACTO - Puedes cambiar aquí */
+        min-width: 38px !important; /* MENÚ COMPACTO - Puedes cambiar aquí */
+        min-height: 38px !important; /* MENÚ COMPACTO - Puedes cambiar aquí */
+        margin-left: 6px !important;
+    }
+    
+    /* Barras del menú más pequeñas */
+    .bar {
+        width: 20px !important; /* BARRAS COMPACTAS - Puedes cambiar aquí */
+        height: 2.5px !important; /* BARRAS COMPACTAS - Puedes cambiar aquí */
+        margin: 2.5px 0 !important;
+    }
+
+    /* Resto de estilos para pantallas pequeñas */
     .hero-title {
         font-size: 20px;
     }
@@ -1265,6 +1397,42 @@ html {
     .footer-section p,
     .footer-section ul li a {
         font-size: 12px;
+    }
+}
+
+/* ===== PANTALLAS ULTRA PEQUEÑAS (320px y menos) ===== */
+@media screen and (max-width: 320px) {
+    .nav-container {
+        padding: 0 6px !important;
+        gap: 4px !important;
+    }
+    
+    /* Logo mínimo pero funcional */
+    .nav-logo img {
+        width: 35px !important; /* LOGO MÍNIMO - Puedes cambiar aquí */
+        height: 35px !important; /* LOGO MÍNIMO - Puedes cambiar aquí */
+    }
+    
+    /* Título mínimo pero legible */
+    .nav-logo h2 {
+        font-size: 13px !important; /* TÍTULO MÍNIMO - Puedes cambiar aquí */
+        letter-spacing: -0.8px !important;
+        max-width: calc(100vw - 95px) !important;
+    }
+    
+    /* Menú hamburguesa mínimo */
+    .nav-toggle {
+        padding: 6px !important; /* MENÚ MÍNIMO - Puedes cambiar aquí */
+        min-width: 32px !important; /* MENÚ MÍNIMO - Puedes cambiar aquí */
+        min-height: 32px !important; /* MENÚ MÍNIMO - Puedes cambiar aquí */
+        margin-left: 4px !important;
+    }
+    
+    /* Barras del menú mínimas */
+    .bar {
+        width: 16px !important; /* BARRAS MÍNIMAS - Puedes cambiar aquí */
+        height: 2px !important; /* BARRAS MÍNIMAS - Puedes cambiar aquí */
+        margin: 2px 0 !important;
     }
 }
 
