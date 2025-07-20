@@ -63,8 +63,8 @@ function showBanner() {
     // Crear banner
     const banner = document.createElement('div');
     banner.id = 'install-banner-clean';
-    // Estilo del banner: blanco semitransparente
-    banner.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; background: rgba(255,255,255,0.9) !important; padding: 15px 20px; z-index: 10000; display: flex; align-items: center; justify-content: space-between; font-family: Arial, sans-serif; color: #333; border-bottom: 1px solid #ddd; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);';
+    // CAMBIO: Se aumentó la transparencia del fondo (de 0.9 a 0.8)
+    banner.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; background: rgba(255,255,255,0.8) !important; padding: 15px 20px; z-index: 10000; display: flex; align-items: center; justify-content: space-between; font-family: Arial, sans-serif; color: #333; border-bottom: 1px solid #ddd; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);';
     
     // Texto del banner
     const text = document.createElement('div');
@@ -78,14 +78,14 @@ function showBanner() {
     // Botón de instalar (azul con letras blancas)
     const installBtn = document.createElement('button');
     installBtn.textContent = 'Instalar';
-    // CAMBIO: Estilo del botón de instalación a azul con texto blanco
+    // Estilo del botón de instalación a azul con texto blanco
     installBtn.style.cssText = 'background: #0071e3 !important; border: none !important; color: #ffffff !important; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 13px; font-weight: bold;';
     installBtn.onclick = () => installApp();
     
     // Botón de cerrar (discreto)
     const closeBtn = document.createElement('button');
     closeBtn.innerHTML = '&#x2715;'; // Ícono de 'X' (cruz)
-    // CAMBIO: Estilo del botón de cerrar a transparente
+    // Estilo del botón de cerrar a transparente
     closeBtn.style.cssText = 'background: transparent !important; border: 1px solid #ccc !important; color: #888 !important; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; padding: 0;';
     closeBtn.onclick = () => hideBanner();
     
