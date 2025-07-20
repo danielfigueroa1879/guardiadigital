@@ -2103,11 +2103,11 @@ img {
     border: 1px solid rgba(225, 225, 225, 0.5); 
     border-radius: 25px; 
     font-size: 14px;
-    background: rgba(240, 240, 242, 0.6); /* BANNER SEMITRANSPARENTE */
+    background: rgba(240, 240, 242, 0.6)!important; /* BANNER SEMITRANSPARENTE */
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     transition: all 0.3s ease;
-    box-sizing: border-box; /* Incluir padding en el cálculo del ancho */
-    min-width: 0; /* Permitir que se encoja si es necesario */
+    box-sizing: border-box!important; /* Incluir padding en el cálculo del ancho */
+    min-width: 0!important; /* Permitir que se encoja si es necesario */
     color: #86868b; /* COLOR DEL TEXTO */
 }
