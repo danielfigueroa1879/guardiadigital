@@ -505,25 +505,25 @@ h3 {
 #chatbot-input { 
     flex: 1; 
     padding: 12px 16px; 
-    border: 1px solid rgba(225, 225, 225, 0.5); 
+    border: 1px solid rgba(225, 225, 225, 0.3); 
     border-radius: 25px; 
     font-size: 14px;
-    background: rgba(240, 240, 242, 0.6)!important;  /* BANNER SEMITRANSPARENTE */
+    background: rgba(255, 255, 255, 0.7) !important; /* BLANCO SEMITRANSPARENTE */
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     transition: all 0.3s ease;
     box-sizing: border-box;
     min-width: 0;
-    color: #86868b; /* COLOR DEL TEXTO */
+    color: #86868b;
 }
 #chatbot-input:focus { 
     outline: none; 
     border-color: rgba(0, 113, 227, 0.8);
-    background: rgba(255, 255, 255, 0.9); /* FONDO MÁS SÓLIDO AL HACER FOCUS */
+    background: rgba(255, 255, 255, 0.95) !important; /* BLANCO MÁS SÓLIDO AL HACER FOCUS */
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     box-shadow: 0 0 0 2px rgba(0, 113, 227, 0.2);
-    color: #1d1d1f; /* COLOR DEL TEXTO MÁS OSCURO AL ESCRIBIR */
+    color: #1d1d1f;
 }
 
 /* BOTÓN DE ENVÍO - CORRIGIENDO POSICIÓN Y AÑADIENDO EFECTOS */
@@ -2101,18 +2101,4 @@ img {
 ::-moz-selection {
     background-color: #0071e3;
     color: #ffffff;
-}
-#chatbot-input { 
-    flex: 1; 
-    padding: 12px 16px; 
-    border: 1px solid rgba(225, 225, 225, 0.5); 
-    border-radius: 25px; 
-    font-size: 14px;
-    background: rgba(240, 240, 242, 0.6)!important; /* BANNER SEMITRANSPARENTE */
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-    box-sizing: border-box!important; /* Incluir padding en el cálculo del ancho */
-    min-width: 0!important; /* Permitir que se encoja si es necesario */
-    color: #86868b; /* COLOR DEL TEXTO */
 }
