@@ -1,4 +1,19 @@
-// PWA Installation Script para Guardia Digital
+// Crear boton de instalacion
+function createInstallButton() {
+    installButton = document.createElement('button');
+    installButton.id = 'install-button';
+    installButton.innerHTML = isMobile ? '<i class="fas fa-download"></i> Instalar' : '<i class="fas fa-download"></i> Instalar App';
+    installButton.className = 'install-pwa-button';
+    
+    // Estilos especificos para movil
+    const mobileStyles = isMobile ? 'bottom: 90px !important; left: 15px !important; padding: 12px 18px !important; font-size: 14px !important; gap: 6px !important;' : '';
+    
+    installButton.style.cssText = 'position: fixed; bottom: 25px; left: 25px; background: rgba(255, 255, 255, 0.9); color: #333; border: 2px solid rgba(0, 0, 0, 0.1); padding: 12px 20px; border-radius: 25px; font-size: 14px; font-weight: 600; cursor: pointer; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); z-index: 1000; display: none; align-items: center; gap: 8px; font-family: -apple-system, BlinkMacSystemFont, SF Pro Display, sans-serif; transition: all 0.3s ease; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); ' + mobileStyles;
+    
+    // Agregar animacion
+    const style = document.createElement('style');
+    style.textContent = '.install-pwa-button:hover { transform: scale(1.05); background: rgba(255, 255, 255, 1); box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15); } .install-pwa-button:active { transform: scale(0.95); }';
+    document.head.appendChild(style// PWA Installation Script para Guardia Digital
 let deferredPrompt;
 let installButton;
 let installBanner;
