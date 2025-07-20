@@ -369,6 +369,17 @@ h3 {
 .signature { margin-top: 10px; }
 
 /* ===== ESTILOS DEL CHATBOT CORREGIDOS ===== */
+/* Estilos para los placeholders del chatbot y formularios */
+#chatbot-input::placeholder {
+    color: rgba(134, 134, 139, 0.7); /* PLACEHOLDER SEMITRANSPARENTE */
+    font-style: italic;
+}
+
+.newsletter-form input::placeholder,
+.newsletter-form textarea::placeholder {
+    color: rgba(134, 134, 139, 0.7) !important; /* PLACEHOLDER SEMITRANSPARENTE */
+    font-style: italic !important;
+}
 #chat-toggle-button {
     position: fixed;
     bottom: 25px;
