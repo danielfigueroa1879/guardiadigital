@@ -156,4 +156,3 @@ window.pwaClean = {
     install: installApp,
     isInstalled: isAppInstalled
 };
-
