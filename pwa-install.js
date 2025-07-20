@@ -407,7 +407,7 @@ function checkIfInstalled() {
     return false;
 }
 
-// Exportar funciones para debug y control del banner
+// Exportar funciones para debug y control
 window.pwaInstall = {
     show: showInstallButton,
     hide: hideInstallButton,
@@ -416,7 +416,11 @@ window.pwaInstall = {
     debug: debugPWAStatus,
     forceShow: function() {
         console.log('🧪 Forzando mostrar boton para testing');
-        showInstallButton();
+        if (isMobile) {
+            showInstallButton();
+        } else {
+            console.log('💻 No se puede mostrar boton en computadora');
+        }
     }
 };
 
