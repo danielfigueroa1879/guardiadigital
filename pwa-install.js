@@ -63,8 +63,8 @@ function showBanner() {
     // Crear banner
     const banner = document.createElement('div');
     banner.id = 'install-banner-clean';
-    // CAMBIO: Se añadió una sombra más pronunciada (box-shadow)
-    banner.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; background: rgba(255,255,255,0.8) !important; padding: 15px 20px; z-index: 10000; display: flex; align-items: center; justify-content: space-between; font-family: Arial, sans-serif; color: #333; border-bottom: 1px solid #ddd; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 4px 12px rgba(0,0,0,0.15);';
+    // CAMBIO: Se aumentó la transparencia del fondo (de 0.8 a 0.7)
+    banner.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; background: rgba(255,255,255,0.7) !important; padding: 15px 20px; z-index: 10000; display: flex; align-items: center; justify-content: space-between; font-family: Arial, sans-serif; color: #333; border-bottom: 1px solid #ddd; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 4px 12px rgba(0,0,0,0.15);';
     
     // Texto del banner
     const text = document.createElement('div');
@@ -98,7 +98,7 @@ function showBanner() {
     
     console.log('✅ Banner mostrado con estilo azul y blanco');
     
-    // CAMBIO: Se aumentó el tiempo a 10 segundos (10000 ms)
+    // Se mantiene el tiempo en 10 segundos (10000 ms)
     setTimeout(() => hideBanner(), 10000);
 }
 
