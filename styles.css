@@ -369,17 +369,6 @@ h3 {
 .signature { margin-top: 10px; }
 
 /* ===== ESTILOS DEL CHATBOT CORREGIDOS ===== */
-/* Estilos para los placeholders del chatbot y formularios */
-#chatbot-input::placeholder {
-    color: rgba(134, 134, 139, 0.7); /* PLACEHOLDER SEMITRANSPARENTE */
-    font-style: italic;
-}
-
-.newsletter-form input::placeholder,
-.newsletter-form textarea::placeholder {
-    color: rgba(134, 134, 139, 0.7) !important; /* PLACEHOLDER SEMITRANSPARENTE */
-    font-style: italic !important;
-}
 #chat-toggle-button {
     position: fixed;
     bottom: 25px;
@@ -492,7 +481,6 @@ h3 {
     gap: 15px;
 }
 
-
 /* FORMULARIO DE ENTRADA - CORRIGIENDO EL DESBORDAMIENTO */
 .chatbot-input-container { 
     padding: 15px; 
@@ -506,25 +494,20 @@ h3 {
 #chatbot-input { 
     flex: 1; 
     padding: 12px 16px; 
-    border: 1px solid rgba(225, 225, 225, 0.3); 
+    border: 1px solid #ccc; 
     border-radius: 25px; 
     font-size: 14px;
-    background: rgba(255, 255, 255, 0.7) !important; /* BLANCO SEMITRANSPARENTE */
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: #f8f9fa;
     transition: all 0.3s ease;
-    box-sizing: border-box;
-    min-width: 0;
-    color: #86868b;
+    box-sizing: border-box; /* Incluir padding en el cálculo del ancho */
+    min-width: 0; /* Permitir que se encoja si es necesario */
 }
+
 #chatbot-input:focus { 
     outline: none; 
-    border-color: rgba(0, 113, 227, 0.8);
-    background: rgba(255, 255, 255, 0.95) !important; /* BLANCO MÁS SÓLIDO AL HACER FOCUS */
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
+    border-color: #0071e3;
+    background: #ffffff;
     box-shadow: 0 0 0 2px rgba(0, 113, 227, 0.2);
-    color: #1d1d1f;
 }
 
 /* BOTÓN DE ENVÍO - CORRIGIENDO POSICIÓN Y AÑADIENDO EFECTOS */
