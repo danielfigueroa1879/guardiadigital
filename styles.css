@@ -714,8 +714,8 @@ html {
     }
     
     .nav-logo img {
-        width: 55px !important; /* Logo más pequeño */
-        height: 55px !important;
+        width: 25px !important; /* Logo más pequeño */
+        height: 25px !important;
         flex-shrink: 0 !important;
     }
     
