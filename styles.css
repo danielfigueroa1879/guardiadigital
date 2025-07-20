@@ -505,20 +505,25 @@ h3 {
 #chatbot-input { 
     flex: 1; 
     padding: 12px 16px; 
-    border: 1px solid #ccc; 
+    border: 1px solid rgba(225, 225, 225, 0.5); 
     border-radius: 25px; 
     font-size: 14px;
-    background: #f8f9fa;
+    background: rgba(240, 240, 242, 0.6); /* BANNER SEMITRANSPARENTE */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     transition: all 0.3s ease;
-    box-sizing: border-box; /* Incluir padding en el cálculo del ancho */
-    min-width: 0; /* Permitir que se encoja si es necesario */
+    box-sizing: border-box;
+    min-width: 0;
+    color: #86868b; /* COLOR DEL TEXTO */
 }
-
 #chatbot-input:focus { 
     outline: none; 
-    border-color: #0071e3;
-    background: #ffffff;
+    border-color: rgba(0, 113, 227, 0.8);
+    background: rgba(255, 255, 255, 0.9); /* FONDO MÁS SÓLIDO AL HACER FOCUS */
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
     box-shadow: 0 0 0 2px rgba(0, 113, 227, 0.2);
+    color: #1d1d1f; /* COLOR DEL TEXTO MÁS OSCURO AL ESCRIBIR */
 }
 
 /* BOTÓN DE ENVÍO - CORRIGIENDO POSICIÓN Y AÑADIENDO EFECTOS */
