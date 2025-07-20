@@ -714,8 +714,8 @@ html {
     }
     
     .nav-logo img {
-        width: 55px !important; /* Logo más pequeño */
-        height: 55px !important;
+        width: 65px !important; /* Logo más pequeño */
+        height: 65px !important;
         flex-shrink: 0 !important;
     }
     
@@ -723,7 +723,7 @@ html {
     .nav-logo h2 {
         order: 2 !important;
         color: #000000 !important;
-        font-size: 18px !important; /* Tamaño base para móviles */
+        font-size: 25px !important; /* Tamaño base para móviles */
         font-weight: 600 !important;
         margin: 0 !important;
         white-space: nowrap !important; /* No permitir salto de línea */
