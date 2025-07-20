@@ -1321,13 +1321,13 @@ html {
     
     /* Logo más compacto pero visible */
     .nav-logo img {
-        width: 40px !important; /* LOGO COMPACTO - Puedes cambiar aquí */
-        height: 40px !important; /* LOGO COMPACTO - Puedes cambiar aquí */
+        width: 60px !important; /* LOGO COMPACTO - Puedes cambiar aquí */
+        height: 60px !important; /* LOGO COMPACTO - Puedes cambiar aquí */
     }
     
     /* Título compacto pero legible */
     .nav-logo h2 {
-        font-size: 15px !important; /* TÍTULO COMPACTO - Puedes cambiar aquí */
+        font-size: 25px !important; /* TÍTULO COMPACTO - Puedes cambiar aquí */
         letter-spacing: -0.5px !important; /* Compactar letras */
         max-width: calc(100vw - 110px) !important; /* Limitar ancho */
     }
@@ -1409,13 +1409,13 @@ html {
     
     /* Logo mínimo pero funcional */
     .nav-logo img {
-        width: 35px !important; /* LOGO MÍNIMO - Puedes cambiar aquí */
-        height: 35px !important; /* LOGO MÍNIMO - Puedes cambiar aquí */
+        width: 45px !important; /* LOGO MÍNIMO - Puedes cambiar aquí */
+        height: 45px !important; /* LOGO MÍNIMO - Puedes cambiar aquí */
     }
     
     /* Título mínimo pero legible */
     .nav-logo h2 {
-        font-size: 13px !important; /* TÍTULO MÍNIMO - Puedes cambiar aquí */
+        font-size: 18px !important; /* TÍTULO MÍNIMO - Puedes cambiar aquí */
         letter-spacing: -0.8px !important;
         max-width: calc(100vw - 95px) !important;
     }
