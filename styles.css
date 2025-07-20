@@ -69,14 +69,14 @@ body {
 }
 
 .nav-logo img {
-    width: 70px; /* Logo más grande en PC */
-    height: 70px;
+    width: 90px; /* Logo más grande en PC */
+    height: 90px;
     transition: width 0.3s ease, height 0.3s ease;
 }
 
 .nav-logo h2 {
     color: #000000; /* CAMBIO A NEGRO */
-    font-size: 25px; /* Tamaño original para PC */
+    font-size: 30px; /* Tamaño original para PC */
     font-weight: 600;
     margin: 0;
 }
