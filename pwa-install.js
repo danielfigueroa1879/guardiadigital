@@ -3,6 +3,18 @@ let deferredPrompt;
 let installBanner;
 let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
+// Función para verificar si la app ya está instalada
+function isAppInstalled() {
+    // Comprueba si la app se está ejecutando en modo standalone (instalada)
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+    // Comprobación adicional para iOS
+    const isNavigatorStandalone = window.navigator.standalone === true;
+    // Comprobación para apps de Android
+    const isAndroidApp = document.referrer.includes('android-app://');
+    
+    return isStandalone || isNavigatorStandalone || isAndroidApp;
+}
+
 // Función para inyectar los estilos de la animación
 function addAnimationStyles() {
     const style = document.createElement('style');
@@ -22,7 +34,13 @@ function addAnimationStyles() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🔧 PWA Script con botón flotante iniciado');
+    // CAMBIO CLAVE: Primero, verificar si la app ya está instalada.
+    if (isAppInstalled()) {
+        console.log('✅ La PWA ya está instalada. No se mostrará el botón de instalación.');
+        return; // Detiene la ejecución del script si la app ya está instalada.
+    }
+    
+    console.log('🔧 PWA Script con botón flotante iniciado (la app no está instalada).');
     console.log('📱 Es dispositivo movil:', isMobile);
     
     addAnimationStyles();
@@ -31,6 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (isMobile) {
         setTimeout(() => {
+            // La comprobación aquí es una segunda seguridad, pero la principal está arriba.
             if (!isAppInstalled()) {
                 console.log('📱 Mostrando botón de instalación en movil');
                 showInstallButton();
@@ -84,8 +103,8 @@ function showInstallButton() {
         max-width: 90%; /* Límite para pantallas muy pequeñas */
         background: rgba(255, 255, 255, 0.85) !important;
         color: #333;
-        padding: 16px 20px; /* CAMBIO: Más alto verticalmente (12px -> 16px) */
-        border-radius: 16px; /* CAMBIO: Menos redondeado (25px -> 16px) */
+        padding: 16px 20px;
+        border-radius: 16px;
         z-index: 10000;
         display: flex;
         align-items: center;
@@ -116,14 +135,14 @@ function showInstallButton() {
         color: white !important;
         border: none;
         padding: 8px 16px;
-        border-radius: 12px; /* CAMBIO: Menos redondeado también */
+        border-radius: 12px;
         cursor: pointer;
         font-size: 13px;
         font-weight: bold;
-        flex-shrink: 0; /* Evita que el botón se encoja */
+        flex-shrink: 0;
     `;
     installBtn.onclick = (e) => {
-        e.stopPropagation(); // Evita que el click se propague
+        e.stopPropagation();
         installApp();
     };
 
@@ -137,7 +156,7 @@ function showInstallButton() {
         font-size: 16px;
         cursor: pointer;
         padding: 5px;
-        flex-shrink: 0; /* Evita que el botón se encoja */
+        flex-shrink: 0;
     `;
     closeBtn.onclick = (e) => {
         e.stopPropagation();
@@ -169,7 +188,7 @@ function hideInstallButton() {
 
 // Lógica para instalar la app
 async function installApp() {
-    hideInstallButton(); // Ocultar el botón inmediatamente
+    hideInstallButton();
     
     if (!deferredPrompt) {
         console.log('❌ No hay prompt disponible');
@@ -192,11 +211,4 @@ async function installApp() {
     } finally {
         deferredPrompt = null;
     }
-}
-
-// Verificar si la app ya está instalada
-function isAppInstalled() {
-    return window.matchMedia('(display-mode: standalone)').matches || 
-           window.navigator.standalone || 
-           document.referrer.includes('android-app://');
 }
