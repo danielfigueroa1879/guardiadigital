@@ -80,16 +80,16 @@ function showInstallButton() {
         top: 90px; /* Distancia desde arriba, debajo de tu header */
         left: 50%;
         transform: translateX(-50%);
-        width: 320px; /* CAMBIO: Ancho fijo para el botón */
+        width: 320px; 
         max-width: 90%; /* Límite para pantallas muy pequeñas */
         background: rgba(255, 255, 255, 0.85) !important;
         color: #333;
-        padding: 12px 20px;
-        border-radius: 25px;
+        padding: 16px 20px; /* CAMBIO: Más alto verticalmente (12px -> 16px) */
+        border-radius: 16px; /* CAMBIO: Menos redondeado (25px -> 16px) */
         z-index: 10000;
         display: flex;
         align-items: center;
-        justify-content: space-between; /* CAMBIO: Alinear contenido */
+        justify-content: space-between; 
         font-family: Arial, sans-serif;
         border: 1px solid rgba(0, 0, 0, 0.1);
         backdrop-filter: blur(10px);
@@ -116,7 +116,7 @@ function showInstallButton() {
         color: white !important;
         border: none;
         padding: 8px 16px;
-        border-radius: 20px;
+        border-radius: 12px; /* CAMBIO: Menos redondeado también */
         cursor: pointer;
         font-size: 13px;
         font-weight: bold;
