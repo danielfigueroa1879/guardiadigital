@@ -80,6 +80,8 @@ function showInstallButton() {
         top: 90px; /* Distancia desde arriba, debajo de tu header */
         left: 50%;
         transform: translateX(-50%);
+        width: 320px; /* CAMBIO: Ancho fijo para el botón */
+        max-width: 90%; /* Límite para pantallas muy pequeñas */
         background: rgba(255, 255, 255, 0.85) !important;
         color: #333;
         padding: 12px 20px;
@@ -87,14 +89,14 @@ function showInstallButton() {
         z-index: 10000;
         display: flex;
         align-items: center;
-        gap: 15px;
+        justify-content: space-between; /* CAMBIO: Alinear contenido */
         font-family: Arial, sans-serif;
         border: 1px solid rgba(0, 0, 0, 0.1);
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
         animation: slideDownAndFadeIn 0.5s ease-out forwards;
-        max-width: 90%;
+        box-sizing: border-box;
     `;
     
     // Texto del botón
@@ -102,6 +104,10 @@ function showInstallButton() {
     text.textContent = 'Instalar App';
     text.style.cssText = 'font-size: 14px; font-weight: bold; color: #333;';
     
+    // Contenedor para los botones de acción para mantenerlos juntos
+    const actionButtons = document.createElement('div');
+    actionButtons.style.cssText = 'display: flex; align-items: center; gap: 8px;';
+
     // Botón de instalar (ahora el principal)
     const installBtn = document.createElement('button');
     installBtn.textContent = 'Instalar';
@@ -114,6 +120,7 @@ function showInstallButton() {
         cursor: pointer;
         font-size: 13px;
         font-weight: bold;
+        flex-shrink: 0; /* Evita que el botón se encoja */
     `;
     installBtn.onclick = (e) => {
         e.stopPropagation(); // Evita que el click se propague
@@ -130,7 +137,7 @@ function showInstallButton() {
         font-size: 16px;
         cursor: pointer;
         padding: 5px;
-        margin-left: 5px;
+        flex-shrink: 0; /* Evita que el botón se encoja */
     `;
     closeBtn.onclick = (e) => {
         e.stopPropagation();
@@ -138,9 +145,11 @@ function showInstallButton() {
     };
     
     // Ensamblar el botón
+    actionButtons.appendChild(installBtn);
+    actionButtons.appendChild(closeBtn);
+
     promptButton.appendChild(text);
-    promptButton.appendChild(installBtn);
-    promptButton.appendChild(closeBtn);
+    promptButton.appendChild(actionButtons);
     document.body.appendChild(promptButton);
     
     console.log('✅ Botón de instalación flotante mostrado');
