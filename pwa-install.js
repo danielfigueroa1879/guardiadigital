@@ -3,16 +3,22 @@ let deferredPrompt;
 let installBanner;
 let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
-// Función para verificar si la app ya está instalada
+// Función para verificar si la app ya está instalada (con diagnóstico)
 function isAppInstalled() {
-    // Comprueba si la app se está ejecutando en modo standalone (instalada)
     const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
-    // Comprobación adicional para iOS
     const isNavigatorStandalone = window.navigator.standalone === true;
-    // Comprobación para apps de Android
     const isAndroidApp = document.referrer.includes('android-app://');
     
-    return isStandalone || isNavigatorStandalone || isAndroidApp;
+    // Log de diagnóstico para depuración
+    console.log('🔍 Verificando estado de instalación:');
+    console.log(`- Modo Standalone (Android): ${isStandalone}`);
+    console.log(`- Navigator Standalone (iOS): ${isNavigatorStandalone}`);
+    console.log(`- Referrer de App Android: ${isAndroidApp}`);
+    
+    const result = isStandalone || isNavigatorStandalone || isAndroidApp;
+    console.log(`- Resultado final: ${result ? 'Instalada' : 'No instalada'}`);
+    
+    return result;
 }
 
 // Función para inyectar los estilos de la animación
@@ -49,7 +55,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (isMobile) {
         setTimeout(() => {
-            // La comprobación aquí es una segunda seguridad, pero la principal está arriba.
             if (!isAppInstalled()) {
                 console.log('📱 Mostrando botón de instalación en movil');
                 showInstallButton();
@@ -75,7 +80,7 @@ function setupInstallation() {
         e.preventDefault();
         deferredPrompt = e;
         
-        if (isMobile) {
+        if (isMobile && !isAppInstalled()) {
             setTimeout(() => showInstallButton(), 1000);
         }
     });
@@ -135,7 +140,7 @@ function showInstallButton() {
         color: white !important;
         border: none;
         padding: 8px 16px;
-        border-radius: 12px;
+        border-radius: 8px; /* CAMBIO: Menos redondeado (12px -> 8px) */
         cursor: pointer;
         font-size: 13px;
         font-weight: bold;
