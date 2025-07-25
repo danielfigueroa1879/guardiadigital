@@ -26,29 +26,18 @@ const generateResponse = async (chatElement) => {
     // Add the user's current message to the persistent chat history
     chatHistory.push({ role: "user", parts: [{ text: userMessage }] });
 
-    // **NEW STRATEGY:** Create a temporary conversation array for the API call.
-    // This array includes a system-like prompt at the beginning to provide context,
-    // which is a more robust method than using 'system_instruction'.
-    const apiConversation = [
-        {
-            role: "user",
-            parts: [{ text: "Eres un asistente virtual para GuardiaDigital, una empresa de ciberseguridad. Responde de manera profesional, amigable y concisa. Ayuda a los usuarios con sus consultas sobre ciberseguridad y los servicios de la empresa: Auditorías de Seguridad, Consultoría, Implementación de Controles y Monitoreo de Seguridad." }]
-        },
-        {
-            role: "model",
-            parts: [{ text: "Entendido. Estoy listo para ayudar como asistente virtual de GuardiaDigital." }]
-        },
-        // Now add the actual conversation history
-        ...chatHistory
-    ];
+    // --- DIAGNOSTIC STRATEGY ---
+    // We are sending ONLY the raw conversation history.
+    // This is the most basic request possible to see if the connection itself is the problem.
+    // We have temporarily removed the chatbot's persona instructions for this test.
 
     // Gemini API details. The API key is handled by the environment.
     const apiKey = ""; 
     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
     
-    // Construct the payload with the full conversation including the context prompt
+    // Construct the simplest possible payload
     const payload = {
-        contents: apiConversation // Send the temporary array with context
+        contents: chatHistory
     };
 
     const requestOptions = {
