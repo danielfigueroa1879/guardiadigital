@@ -9,58 +9,85 @@ document.addEventListener("DOMContentLoaded", () => {
     const chatInput = document.querySelector(".chat-input textarea");
     const sendChatBtn = document.querySelector(".chat-input span");
 
-    // Verificar si los elementos cruciales existen
     if (!chatbotToggler || !closeBtn || !chatbox || !chatInput || !sendChatBtn) {
-        console.error("Error: No se encontraron uno o más elementos del chatbot en el DOM. Verifica las clases en tu HTML.");
+        console.error("Error: No se encontraron uno o más elementos del chatbot en el DOM.");
         return;
     }
 
     let userMessage = null;
     const inputInitHeight = chatInput.scrollHeight;
+    let welcomeMessageShown = false; // Flag para mostrar el mensaje de bienvenida solo una vez
 
-    /**
-     * Crea un elemento <li> para un mensaje de chat.
-     * @param {string} message - El texto del mensaje.
-     * @param {string} className - 'outgoing' para el usuario, 'incoming' para el bot.
-     * @returns {HTMLElement}
-     */
+    // --- RESPUESTAS PREDETERMINADAS ---
+    const predefinedResponses = {
+        "saludos": {
+            keywords: ["hola", "buenas", "buenos dias", "buenos días", "buenas tardes", "buenas noches"],
+            response: "¡Hola! Soy el asistente virtual de GuardiaDigital. ¿En qué puedo ayudarte hoy?"
+        },
+        "despedidas": {
+            keywords: ["adios", "chao", "hasta luego", "nos vemos"],
+            response: "¡Hasta luego! Que tengas un excelente día. Si tienes más dudas, aquí estaré."
+        },
+        "agradecimientos": {
+            keywords: ["gracias", "muchas gracias", "te pasaste", "agradecido"],
+            response: "¡De nada! Estoy para ayudarte. ¿Hay algo más que necesites saber?"
+        },
+        "servicios": {
+            keywords: ["servicios", "ofrecen", "hacen", "planes"],
+            response: "En GuardiaDigital ofrecemos: Auditorías de Seguridad, Consultoría, Implementación de Controles y Monitoreo de Seguridad. ¿Te gustaría que te detalle alguno de estos servicios?"
+        },
+        "phishing": {
+            keywords: ["phishing", "phisng", "fishing"],
+            response: "El phishing es un ciberataque que usa correos o mensajes fraudulentos para robar tu información personal. Siempre verifica el remitente y nunca hagas clic en enlaces sospechosos. ¿Quieres saber más sobre cómo protegerte?"
+        },
+        "malware": {
+            keywords: ["malware", "virus", "troyano", "ransomware"],
+            response: "El malware es un software malicioso diseñado para dañar tu sistema. Para protegerte, mantén tu antivirus actualizado y no descargues archivos de fuentes no confiables. Nuestros servicios de monitoreo pueden ayudarte a detectar estas amenazas a tiempo."
+        },
+        "contraseña": {
+            keywords: ["contraseña", "clave", "password"],
+            response: "Una contraseña segura debe tener al menos 12 caracteres, mezclando mayúsculas, minúsculas, números y símbolos (!@#$%). Evita usar datos personales. ¿Te gustaría que te dé un ejemplo de una contraseña segura?"
+        }
+    };
+
     const createChatLi = (message, className) => {
         const chatLi = document.createElement("li");
         chatLi.classList.add("chat", className);
-        let chatContent = className === "outgoing" 
-            ? `<p></p>` 
-            : `<span class="material-symbols-outlined">smart_toy</span><p></p>`;
+        let chatContent = className === "outgoing" ? `<p></p>` : `<span class="material-symbols-outlined">smart_toy</span><p></p>`;
         chatLi.innerHTML = chatContent;
         chatLi.querySelector("p").textContent = message;
         return chatLi;
     };
 
     /**
-     * Obtiene una respuesta de la IA de Gemini.
-     * Esta función imita la lógica del archivo chatbot.js que sí funciona.
-     * @param {HTMLElement} chatElement - El elemento <li> donde se mostrará la respuesta.
+     * Muestra un mensaje de bienvenida adicional con sugerencias.
      */
+    const showWelcomeMessage = () => {
+        setTimeout(() => {
+            const welcomeLi = createChatLi("Puedes preguntarme sobre nuestros servicios como Auditorías, o sobre temas de ciberseguridad como 'phishing' o 'malware'.", "incoming");
+            chatbox.appendChild(welcomeLi);
+            chatbox.scrollTop = chatbox.scrollHeight;
+        }, 800); // Se muestra 800ms después de abrir el chat
+    };
+
+    const getPredefinedResponse = (input) => {
+        for (const key in predefinedResponses) {
+            const category = predefinedResponses[key];
+            for (const keyword of category.keywords) {
+                if (input.includes(keyword)) {
+                    return category.response;
+                }
+            }
+        }
+        return null;
+    };
+
     const generateResponse = async (chatElement) => {
         const messageElement = chatElement.querySelector("p");
-
-        // Contexto e instrucción para el modelo, adaptado para GuardiaDigital
-        const prompt = `Eres un asistente virtual para GuardiaDigital, una empresa de ciberseguridad. Responde de manera profesional, amigable y concisa. Ayuda a los usuarios con sus consultas sobre ciberseguridad y los servicios de la empresa, que son:
-        1.  **Auditorías de Seguridad**: Evaluación completa de infraestructura digital.
-        2.  **Consultoría**: Asesoramiento experto y personalizado.
-        3.  **Implementación de Controles**: Configuración de firewalls, sistemas de detección, etc.
-        4.  **Monitoreo de Seguridad**: Supervisión 24/7 para detectar y responder a amenazas.
-        
-        Sé amable y profesional. Si no sabes la respuesta, di que consultarás con un especialista. No inventes información. Responde siempre en español.
-        
-        Aquí está la pregunta del usuario: "${userMessage}"`;
-
-        // Usamos la clave de API del ejemplo que funciona, como se solicitó.
+        const prompt = `Eres un asistente virtual para GuardiaDigital, una empresa de ciberseguridad. Responde de manera profesional, amigable y concisa. Ayuda a los usuarios con sus consultas sobre ciberseguridad y los servicios de la empresa. Aquí está la pregunta del usuario: "${userMessage}"`;
         const apiKey = "AIzaSyB2Gv6BvDX5UpWUMnIsx-CxyL5s8fWezyc";
         const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-
-        const payload = {
-            contents: [{ parts: [{ text: prompt }] }]
-        };
+        const payload = { contents: [{ parts: [{ text: prompt }] }] };
 
         try {
             const response = await fetch(apiUrl, {
@@ -68,23 +95,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             });
-
-            if (!response.ok) {
-                throw new Error(`Error en la API: ${response.status} ${response.statusText}`);
-            }
-
+            if (!response.ok) throw new Error(`Error en la API: ${response.status} ${response.statusText}`);
             const result = await response.json();
-            let botResponse;
-
-            if (result.candidates && result.candidates[0]?.content?.parts[0]?.text) {
-                botResponse = result.candidates[0].content.parts[0].text.trim();
-            } else {
-                console.error("Respuesta de la API inesperada:", result);
-                botResponse = 'Lo siento, no pude procesar la respuesta. Inténtalo de nuevo.';
-            }
-            
+            const botResponse = result.candidates?.[0]?.content?.parts?.[0]?.text.trim() || 'Lo siento, no pude procesar la respuesta. Inténtalo de nuevo.';
             messageElement.textContent = botResponse;
-
         } catch (error) {
             console.error('Error al contactar la IA:', error);
             messageElement.classList.add("error");
@@ -94,13 +108,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    /**
-     * Maneja el proceso de enviar un mensaje.
-     */
     const handleChat = () => {
         userMessage = chatInput.value.trim();
         if (!userMessage) return;
 
+        const userMessageLower = userMessage.toLowerCase();
         chatInput.value = "";
         chatInput.style.height = `${inputInitHeight}px`;
 
@@ -108,15 +120,18 @@ document.addEventListener("DOMContentLoaded", () => {
         chatbox.scrollTop = chatbox.scrollHeight;
 
         setTimeout(() => {
-            const incomingChatLi = createChatLi("Pensando...", "incoming");
+            const predefinedResponse = getPredefinedResponse(userMessageLower);
+            const incomingChatLi = createChatLi(predefinedResponse || "Pensando...", "incoming");
             chatbox.appendChild(incomingChatLi);
             chatbox.scrollTop = chatbox.scrollHeight;
-            generateResponse(incomingChatLi);
+
+            if (!predefinedResponse) {
+                generateResponse(incomingChatLi);
+            }
         }, 600);
     };
 
     // --- Event Listeners ---
-
     chatInput.addEventListener("input", () => {
         chatInput.style.height = "auto";
         chatInput.style.height = `${chatInput.scrollHeight}px`;
@@ -131,5 +146,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     sendChatBtn.addEventListener("click", handleChat);
     closeBtn.addEventListener("click", () => document.body.classList.remove("show-chatbot"));
-    chatbotToggler.addEventListener("click", () => document.body.classList.toggle("show-chatbot"));
+    
+    // Modificado para mostrar el mensaje de bienvenida dinámico
+    chatbotToggler.addEventListener("click", () => {
+        document.body.classList.toggle("show-chatbot");
+        // Si el chatbot se está mostrando y el mensaje de bienvenida no ha aparecido
+        if (document.body.classList.contains("show-chatbot") && !welcomeMessageShown) {
+            showWelcomeMessage();
+            welcomeMessageShown = true; // Marcar como mostrado para esta sesión
+        }
+    });
 });
