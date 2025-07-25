@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const messageElement = document.createElement('div');
         messageElement.classList.add('message', `${sender}-message`);
         const p = document.createElement('p');
-        p.textContent = text;
+        p.innerHTML = text;
         messageElement.appendChild(p);
         chatbotMessages.appendChild(messageElement);
         chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
@@ -70,11 +70,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Contexto e instrucción para el modelo de IA
         const prompt = `Eres un asistente virtual para Guardia Digital, una empresa chilena de ciberseguridad. Tu nombre es 'Cyber Asistente'. Responde a las preguntas de los usuarios sobre nuestros servicios, que incluyen:
-        1.  **Auditorías de Seguridad**: Evaluación completa de infraestructura digital.
-        2.  **Monitoreo de Redes**: Supervisión 24/7.
-        3.  **Consultoría en Ciberseguridad**: Asesoramiento experto y personalizado.
-        4.  **Implementación de Sistemas de Seguridad**: Configuración de firewalls, etc.
-        5.  **Seguridad IoT**: Protección de dispositivos inteligentes.
+        1.  <b>Auditorías de Seguridad</b>: Evaluación completa de infraestructura digital.
+        2.  <b>Monitoreo de Redes</b>: Supervisión 24/7.
+        3.  <b>Consultoría en Ciberseguridad</b>: Asesoramiento experto y personalizado.
+        4.  <b>Implementación de Sistemas de Seguridad</b>: Configuración de firewalls, etc.
+        5.  <b>Seguridad IoT</b>: Protección de dispositivos inteligentes.
         
         Nuestra misión es proteger el ecosistema digital de nuestros clientes con soluciones innovadoras.
         Nuestra visión es ser líderes en soluciones tecnológicas de seguridad digital.
@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Extraer el texto de la respuesta de la API de forma segura
             let botResponse;
             if (result.candidates && result.candidates[0] && result.candidates[0].content && result.candidates[0].content.parts && result.candidates[0].content.parts[0]) {
-                botResponse = result.candidates[0].content.parts[0].text;
+                botResponse = result.candidates[0].content.parts[0].text.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
             } else {
                 console.error("Respuesta de la API inesperada:", result);
                 botResponse = 'Lo siento, no pude procesar la respuesta. Inténtalo de nuevo.';
@@ -133,5 +133,3 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
-
-
