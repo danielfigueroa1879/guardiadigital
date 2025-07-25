@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
         Aquí está la pregunta del usuario: "${userInput}"`;
 
         // Clave de API del ejemplo que funciona
-        const apiKey = "AIzaSyB2Gv6BvDX5UpWUMnIsx-CxyL5s8fWezyc";
+        const apiKey = "";
         const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
         try {
