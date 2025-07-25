@@ -6,8 +6,6 @@ const sendChatBtn = document.querySelector(".chat-input span");
 
 let userMessage = null; // Variable to store user's message
 const inputInitHeight = chatInput.scrollHeight;
-// This will store the actual user-bot conversation
-const chatHistory = []; 
 
 const createChatLi = (message, className) => {
     // Create a chat <li> element with passed message and className
@@ -20,34 +18,31 @@ const createChatLi = (message, className) => {
 }
 
 const generateResponse = async (chatElement) => {
-    // This function uses the Gemini API and maintains conversation history
+    // This function uses the simplified logic from the working chatbot
     const messageElement = chatElement.querySelector("p");
+    const thinkingElement = messageElement; // The element that shows "Pensando..."
 
-    // Add the user's current message to the persistent chat history
-    chatHistory.push({ role: "user", parts: [{ text: userMessage }] });
-
-    // Create a temporary conversation array for the API call.
-    // This array includes a system-like prompt at the beginning to provide context.
-    const apiConversation = [
-        {
-            role: "user",
-            parts: [{ text: "Eres un asistente virtual para GuardiaDigital, una empresa de ciberseguridad. Responde de manera profesional, amigable y concisa. Ayuda a los usuarios con sus consultas sobre ciberseguridad y los servicios de la empresa: Auditorías de Seguridad, Consultoría, Implementación de Controles y Monitoreo de Seguridad." }]
-        },
-        {
-            role: "model",
-            parts: [{ text: "Entendido. Estoy listo para ayudar como asistente virtual de GuardiaDigital." }]
-        },
-        // Now add the actual conversation history
-        ...chatHistory
-    ];
-
-    // Gemini API details. The API key is handled by the environment.
-    const apiKey = ""; 
-    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+    // **ADAPTED LOGIC:** Create a single, detailed prompt for each request.
+    const prompt = `Eres un asistente virtual para GuardiaDigital, una empresa de ciberseguridad. Responde de manera profesional, amigable y concisa. Ayuda a los usuarios con sus consultas sobre ciberseguridad y los servicios de la empresa, que son:
+    1.  **Auditorías de Seguridad**: Evaluación completa de infraestructura digital.
+    2.  **Consultoría**: Asesoramiento experto y personalizado.
+    3.  **Implementación de Controles**: Configuración de firewalls, sistemas de detección, etc.
+    4.  **Monitoreo de Seguridad**: Supervisión 24/7 para detectar y responder a amenazas.
     
-    // Construct the payload with the full conversation including the context prompt
+    Sé amable y profesional. Si no sabes la respuesta, di que consultarás con un especialista. No inventes información. Responde siempre en español.
+    
+    Aquí está la pregunta del usuario: "${userMessage}"`;
+
+    // Use the API Key from the working example, as requested.
+    const apiKey = "AIzaSyB2Gv6BvDX5UpWUMnIsx-CxyL5s8fWezyc";
+    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
     const payload = {
-        contents: apiConversation
+        contents: [{
+            parts: [{
+                text: prompt
+            }]
+        }]
     };
 
     const requestOptions = {
@@ -55,40 +50,36 @@ const generateResponse = async (chatElement) => {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(payload),
-        // **FINAL FIX ATTEMPT:** Add a referrer policy to prevent the browser
-        // from sending the 'Referer' header, which might be causing the 403 error.
-        referrerPolicy: "no-referrer"
+        body: JSON.stringify(payload)
     };
 
     try {
         const response = await fetch(apiUrl, requestOptions);
         if (!response.ok) {
-            // If the response is not OK, try to get more details from the body
-            const errorBody = await response.json().catch(() => null);
+             const errorBody = await response.json().catch(() => null);
             let errorDetail = `Error HTTP: ${response.status}`;
             if (errorBody && errorBody.error && errorBody.error.message) {
                 errorDetail = errorBody.error.message;
             }
             throw new Error(errorDetail);
         }
+
         const result = await response.json();
-        
-        if (result.candidates && result.candidates.length > 0 && result.candidates[0].content.parts[0].text) {
-            const botResponse = result.candidates[0].content.parts[0].text.trim();
-            messageElement.textContent = botResponse;
-            // Add the bot's actual response to the persistent chat history
-            chatHistory.push({ role: "model", parts: [{ text: botResponse }] });
+        let botResponse;
+
+        if (result.candidates && result.candidates[0] && result.candidates[0].content && result.candidates[0].content.parts && result.candidates[0].content.parts[0]) {
+            botResponse = result.candidates[0].content.parts[0].text.trim();
         } else {
-            throw new Error("Respuesta de API no válida o vacía.");
+            console.error("Respuesta de la API inesperada:", result);
+            botResponse = 'Lo siento, no pude procesar la respuesta en este momento. Por favor, inténtalo de nuevo.';
         }
+        
+        thinkingElement.textContent = botResponse;
+
     } catch (error) {
         console.error("Error al conectar con el asistente:", error);
-        messageElement.classList.add("error");
-        // Display a more detailed error message to the user
-        messageElement.textContent = `Hubo un problema al conectar con el asistente. Detalle: ${error.message}. Por favor, intenta de nuevo más tarde.`;
-        // On failure, remove the last user message from history to allow a retry
-        chatHistory.pop();
+        thinkingElement.classList.add("error");
+        thinkingElement.textContent = `Hubo un problema al conectar con el asistente. Detalle: ${error.message}. Por favor, intenta de nuevo más tarde.`;
     } finally {
         chatbox.scrollTo(0, chatbox.scrollHeight);
     }
@@ -133,3 +124,4 @@ chatInput.addEventListener("keydown", (e) => {
 sendChatBtn.addEventListener("click", handleChat);
 closeBtn.addEventListener("click", () => document.body.classList.remove("show-chatbot"));
 chatbotToggler.addEventListener("click", () => document.body.classList.add("show-chatbot"));
+
