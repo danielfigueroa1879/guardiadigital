@@ -310,7 +310,7 @@
                 });
             }
 
-            // --- Lógica del Chatbot CORREGIDA ---
+            // --- CHATBOT CON SISTEMA DE RESPALDO ---
             const chatToggleButton = document.getElementById('chat-toggle-button');
             const chatbotContainer = document.getElementById('chatbot-container');
             const closeChatBtn = document.getElementById('close-chat-btn');
@@ -318,6 +318,32 @@
             const chatbotInput = document.getElementById('chatbot-input');
             const chatbotMessages = document.getElementById('chatbot-messages');
             const loadingIndicator = document.getElementById('chatbot-loading');
+
+            // Configuración de APIs con respaldo
+            const API_CONFIGS = [
+                {
+                    name: "Gemini 2.0 Flash",
+                    key: "AIzaSyB2Gv6BvDX5UpWUMnIsx-CxyL5s8fWezyc",
+                    url: "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent",
+                    timeout: 10000
+                },
+                {
+                    name: "Gemini 1.5 Flash (respaldo)",
+                    key: "AIzaSyB2Gv6BvDX5UpWUMnIsx-CxyL5s8fWezyc",
+                    url: "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent",
+                    timeout: 15000
+                }
+            ];
+
+            // Respuestas predeterminadas como respaldo final
+            const FALLBACK_RESPONSES = {
+                saludo: "¡Hola! Soy el Cyber Asistente de Guardia Digital. Aunque tengo algunos problemas técnicos, puedo ayudarte con información básica sobre nuestros servicios de ciberseguridad.",
+                servicios: "Ofrecemos: 1) Revisión Completa de Seguridad, 2) Vigilancia 24/7, 3) Cumplimiento Legal Simplificado, y 4) Capacitación para tu Equipo. ¿Te interesa alguno en particular?",
+                contacto: "Puedes contactarnos en: contacto@guardiadigital.cl o llamar al +56 9 59978963. También puedes completar el formulario en esta página.",
+                phishing: "El phishing son ataques que usan correos falsos para robar información. Siempre verifica el remitente antes de hacer clic en enlaces.",
+                malware: "El malware es software malicioso. Mantén tu antivirus actualizado y no descargues archivos de fuentes no confiables.",
+                default: "Disculpa, tengo problemas técnicos temporales. Para ayuda inmediata, contacta a nuestro equipo en contacto@guardiadigital.cl o +56 9 59978963."
+            };
 
             if (chatToggleButton && chatbotContainer && closeChatBtn) {
                 chatToggleButton.addEventListener('click', () => chatbotContainer.classList.toggle('active'));
@@ -336,53 +362,101 @@
                 chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
             };
 
+            // Función para detectar tipo de pregunta
+            const detectQuestionType = (input) => {
+                const lowInput = input.toLowerCase();
+                if (lowInput.includes('hola') || lowInput.includes('buenas')) return 'saludo';
+                if (lowInput.includes('servicio') || lowInput.includes('ofrecen')) return 'servicios';
+                if (lowInput.includes('contacto') || lowInput.includes('teléfono') || lowInput.includes('email')) return 'contacto';
+                if (lowInput.includes('phishing') || lowInput.includes('fishing')) return 'phishing';
+                if (lowInput.includes('malware') || lowInput.includes('virus')) return 'malware';
+                return 'default';
+            };
+
+            // Función de respaldo con respuestas predeterminadas
+            const getFallbackResponse = (userInput) => {
+                const questionType = detectQuestionType(userInput);
+                return FALLBACK_RESPONSES[questionType] || FALLBACK_RESPONSES.default;
+            };
+
+            // Función principal para obtener respuesta con múltiples intentos
             const getAIResponse = async (userInput) => {
                 loadingIndicator.style.display = 'block';
                 
-                const prompt = `Eres un asistente virtual para GUARDIA DIGITAL, una empresa chilena de ciberseguridad. Tu nombre es 'Cyber Asistente'. Responde a las preguntas de los usuarios sobre nuestros servicios, que incluyen:
-                1. **Revisión Completa de Seguridad**: Analizamos todos los puntos donde tu empresa podría estar en riesgo y te explicamos de manera simple qué necesitas proteger.
-                2. **Vigilancia 24/7 - Tu Guardia Digital**: Cuidamos tu empresa las 24 horas del día, todos los días del año. Si algo extraño sucede, actuamos inmediatamente.
-                3. **Cumplimiento Legal Simplificado**: Te ayudamos a cumplir con todas las normas y regulaciones de seguridad sin que tengas que convertirte en un experto legal.
-                4. **Capacitación Práctica para tu Equipo**: Enseñamos a tu equipo cómo mantenerse seguro en el día a día, con consejos prácticos y fáciles de aplicar.
-                
-                Nuestra misión es proteger el presente y el futuro digital de las empresas en Chile, entregando soluciones de ciberseguridad robustas y fáciles de entender.
-                Nuestra visión es ser líderes en soluciones tecnológicas de seguridad digital, destacándonos por nuestra innovación y profesionalismo.
-                
-                También puedes ayudar con temas generales de ciberseguridad como phishing, malware, contraseñas seguras, etc.
-                
-                Sé amable, profesional y conciso. Si no sabes la respuesta, di que consultarás con un especialista. No inventes información. Responde en español.
-                
-                Aquí está la pregunta del usuario: "${userInput}"`;
+                const prompt = `Eres un asistente virtual para GUARDIA DIGITAL, una empresa chilena de ciberseguridad. Tu nombre es 'Cyber Asistente'. 
 
-                // ✅ API KEY CORREGIDA - ESTA ES LA LÍNEA QUE ESTABA CAUSANDO EL ERROR
-                const apiKey = "AIzaSyB31abbgN6FrtXQJj8CN0ma-xQ43DkQkhc";
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-                const payload = { contents: [{ parts: [{ text: prompt }] }] };
+Servicios que ofrecemos:
+1. **Revisión Completa de Seguridad**: Analizamos riesgos y vulnerabilidades
+2. **Vigilancia 24/7**: Monitoreo continuo de tu empresa
+3. **Cumplimiento Legal Simplificado**: Ayuda con normas y regulaciones
+4. **Capacitación Práctica**: Entrenamiento para tu equipo
 
-                try {
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
+Misión: Proteger el ecosistema digital de empresas chilenas con soluciones comprensibles.
+Visión: Ser líderes en seguridad digital con innovación y profesionalismo.
 
-                    if (!response.ok) {
-                        const errorData = await response.json();
-                        throw new Error(`Error ${response.status}: ${errorData.error?.message || 'Error desconocido'}`);
+Contacto: contacto@guardiadigital.cl | +56 9 59978963 | Santiago, Chile
+
+Responde de forma amable, profesional y concisa en español. Si no sabes algo específico, ofrece contactar con un especialista.
+
+Pregunta: "${userInput}"`;
+
+                // Intentar con cada configuración de API
+                for (let i = 0; i < API_CONFIGS.length; i++) {
+                    const config = API_CONFIGS[i];
+                    
+                    try {
+                        console.log(`🔄 Intentando con ${config.name}...`);
+                        
+                        const controller = new AbortController();
+                        const timeoutId = setTimeout(() => controller.abort(), config.timeout);
+                        
+                        const response = await fetch(`${config.url}?key=${config.key}`, {
+                            method: 'POST',
+                            headers: { 
+                                'Content-Type': 'application/json',
+                                'User-Agent': 'GuardiaDigital-Chatbot/1.0'
+                            },
+                            body: JSON.stringify({
+                                contents: [{ parts: [{ text: prompt }] }],
+                                generationConfig: {
+                                    temperature: 0.7,
+                                    maxOutputTokens: 500
+                                }
+                            }),
+                            signal: controller.signal
+                        });
+
+                        clearTimeout(timeoutId);
+
+                        if (response.ok) {
+                            const result = await response.json();
+                            const botResponse = result.candidates?.[0]?.content?.parts?.[0]?.text;
+                            
+                            if (botResponse && botResponse.trim()) {
+                                console.log(`✅ Éxito con ${config.name}`);
+                                addMessage('bot', botResponse.trim());
+                                return;
+                            }
+                        } else {
+                            const errorData = await response.json();
+                            console.log(`❌ Error ${response.status} con ${config.name}:`, errorData.error?.message);
+                        }
+                        
+                    } catch (error) {
+                        console.log(`❌ Fallo con ${config.name}:`, error.message);
+                        // Continúa con la siguiente configuración
                     }
-
-                    const result = await response.json();
-                    const botResponse = result.candidates?.[0]?.content?.parts?.[0]?.text || "Lo siento, no pude procesar la respuesta en este momento.";
-                    addMessage('bot', botResponse);
-
-                } catch (error) {
-                    console.error('Error al contactar la IA:', error);
-                    addMessage('bot', `Hubo un problema al conectar con el asistente: ${error.message}. Por favor, intenta de nuevo más tarde.`);
-                } finally {
-                    loadingIndicator.style.display = 'none';
                 }
+
+                // Si todas las APIs fallan, usar respuesta predeterminada
+                console.log('🔄 Usando respuesta de respaldo...');
+                const fallbackResponse = getFallbackResponse(userInput);
+                addMessage('bot', fallbackResponse);
+                
+                loadingIndicator.style.display = 'none';
             };
 
+            // Manejo del formulario del chatbot
             if (chatbotForm) {
                 chatbotForm.addEventListener('submit', (e) => {
                     e.preventDefault();
@@ -395,23 +469,30 @@
                 });
             }
 
-            // Mostrar mensaje de bienvenida cuando se abre el chatbot
+            // Mensaje de bienvenida al abrir el chatbot
             let welcomeShown = false;
             chatToggleButton.addEventListener('click', () => {
                 if (!welcomeShown && chatbotContainer.classList.contains('active')) {
                     setTimeout(() => {
-                        addMessage('bot', '¡Hola! Soy el Cyber Asistente de Guardia Digital. ¿En qué puedo ayudarte hoy? Puedes preguntarme sobre nuestros servicios o temas de ciberseguridad.');
+                        addMessage('bot', '¡Hola! Soy el Cyber Asistente de Guardia Digital. ¿En qué puedo ayudarte hoy? Puedes preguntarme sobre nuestros servicios de ciberseguridad, consejos de seguridad, o información de contacto.');
                         welcomeShown = true;
                     }, 500);
                 }
             });
+
+            // Diagnóstico automático al cargar la página
+            console.log('🔧 DIAGNÓSTICO DEL CHATBOT:');
+            console.log('📅 Fecha:', new Date().toISOString());
+            console.log('🌐 URL actual:', window.location.href);
+            console.log('🔑 APIs configuradas:', API_CONFIGS.length);
+            console.log('💾 Respuestas de respaldo:', Object.keys(FALLBACK_RESPONSES).length);
+            console.log('✅ Sistema iniciado correctamente');
         });
     </script>
     
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
     <script src="firebase-counter.js"></script>
-    <!-- NUEVO: Script PWA -->
     <script src="pwa-install.js"></script>
 
 </body>
