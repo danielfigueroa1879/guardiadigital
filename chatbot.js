@@ -6,6 +6,7 @@ const sendChatBtn = document.querySelector(".chat-input span");
 
 let userMessage = null; // Variable to store user's message
 const inputInitHeight = chatInput.scrollHeight;
+const chatHistory = []; // Array to store conversation history
 
 const createChatLi = (message, className) => {
     // Create a chat <li> element with passed message and className
@@ -18,18 +19,25 @@ const createChatLi = (message, className) => {
 }
 
 const generateResponse = async (chatElement) => {
-    // This function now uses the Gemini API
+    // This function uses the Gemini API and maintains conversation history
     const messageElement = chatElement.querySelector("p");
+
+    // Add the user's message to the history
+    chatHistory.push({ role: "user", parts: [{ text: userMessage }] });
+
+    // System instruction to give the chatbot context about its role
+    const systemInstruction = {
+        parts: [{ text: "Eres un asistente virtual para GuardiaDigital, una empresa de ciberseguridad. Responde de manera profesional, amigable y concisa. Ayuda a los usuarios con sus consultas sobre ciberseguridad y los servicios de la empresa: Auditorías de Seguridad, Consultoría, Implementación de Controles y Monitoreo de Seguridad." }]
+    };
 
     // Gemini API details. The API key is handled by the environment.
     const apiKey = ""; 
     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
     
+    // **FIX:** Construct the payload with the 'system_instruction' field separate from 'contents'.
     const payload = {
-        contents: [{
-            role: "user",
-            parts: [{ text: userMessage }]
-        }]
+        contents: chatHistory,
+        system_instruction: systemInstruction
     };
 
     const requestOptions = {
@@ -40,19 +48,24 @@ const generateResponse = async (chatElement) => {
         body: JSON.stringify(payload)
     };
 
-    // Send POST request to the Gemini API and handle the response
     try {
         const response = await fetch(apiUrl, requestOptions);
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            // If the response is not OK, try to get more details from the body
+            const errorBody = await response.json().catch(() => null);
+            let errorDetail = `Error HTTP: ${response.status}`;
+            if (errorBody && errorBody.error && errorBody.error.message) {
+                errorDetail = errorBody.error.message;
+            }
+            throw new Error(errorDetail);
         }
         const result = await response.json();
         
-        if (result.candidates && result.candidates.length > 0 &&
-            result.candidates[0].content && result.candidates[0].content.parts &&
-            result.candidates[0].content.parts.length > 0) {
-            const text = result.candidates[0].content.parts[0].text;
-            messageElement.textContent = text.trim();
+        if (result.candidates && result.candidates.length > 0 && result.candidates[0].content.parts[0].text) {
+            const botResponse = result.candidates[0].content.parts[0].text.trim();
+            messageElement.textContent = botResponse;
+            // Add the bot's response to the history
+            chatHistory.push({ role: "model", parts: [{ text: botResponse }] });
         } else {
             // Handle cases where the response structure is unexpected
             throw new Error("Respuesta de API no válida o vacía.");
@@ -60,7 +73,10 @@ const generateResponse = async (chatElement) => {
     } catch (error) {
         console.error("Error al conectar con el asistente:", error);
         messageElement.classList.add("error");
-        messageElement.textContent = "Hubo un problema al conectar con el asistente. Por favor, intenta de nuevo más tarde.";
+        // Display a more detailed error message to the user
+        messageElement.textContent = `Hubo un problema al conectar con el asistente. Detalle: ${error.message}. Por favor, intenta de nuevo más tarde.`;
+        // On failure, remove the last user message from history to allow a retry
+        chatHistory.pop();
     } finally {
         chatbox.scrollTo(0, chatbox.scrollHeight);
     }
