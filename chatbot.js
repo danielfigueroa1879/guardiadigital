@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // **SOLUCIÓN DEFINITIVA:** Se elimina la clave de API hardcodeada.
         // El entorno gestionará la autenticación de forma segura.
-        const apiKey = ""; 
+        const apiKey = "AIzaSyB2Gv6BvDX5UpWUMnIsx-CxyL5s8fWezyc"; 
         const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
         const payload = {
