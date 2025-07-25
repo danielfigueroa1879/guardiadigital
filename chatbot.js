@@ -1,136 +1,107 @@
-// Espera a que el DOM esté completamente cargado antes de ejecutar el script
-document.addEventListener('DOMContentLoaded', () => {
+const chatbotToggler = document.querySelector(".chatbot-toggler");
+const closeBtn = document.querySelector(".close-btn");
+const chatbox = document.querySelector(".chatbox");
+const chatInput = document.querySelector(".chat-input textarea");
+const sendChatBtn = document.querySelector(".chat-input span");
 
-    console.log("Chatbot script loaded and DOM is ready.");
+let userMessage = null; // Variable to store user's message
+const inputInitHeight = chatInput.scrollHeight;
 
-    // Obtener referencias a todos los elementos HTML necesarios
-    const chatToggleButton = document.getElementById('chat-toggle-button');
-    const chatbotContainer = document.getElementById('chatbot-container');
-    const closeChatBtn = document.getElementById('close-chat-btn');
-    const chatbotForm = document.getElementById('chatbot-form');
-    const chatbotInput = document.getElementById('chatbot-input');
-    const chatbotMessages = document.getElementById('chatbot-messages');
-    const loadingIndicator = document.getElementById('chatbot-loading');
+const createChatLi = (message, className) => {
+    // Create a chat <li> element with passed message and className
+    const chatLi = document.createElement("li");
+    chatLi.classList.add("chat", `${className}`);
+    let chatContent = className === "outgoing" ? `<p></p>` : `<span class="material-symbols-outlined">smart_toy</span><p></p>`;
+    chatLi.innerHTML = chatContent;
+    chatLi.querySelector("p").textContent = message;
+    return chatLi; // return chat <li> element
+}
 
-    // Verificar si todos los elementos del chatbot existen
-    if (!chatToggleButton || !chatbotContainer || !closeChatBtn || !chatbotForm || !chatbotInput || !chatbotMessages || !loadingIndicator) {
-        console.error("Error: No se encontraron uno o más elementos del chatbot en el DOM. Verifica los IDs en tu HTML.");
-        return; // Detener la ejecución si falta un elemento crucial
-    }
+const generateResponse = async (chatElement) => {
+    // This function now uses the Gemini API
+    const messageElement = chatElement.querySelector("p");
 
-    // --- Event Listeners ---
+    // Gemini API details. The API key is handled by the environment.
+    const apiKey = ""; 
+    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+    
+    const payload = {
+        contents: [{
+            role: "user",
+            parts: [{ text: userMessage }]
+        }]
+    };
 
-    // Alternar la visibilidad del chatbot al hacer clic en el botón flotante
-    chatToggleButton.addEventListener('click', () => {
-        chatbotContainer.classList.toggle('active');
-    });
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    };
 
-    // Cerrar el chatbot al hacer clic en el botón de cerrar
-    closeChatBtn.addEventListener('click', () => {
-        chatbotContainer.classList.remove('active');
-    });
-
-    // Manejar el envío del formulario para enviar un mensaje
-    chatbotForm.addEventListener('submit', (e) => {
-        e.preventDefault(); // Prevenir que el formulario recargue la página
-        const userInput = chatbotInput.value.trim(); // Obtener la entrada del usuario y eliminar espacios en blanco
-
-        if (userInput) {
-            // Si hay entrada, agregar el mensaje del usuario al chat y obtener una respuesta de la IA
-            addMessage(userInput, 'user');
-            chatbotInput.value = ''; // Limpiar el campo de entrada
-            getAIResponse(userInput); // Llamar a la función que usa la API
+    // Send POST request to the Gemini API and handle the response
+    try {
+        const response = await fetch(apiUrl, requestOptions);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
-    });
-
-    // --- Funciones Principales ---
-
-    /**
-     * Agrega un mensaje a la ventana del chat.
-     * @param {string} text - El texto del mensaje.
-     * @param {string} sender - El remitente del mensaje ('user' o 'bot').
-     */
-    function addMessage(text, sender) {
-        const messageElement = document.createElement('div');
-        messageElement.classList.add('message', `${sender}-message`);
-        const p = document.createElement('p');
-        p.textContent = text;
-        messageElement.appendChild(p);
-        chatbotMessages.appendChild(messageElement);
-        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-    }
-
-    /**
-     * Obtiene una respuesta de la IA de Gemini usando la clave de API proporcionada.
-     * @param {string} userInput - El texto de entrada del usuario.
-     */
-    async function getAIResponse(userInput) {
-        loadingIndicator.style.display = 'flex';
-        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-
-        // Contexto e instrucción para el modelo de IA
-        const prompt = `Eres un asistente virtual para RECYBERSEG, una empresa chilena de ciberseguridad. Tu nombre es 'Cyber Asistente'. Responde a las preguntas de los usuarios sobre nuestros servicios, que incluyen:
-        1.  **Auditorías de Seguridad**: Evaluación completa de infraestructura digital.
-        2.  **Monitoreo de Redes**: Supervisión 24/7.
-        3.  **Consultoría en Ciberseguridad**: Asesoramiento experto y personalizado.
-        4.  **Implementación de Sistemas de Seguridad**: Configuración de firewalls, etc.
-        5.  **Seguridad IoT**: Protección de dispositivos inteligentes.
+        const result = await response.json();
         
-        Nuestra misión es proteger el ecosistema digital de nuestros clientes con soluciones innovadoras.
-        Nuestra visión es ser líderes en soluciones tecnológicas de seguridad digital.
-        
-        Sé amable, profesional y conciso. Si no sabes la respuesta, di que consultarás con un especialista. No inventes información. Responde en español.
-        
-        Aquí está la pregunta del usuario: "${userInput}"`;
-
-        // Clave de API proporcionada por el usuario
-        const apiKey = "AIzaSyDwJx2U16H39dxdCN9SXkn-_AWyydTAx7U";
-        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-
-        try {
-            // Preparar el payload para la API de Gemini
-            const payload = {
-                contents: [{
-                    parts: [{
-                        text: prompt
-                    }]
-                }]
-            };
-
-            // Realizar la llamada a la API
-            const response = await fetch(apiUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(payload)
-            });
-
-            if (!response.ok) {
-                throw new Error(`Error en la API: ${response.status} ${response.statusText}`);
-            }
-
-            const result = await response.json();
-            
-            // Extraer el texto de la respuesta de la API de forma segura
-            let botResponse;
-            if (result.candidates && result.candidates[0] && result.candidates[0].content && result.candidates[0].content.parts && result.candidates[0].content.parts[0]) {
-                botResponse = result.candidates[0].content.parts[0].text;
-            } else {
-                console.error("Respuesta de la API inesperada:", result);
-                botResponse = 'Lo siento, no pude procesar la respuesta. Inténtalo de nuevo.';
-            }
-            
-            // Agregar la respuesta del bot al chat
-            addMessage(botResponse, 'bot');
-
-        } catch (error) {
-            console.error('Error al contactar la IA:', error);
-            addMessage(`Hubo un problema al conectar con el asistente. Por favor, intenta de nuevo más tarde. (Error: ${error.message})`, 'bot');
-        } finally {
-            // Ocultar el indicador de carga
-            loadingIndicator.style.display = 'none';
+        if (result.candidates && result.candidates.length > 0 &&
+            result.candidates[0].content && result.candidates[0].content.parts &&
+            result.candidates[0].content.parts.length > 0) {
+            const text = result.candidates[0].content.parts[0].text;
+            messageElement.textContent = text.trim();
+        } else {
+            // Handle cases where the response structure is unexpected
+            throw new Error("Respuesta de API no válida o vacía.");
         }
+    } catch (error) {
+        console.error("Error al conectar con el asistente:", error);
+        messageElement.classList.add("error");
+        messageElement.textContent = "Hubo un problema al conectar con el asistente. Por favor, intenta de nuevo más tarde.";
+    } finally {
+        chatbox.scrollTo(0, chatbox.scrollHeight);
+    }
+}
+
+const handleChat = () => {
+    userMessage = chatInput.value.trim(); // Get user entered message and remove extra whitespace
+    if(!userMessage) return;
+
+    // Clear the input textarea and set its height to default
+    chatInput.value = "";
+    chatInput.style.height = `${inputInitHeight}px`;
+
+    // Append the user's message to the chatbox
+    chatbox.appendChild(createChatLi(userMessage, "outgoing"));
+    chatbox.scrollTo(0, chatbox.scrollHeight);
+    
+    setTimeout(() => {
+        // Display "Thinking..." message while waiting for the response
+        const incomingChatLi = createChatLi("Pensando...", "incoming");
+        chatbox.appendChild(incomingChatLi);
+        chatbox.scrollTo(0, chatbox.scrollHeight);
+        generateResponse(incomingChatLi);
+    }, 600);
+}
+
+chatInput.addEventListener("input", () => {
+    // Adjust the height of the input textarea based on its content
+    chatInput.style.height = `${inputInitHeight}px`;
+    chatInput.style.height = `${chatInput.scrollHeight}px`;
+});
+
+chatInput.addEventListener("keydown", (e) => {
+    // If Enter key is pressed without Shift key and the window 
+    // width is greater than 800px, handle the chat
+    if(e.key === "Enter" && !e.shiftKey && window.innerWidth > 800) {
+        e.preventDefault();
+        handleChat();
     }
 });
 
+sendChatBtn.addEventListener("click", handleChat);
+closeBtn.addEventListener("click", () => document.body.classList.remove("show-chatbot"));
+chatbotToggler.addEventListener("click", () => document.body.classList.add("show-chatbot"));
