@@ -26,18 +26,28 @@ const generateResponse = async (chatElement) => {
     // Add the user's current message to the persistent chat history
     chatHistory.push({ role: "user", parts: [{ text: userMessage }] });
 
-    // --- DIAGNOSTIC STRATEGY ---
-    // We are sending ONLY the raw conversation history.
-    // This is the most basic request possible to see if the connection itself is the problem.
-    // We have temporarily removed the chatbot's persona instructions for this test.
+    // Create a temporary conversation array for the API call.
+    // This array includes a system-like prompt at the beginning to provide context.
+    const apiConversation = [
+        {
+            role: "user",
+            parts: [{ text: "Eres un asistente virtual para GuardiaDigital, una empresa de ciberseguridad. Responde de manera profesional, amigable y concisa. Ayuda a los usuarios con sus consultas sobre ciberseguridad y los servicios de la empresa: Auditorías de Seguridad, Consultoría, Implementación de Controles y Monitoreo de Seguridad." }]
+        },
+        {
+            role: "model",
+            parts: [{ text: "Entendido. Estoy listo para ayudar como asistente virtual de GuardiaDigital." }]
+        },
+        // Now add the actual conversation history
+        ...chatHistory
+    ];
 
     // Gemini API details. The API key is handled by the environment.
     const apiKey = ""; 
     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
     
-    // Construct the simplest possible payload
+    // Construct the payload with the full conversation including the context prompt
     const payload = {
-        contents: chatHistory
+        contents: apiConversation
     };
 
     const requestOptions = {
@@ -45,7 +55,10 @@ const generateResponse = async (chatElement) => {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
+        // **FINAL FIX ATTEMPT:** Add a referrer policy to prevent the browser
+        // from sending the 'Referer' header, which might be causing the 403 error.
+        referrerPolicy: "no-referrer"
     };
 
     try {
