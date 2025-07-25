@@ -1,5 +1,5 @@
 // Espera a que el DOM esté completamente cargado antes de ejecutar el script
-document.addEventListener('DOMContentLoaded', () => {
+//document.addEventListener('DOMContentLoaded', () => {
 
     console.log("Chatbot script loaded and DOM is ready.");
 
