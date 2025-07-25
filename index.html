@@ -3,211 +3,389 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guardia Digital</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <title>Recyberseg - Líderes en Ciberseguridad con IA Avanzada</title>
+    <meta name="description" content="Servicios profesionales de ciberseguridad, auditorías de seguridad, monitoreo de redes y consultoría especializada. Protegemos tu infraestructura digital.">
+    <meta name="keywords" content="ciberseguridad, seguridad informatica, auditoria seguridad, monitoreo redes, IoT security">
+    
+    <!-- Preconnect para recursos externos críticos -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
-    <!-- ICONOS Y FAVICONS -->
-    <link rel="icon" type="image/png" href="fotos/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="fotos/favicon.svg" />
-    <link rel="shortcut icon" href="fotos/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="fotos/apple-touch-icon.png" />
-    <meta name="apple-mobile-web-app-title" content="Guardia Digital" />
-    <link rel="manifest" href="site.webmanifest" />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
     
-    <!-- META TAGS PWA para móviles -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <meta name="theme-color" content="#0071e3">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Guardia Digital">
-    <meta name="application-name" content="Guardia Digital">
-    <meta name="msapplication-TileColor" content="#0071e3">
-    <meta name="msapplication-TileImage" content="fotos/apple-touch-icon.png">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="HandheldFriendly" content="true">
-    <meta name="MobileOptimized" content="320">
+    <!-- DNS Prefetch para Firebase -->
+    <link rel="dns-prefetch" href="//recyberseg-default-rtdb.firebaseio.com">
+    <link rel="dns-prefetch" href="//wa.me">
     
-    <!-- SEO y DESCRIPCIÓN -->
-    <meta name="description" content="Tu aliado confiable en ciberseguridad empresarial. Protección 24/7, auditorías de seguridad y consultoría especializada.">
-    <meta name="keywords" content="ciberseguridad, seguridad informática, protección empresarial, auditorías de seguridad, Chile">
-    <meta name="author" content="Guardia Digital">
+    <!-- Preload recursos críticos -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;700&display=swap" as="style">
     
-    <!-- ESTILOS Y FUENTES (mantener lo existente) -->
+    <!-- CSS con optimización de carga -->
     <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;700&display=swap" rel="stylesheet"></noscript>
+    
+    <!-- Font Awesome con loading optimizado -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></noscript>
+    <style>
+        /* Critical CSS inlined para renderizado inmediato */
+        
+        /* Optimizaciones de rendimiento globales */
+        * {
+            box-sizing: border-box;
+        }
+        
+        /* Aseguramos que el scroll sea manejado por el elemento HTML */
+        html {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            overflow-x: hidden; /* Previene scroll horizontal */
+            overflow-y: auto;   /* Permite scroll vertical */
+        }
+        
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            background-color: #0f0f0f;
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden; /* Previene scroll horizontal en body */
+            overflow-y: visible; /* Permite que el contenido del body se desborde y el scroll lo maneje HTML */
+            margin: 0;
+            padding: 0;
+            /* SE ELIMINAN LAS PROPIEDADES 'transform' y 'backface-visibility' DE AQUÍ */
+            /* Estas propiedades causaban que position: fixed no funcionara correctamente */
+        }
+        
+        /* Optimizaciones para el contador de visitas */
+        .visitor-counter-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #E0FD2C;
+            font-size: 16px;
+            font-weight: 600;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 8px 15px;
+            border-radius: 25px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            /* GPU acceleration - estas son seguras si no están en un ancestro */
+            will-change: transform, background-color;
+            transform: translateZ(0);
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
 
+        .visitor-counter-container:hover {
+            background-color: rgba(224, 253, 44, 0.2);
+            transform: scale(1.05) translateZ(0);
+        }
+
+        .visitor-counter-container .fa-eye {
+            font-size: 18px;
+        }
+
+        /* Optimizaciones para móviles */
+        @media screen and (max-width: 992px) {
+            .visitor-counter-container {
+                position: absolute; 
+                top: 24px;
+                left: 20px;
+                z-index: 1001;
+                font-size: 12px;
+                padding: 6px 10px;
+                gap: 5px;
+                background-color: transparent;
+                color: #ffffff;
+                box-shadow: none;
+                text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+                border: none;
+                /* Optimización táctil */
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                user-select: none;
+            }
+
+            .visitor-counter-container .fa-eye {
+                font-size: 14px;
+            }
+
+            .nav-logo {
+                padding-left: 80px; 
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .nav-logo {
+                padding-left: 50px; 
+            }
+        }
+        
+        /* Header optimizado */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(40, 40, 40, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            /* GPU acceleration */
+            will-change: transform, opacity;
+            transform: translateZ(0); /* Este transform en el header es seguro y común */
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+        
+        /* Hero section optimizada */
+        .hero {
+            padding: 140px 20px 80px;
+            text-align: center;
+            background: linear-gradient(rgba(26, 26, 26, 0.7), rgba(42, 42, 42, 0.7)), url('fotos/fondo.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            /* GPU acceleration */
+            will-change: transform;
+            transform: translateZ(0); /* Este transform en el hero es seguro y común */
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+        
+        /* Optimización para dispositivos móviles */
+        @media screen and (max-width: 768px) {
+            .hero {
+                background-attachment: scroll; /* Mejor rendimiento en móviles */
+                min-height: 70vh;
+                padding: 100px 15px 60px;
+            }
+            
+            body {
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+        
+        /* Preload de imágenes críticas */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('fotos/fondo.png');
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            z-index: -1;
+            /* Preload hidden */
+        }
+    </style>
 </head>
 <body>
-    <header class="header" id="header">
-        <nav class="navbar container">
+    <header class="header">
+        <nav class="navbar">
             <div class="nav-container">
                 <div class="nav-logo">
-                    <img src="fotos/logo.png" alt="Guardia Digital Logo">
-                    <h2>GUARDIA DIGITAL</h2>
+                    <h2>RECYBERSEG</h2>
+                </div>
+                
+                <div class="nav-toggle" id="mobile-menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
                 </div>
                 
                 <ul class="nav-menu" id="nav-menu">
-                    <li class="nav-item"><a href="#inicio" class="nav-link">Inicio</a></li>
-                    <li class="nav-item"><a href="#servicios" class="nav-link">Servicios</a></li>
-                    <li class="nav-item"><a href="#mision" class="nav-link">Misión</a></li>
-                    <li class="nav-item"><a href="#contacto" class="nav-link">Contacto</a></li>
+                    <li class="nav-item">
+                        <a href="#inicio" class="nav-link">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#servicios" class="nav-link">Servicios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contacto" class="nav-link">Contacto</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contacto" class="nav-link">Suscripción</a>
+                    </li>
                 </ul>
                 
-                <div class="visitor-counter-container">
-                     <i class="fas fa-eye"></i>
-                     <span id="visitor-count">0</span>
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Buscar...">
+                    <button class="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
                 </div>
 
-                <button class="nav-toggle" id="mobile-menu" aria-label="Abrir menú">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </button>
+                <!-- Contador de Visitas -->
+                <div class="visitor-counter-container">
+                     <i class="fas fa-eye"></i>
+                     <span id="visitor-count"></span>
+                </div>
+
             </div>
         </nav>
     </header>
 
     <section id="inicio" class="hero">
-        <div class="hero-content container">
+        <div class="hero-content">
             <h1 class="hero-title">
-                TU ALIADO CONFIABLE EN<br>
-                CIBERSEGURIDAD EMPRESARIAL
+                LÍDERES EN CIBERSEGURIDAD CON IA<br>
+                AVANZADA Y DISEÑO WEB.
             </h1>
             <p class="hero-description">
-                En un mundo digital cada vez más complejo, sabemos que lo que realmente importa para tu empresa 
-                es tener la tranquilidad de que tus datos y sistemas están protegidos. En Guardia Digital, 
-                convertimos la ciberseguridad en algo simple y comprensible.
+                En un mundo cada vez más conectado, garantizar la seguridad digital y tecnológica es crucial. 
+                Nuestro conjunto integral de servicios, que abarca desde auditorías de seguridad y monitoreo 
+                de redes hasta consultoría especializada en ciberseguridad, está diseñado para proteger tus 
+                activos más valiosos. Con experiencia en ingeniería informática y soluciones innovadoras en 
+                IoT e inteligencia artificial, ofrecemos herramientas y estrategias personalizadas que 
+                fortalecen la protección de tu infraestructura digital, reducen riesgos y aseguran el 
+                cumplimiento de los estándares más exigentes. Tu seguridad es nuestra prioridad.
             </p>
         </div>
     </section>
 
-    <section id="servicios" class="main-services">
+    <section class="main-services">
         <div class="container">
-            <h2>Protección Simple y Confiable</h2>
-            <p>Te ayudamos a proteger tu empresa sin complicaciones. Hablamos en términos claros para que entiendas exactamente cómo mantenemos tu negocio seguro.</p>
+            <h2>Soluciones de Seguridad</h2>
+            <p>Implementamos estrategias robustas para mitigar riesgos cibernéticos, protegiendo datos y redes contra amenazas avanzadas.</p>
             
             <div class="services-grid">
-                <div class="service-card-new">
-                    <div>
-                        <div class="service-icon"><i class="fas fa-shield-alt"></i></div>
-                        <h3>Revisión Completa de Seguridad</h3>
-                        <p>Analizamos todos los puntos donde tu empresa podría estar en riesgo y te explicamos de manera simple qué necesitas proteger.</p>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <img src="fotos/auditorias1.png" alt="Auditorías de Seguridad" loading="lazy" width="240" height="240">
                     </div>
-                    <span class="pricing-highlight">Evaluación Gratuita</span>
+                    <h3>1. Auditorías de Seguridad</h3>
+                    <p>Evaluación completa de tu infraestructura digital</p>
+                    <span class="service-price">$0</span>
                 </div>
                 
-                <div class="service-card-new">
-                    <div>
-                        <div class="service-icon"><i class="fas fa-eye"></i></div>
-                        <h3>Vigilancia 24/7 - Tu Guardia Digital</h3>
-                        <p>Cuidamos tu empresa las 24 horas del día, todos los días del año. Si algo extraño sucede, actuamos inmediatamente.</p>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <img src="fotos/monitoreo2.png" alt="Monitoreo de Redes" loading="lazy" width="240" height="240">
                     </div>
-                    <span class="pricing-highlight">20% más económico</span>
+                    <h3>2. Monitoreo de Redes</h3>
+                    <p>Supervisión 24/7 de tu red corporativa</p>
+                    <span class="service-price">$0</span>
                 </div>
                 
-                <div class="service-card-new">
-                    <div>
-                        <div class="service-icon"><i class="fas fa-users-cog"></i></div>
-                        <h3>Cumplimiento Legal Simplificado</h3>
-                        <p>Te ayudamos a cumplir con todas las normas y regulaciones de seguridad sin que tengas que convertirte en un experto legal.</p>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <img src="fotos/consultoria3.jpg" alt="Consultoría en Ciberseguridad" class="consultoria-img" loading="lazy" width="280" height="280">
                     </div>
-                    <span class="pricing-highlight">Paquetes Escalables</span>
+                    <h3>3. Consultoría en Ciberseguridad</h3>
+                    <p>Asesoramiento experto personalizado</p>
+                    <span class="service-price">$0</span>
                 </div>
                 
-                <div class="service-card-new">
-                    <div>
-                        <div class="service-icon"><i class="fas fa-graduation-cap"></i></div>
-                        <h3>Capacitación Práctica para tu Equipo</h3>
-                        <p>Enseñamos a tu equipo cómo mantenerse seguro en el día a día, con consejos prácticos y fáciles de aplicar.</p>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <img src="fotos/implementacion4.png" alt="Implementación de Sistemas de Seguridad" loading="lazy" width="240" height="240">
                     </div>
-                    <span class="pricing-highlight">Descuentos Anuales</span>
+                    <h3>4. Implementación de Sistemas de Seguridad</h3>
+                    <p>Configuración de sistemas de seguridad</p>
+                    <span class="service-price">$0</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="iot-section">
+    <section id="servicios" class="iot-section">
         <div class="container">
-            <h2>Evaluación Gratuita - Sin Compromiso</h2>
+            <h2>Servicios de Seguridad IoT</h2>
             <p class="iot-description">
-                Comenzamos ofreciéndote una evaluación completamente gratuita de la seguridad de tu empresa. 
-                Sin tecnicismos, sin compromisos. Solo queremos que sepas exactamente dónde estás parado.
+                Los dispositivos IoT conectan el mundo físico y digital, pero también abren nuevas puertas para los atacantes. 
+                Este servicio asegura la protección de dispositivos inteligentes, redes y datos asociados a través de soluciones 
+                personalizadas para entornos IoT. Esto incluye dispositivos industriales, domésticos, de salud, transporte y más.
             </p>
             
             <div class="iot-services">
                 <div class="iot-card">
-                    <i class="fas fa-search" style="font-size: 48px;"></i>
-                    <h3>1. Te Contamos Qué Encontramos</h3>
+                    <div class="iot-image">
+                        </div>
+                    <h3>1. Evaluación de Vulnerabilidades IoT</h3>
                     <div class="iot-details">
-                        <p><strong>Revisamos tu empresa y te explicamos de manera simple dónde están los riesgos.</strong></p>
+                        <p><strong>Identificación de posibles brechas en dispositivos, firmware y protocolos de comunicación.</strong></p>
                         <ul>
-                            <li>✓ Revisión básica de tus sistemas</li>
-                            <li>✓ Identificamos los puntos más importantes a proteger</li>
-                            <li>✓ Sabes exactamente cómo está tu empresa hoy</li>
-                            <li>✓ Recomendaciones claras de qué hacer primero</li>
+                            <li>Pruebas de penetración específicas para dispositivos IoT</li>
+                            <li><strong>Beneficios:</strong></li>
+                            <li>Identificación proactiva de riesgos antes de que sean explotados</li>
+                            <li>Informes detallados con soluciones recomendadas</li>
                         </ul>
                     </div>
-                    <a href="#contacto" class="cta-button">Solicitar Evaluación</a>
+                    <button class="cta-button">Elegir Producto</button>
                 </div>
                 
                 <div class="iot-card">
-                    <i class="fas fa-chart-line" style="font-size: 48px;"></i>
-                    <h3>2. Creamos Tu Plan de Protección</h3>
+                    <div class="iot-image">
+                        </div>
+                    <h3>2. Implementación de Sistemas de Seguridad IoT</h3>
                     <div class="iot-details">
-                        <p><strong>Diseñamos un plan paso a paso, pensado específicamente para tu empresa y tu presupuesto.</strong></p>
+                        <p><strong>Configuración de firewalls, cifrado de datos y herramientas de autenticación para dispositivos conectados.</strong></p>
                         <ul>
-                            <li>✓ Plan adaptado a tu tipo de negocio</li>
-                            <li>✓ Pasos claros y fechas realistas</li>
-                            <li>✓ Avanzas de a poco, sin grandes inversiones</li>
-                            <li>✓ Cada peso que inviertas tiene un propósito claro</li>
+                            <li>Segmentación de redes para aislar dispositivos IoT vulnerables</li>
+                            <li><strong>Beneficios:</strong></li>
+                            <li>Reducción de superficies de ataque en la red IoT</li>
+                            <li>Protección robusta contra accesos no autorizados y ataques DDoS</li>
                         </ul>
                     </div>
-                     <a href="#contacto" class="cta-button">Ver Ejemplo</a>
+                    <button class="cta-button">Elegir Producto</button>
                 </div>
                 
                 <div class="iot-card">
-                    <i class="fas fa-handshake" style="font-size: 48px;"></i>
-                    <h3>3. Te Acompañamos en el Camino</h3>
+                    <div class="iot-image">
+                        </div>
+                    <h3>3. Monitoreo y Respuesta en Tiempo Real</h3>
                     <div class="iot-details">
-                        <p><strong>No te dejamos solo. Nuestro equipo está siempre disponible para ayudarte y responder tus dudas.</strong></p>
+                        <p><strong>Supervisión constante del tráfico y comportamiento de los dispositivos IoT. Detección y mitigación de amenazas en tiempo real.</strong></p>
                         <ul>
-                            <li>✓ Soporte en español cuando lo necesites</li>
-                            <li>✓ Tu seguridad mejora constantemente</li>
-                            <li>✓ Te concentras en hacer crecer tu negocio</li>
+                            <li><strong>Beneficios:</strong></li>
+                            <li>Minimización de interrupciones en el funcionamiento de dispositivos críticos</li>
+                            <li>Respuesta inmediata a intentos de explotación de vulnerabilidades</li>
                         </ul>
                     </div>
-                     <a href="#contacto" class="cta-button">Conocer Más</a>
+                    <button class="cta-button">Elegir Producto</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="mision" class="mission-vision">
+    <section class="mission-vision">
         <div class="container">
-            <h2>Misión y Visión</h2>
+            <h2>Lineamientos y Directrices</h2>
+            
             <div class="mv-grid">
                 <div class="mv-card">
                     <h3>Misión</h3>
                     <p>
-                        Proteger el presente y el futuro digital de las empresas en Chile, entregando soluciones de 
-                        ciberseguridad robustas y fáciles de entender, a través de un equipo de expertos 
-                        cercanos y comprometidos.
+                        Proteger y fortalecer el ecosistema digital de nuestros clientes mediante soluciones innovadoras, 
+                        confiables y personalizadas en ciberseguridad, ingeniería informática y tecnología IoT. 
+                        Nos comprometemos a garantizar la integridad, disponibilidad y confidencialidad de sus datos, 
+                        impulsando un entorno más seguro y preparado para enfrentar los desafíos del mundo digital.
                     </p>
                 </div>
+                
                 <div class="mv-card">
                     <h3>Visión</h3>
                     <p>
-                        Ser líderes en soluciones tecnológicas de seguridad digital, destacándonos por nuestra 
-                        innovación y profesionalismo, para construir un mundo digital más seguro donde las 
-                        organizaciones puedan prosperar.
+                        Ser reconocidos como líderes en soluciones tecnológicas de seguridad digital, destacándonos por 
+                        nuestra innovación, profesionalismo y capacidad de adaptación a las necesidades cambiantes del mercado. 
+                        Aspiramos a construir un mundo digital más seguro, donde la tecnología y la confianza vayan de la mano, 
+                        y donde las organizaciones y personas puedan prosperar sin preocuparse por amenazas tecnológicas.
                     </p>
                 </div>
             </div>
@@ -217,26 +395,66 @@
     <section id="contacto" class="contact-section">
         <div class="container">
             <div class="contact-content-wrapper">
+                <!-- Información de contacto (izquierda en PC, arriba en móvil) -->
                 <div class="contact-info-wrapper">
                     <h3>Información de Contacto</h3>
                     <div class="contact-info-items">
-                        <div class="contact-item"><i class="fas fa-map-marker-alt"></i><span>Santiago, Chile</span></div>
-                        <div class="contact-item"><i class="fas fa-envelope"></i><span>contacto@guardiadigital.cl</span></div>
-                        <div class="contact-item"><i class="fas fa-phone"></i><span>+56 9 59978963</span></div>
-                        <div class="contact-item"><i class="fab fa-whatsapp"></i><a href="#" target="_blank" rel="noopener noreferrer"><span>WhatsApp</span></a></div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>La Serena, Chile</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>danielfigueroa1879@gmail.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>959978963</span>
+                        </div>
+                        <div class="contact-item whatsapp-item">
+                            <i class="fab fa-whatsapp"></i>
+                            <a href="https://wa.me/qr/KQFJFHZLQRHXE1" target="_blank" rel="noopener noreferrer">
+                                <span>WhatsApp</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
                 
+                <!-- Formulario (derecha en PC, abajo en móvil) -->
                 <div class="contact-form-wrapper">
-                    <h2>Solicitar Evaluación Gratuita</h2>
-                    <form class="newsletter-form" id="contactForm">
-                        <input type="text" name="nombre" placeholder="Nombre completo" required>
-                        <input type="email" name="email" placeholder="Correo electrónico" required>
-                        <input type="tel" name="telefono" placeholder="Teléfono">
-                        <input type="text" name="empresa" placeholder="Nombre de la empresa">
-                        <textarea name="mensaje" placeholder="Describe brevemente tus necesidades..." rows="4"></textarea>
-                        <button type="submit">Solicitar Evaluación</button>
+                    <h2>Formulario de Inscripción</h2>
+                    
+                    <!-- FORMULARIO CORREGIDO PARA NETLIFY -->
+                    <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" action="https://cyberseg.netlify.app/gracias.html" class="newsletter-form" id="contact-form">
+                        <!-- Campo oculto requerido por Netlify -->
+                        <input type="hidden" name="form-name" value="contact" />
+                        
+                        <!-- Campo honeypot oculto para prevenir spam -->
+                        <p style="display: none;">
+                            <label>No llenes este campo si eres humano: <input name="bot-field" /></label>
+                        </p>
+                        
+                        <input type="text" name="nombre" placeholder="Nombre" maxlength="100" required>
+                        <input type="email" name="email" placeholder="Email" required maxlength="100">
+                        <input type="tel" name="telefono" placeholder="Teléfono" maxlength="20">
+                        <input type="text" name="asunto" placeholder="Asunto" maxlength="200">
+                        <textarea name="mensaje" placeholder="Escribe aquí..." rows="5" required maxlength="1000"></textarea>
+                        
+                        <button type="submit" id="submit-btn">Suscribirse</button>
                     </form>
+
+                    <!-- Mensaje de confirmación -->
+                    <div id="form-messages" style="display: none; margin-top: 20px;">
+                        <div id="success-message" style="display: none; background: linear-gradient(145deg, #28a745, #20c997); color: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);">
+                            <h3 style="margin: 0 0 10px 0; color: white;">¡Mensaje Enviado!</h3>
+                            <p style="margin: 0; color: white;">Gracias por contactarnos. Te responderemos pronto.</p>
+                        </div>
+                        
+                        <div id="error-message" style="display: none; background: linear-gradient(145deg, #dc3545, #e74c3c); color: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);">
+                            <h3 style="margin: 0 0 10px 0; color: white;">Error al Enviar</h3>
+                            <p style="margin: 0; color: white;">Hubo un problema. Por favor, intenta nuevamente.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -246,254 +464,110 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>GUARDIA DIGITAL</h3>
-                    <p>Tu aliado confiable en ciberseguridad</p>
+                    <h3>RECYBERSEG</h3>
+                    <p>+569 59978963</p>
                     <div class="social-links">
-                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" aria-label="Imprimir"><i class="fas fa-print"></i></a>
+                        <a href="https://wa.me/qr/KQFJFHZLQRHXE1" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://www.linkedin.com/in/danieleliasfigueroachacama/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" onclick="window.print(); return false;" aria-label="Imprimir"><i class="fas fa-print"></i></a>
                     </div>
                 </div>
             </div>
+            
             <div class="footer-bottom">
-                <p>&copy;2025 by Guardia Digital. Todos los derechos reservados.</p>
+                <p>&copy;2025 by RECYBERSEG.</p>
                 <div class="signature">
-                    <p><strong>Universidad SEK</strong> - Plan de Marketing Digital</p>
+                    <p><strong>Daniel Figueroa Ch.</strong></p>
+                    <p>Ingeniero en Informática</p>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- CHATBOT -->
-    <button id="chat-toggle-button" aria-label="Abrir chat"><i class="fas fa-comments"></i></button>
-    <div id="chatbot-container">
+    <!-- ===== Chatbot de IA ===== -->
+    <button id="chat-toggle-button" class="chat-toggle-button">
+        <!-- Icono SVG moderno -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+    </button>
+    
+    <div id="chatbot-container" class="chatbot-container">
         <div class="chatbot-header">
-             <div class="chatbot-title"><i class="fas fa-shield-alt"></i> Cyber Asistente</div>
-             <button id="close-chat-btn" aria-label="Cerrar chat"><i class="fas fa-times"></i></button>
+            <h3>Asistente Virtual</h3>
+            <button id="close-chat-btn">&times;</button>
         </div>
-        <div id="chatbot-messages"></div>
-        <div id="chatbot-loading" style="display: none;">Escribiendo...</div>
-        <form id="chatbot-form" class="chatbot-input-container">
-            <input type="text" id="chatbot-input" placeholder="Escribe tu pregunta..." autocomplete="off">
-            <button type="submit" aria-label="Enviar"><i class="fas fa-paper-plane"></i></button>
+        <div id="chatbot-messages" class="chatbot-messages">
+             <div class="message bot-message">
+                <p>¡Hola! Soy el asistente virtual de RECYBERSEG. ¿Cómo puedo ayudarte hoy?</p>
+            </div>
+        </div>
+        <div id="chatbot-loading" class="loading-indicator" style="display: none;">
+            <span>.</span><span>.</span><span>.</span>
+        </div>
+        <form id="chatbot-form" class="chatbot-form">
+            <input type="text" id="chatbot-input" placeholder="Escribe tu pregunta..." autocomplete="off" required>
+            <button type="submit">
+                <i class="fas fa-paper-plane"></i>
+            </button>
         </form>
     </div>
-    
+    <!-- ===== Fin Chatbot de IA ===== -->
+
+    <!-- Scripts optimizados con carga diferida -->
+    <script src="menu-script.js" defer></script>
+    <script src="chatbot.js" defer></script>
+
+    <!-- Cargar Firebase y contador de forma diferida después del load -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // --- Lógica General de la Página ---
-            const header = document.getElementById('header');
-            const menuButton = document.getElementById('mobile-menu');
-            const mobileMenu = document.getElementById('nav-menu');
-            
-            // Header con scroll
-            window.addEventListener('scroll', function() {
-                if (window.scrollY > 50) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
+        window.addEventListener('load', function() {
+            function loadScript(src, callback) {
+                const script = document.createElement('script');
+                script.src = src;
+                script.defer = true;
+                if (callback) script.onload = callback;
+                document.head.appendChild(script);
+            }
+            // Firebase SDK con loading diferido
+            loadScript('https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js', function() {
+                loadScript('https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js', function() {
+                    // Cargar el contador después de Firebase
+                    loadScript('firebase-counter.js');
+                });
             });
-
-            // Menú móvil
-            if (menuButton && mobileMenu) {
-                menuButton.addEventListener('click', function() {
-                    mobileMenu.classList.toggle('active');
-                    menuButton.classList.toggle('active');
-                });
-
-                document.querySelectorAll('.nav-link').forEach(link => {
-                    link.addEventListener('click', () => {
-                         mobileMenu.classList.remove('active');
-                         menuButton.classList.remove('active');
-                    });
-                });
-            }
-
-            // --- CHATBOT CON SISTEMA DE RESPALDO ---
-            const chatToggleButton = document.getElementById('chat-toggle-button');
-            const chatbotContainer = document.getElementById('chatbot-container');
-            const closeChatBtn = document.getElementById('close-chat-btn');
-            const chatbotForm = document.getElementById('chatbot-form');
-            const chatbotInput = document.getElementById('chatbot-input');
-            const chatbotMessages = document.getElementById('chatbot-messages');
-            const loadingIndicator = document.getElementById('chatbot-loading');
-
-            // Configuración de APIs con respaldo
-            const API_CONFIGS = [
-                {
-                    name: "Gemini 2.0 Flash",
-                    key: "AIzaSyB2Gv6BvDX5UpWUMnIsx-CxyL5s8fWezyc",
-                    url: "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent",
-                    timeout: 10000
-                },
-                {
-                    name: "Gemini 1.5 Flash (respaldo)",
-                    key: "AIzaSyB2Gv6BvDX5UpWUMnIsx-CxyL5s8fWezyc",
-                    url: "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent",
-                    timeout: 15000
-                }
-            ];
-
-            // Respuestas predeterminadas como respaldo final
-            const FALLBACK_RESPONSES = {
-                saludo: "¡Hola! Soy el Cyber Asistente de Guardia Digital. Aunque tengo algunos problemas técnicos, puedo ayudarte con información básica sobre nuestros servicios de ciberseguridad.",
-                servicios: "Ofrecemos: 1) Revisión Completa de Seguridad, 2) Vigilancia 24/7, 3) Cumplimiento Legal Simplificado, y 4) Capacitación para tu Equipo. ¿Te interesa alguno en particular?",
-                contacto: "Puedes contactarnos en: contacto@guardiadigital.cl o llamar al +56 9 59978963. También puedes completar el formulario en esta página.",
-                phishing: "El phishing son ataques que usan correos falsos para robar información. Siempre verifica el remitente antes de hacer clic en enlaces.",
-                malware: "El malware es software malicioso. Mantén tu antivirus actualizado y no descargues archivos de fuentes no confiables.",
-                default: "Disculpa, tengo problemas técnicos temporales. Para ayuda inmediata, contacta a nuestro equipo en contacto@guardiadigital.cl o +56 9 59978963."
-            };
-
-            if (chatToggleButton && chatbotContainer && closeChatBtn) {
-                chatToggleButton.addEventListener('click', () => chatbotContainer.classList.toggle('active'));
-                closeChatBtn.addEventListener('click', () => chatbotContainer.classList.remove('active'));
-            }
-
-            const addMessage = (sender, text) => {
-                const messageContainer = document.createElement('div');
-                messageContainer.classList.add('message', `${sender}-message`);
-                
-                const messageBubble = document.createElement('p');
-                messageBubble.textContent = text;
-                
-                messageContainer.appendChild(messageBubble);
-                chatbotMessages.appendChild(messageContainer);
-                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-            };
-
-            // Función para detectar tipo de pregunta
-            const detectQuestionType = (input) => {
-                const lowInput = input.toLowerCase();
-                if (lowInput.includes('hola') || lowInput.includes('buenas')) return 'saludo';
-                if (lowInput.includes('servicio') || lowInput.includes('ofrecen')) return 'servicios';
-                if (lowInput.includes('contacto') || lowInput.includes('teléfono') || lowInput.includes('email')) return 'contacto';
-                if (lowInput.includes('phishing') || lowInput.includes('fishing')) return 'phishing';
-                if (lowInput.includes('malware') || lowInput.includes('virus')) return 'malware';
-                return 'default';
-            };
-
-            // Función de respaldo con respuestas predeterminadas
-            const getFallbackResponse = (userInput) => {
-                const questionType = detectQuestionType(userInput);
-                return FALLBACK_RESPONSES[questionType] || FALLBACK_RESPONSES.default;
-            };
-
-            // Función principal para obtener respuesta con múltiples intentos
-            const getAIResponse = async (userInput) => {
-                loadingIndicator.style.display = 'block';
-                
-                const prompt = `Eres un asistente virtual para GUARDIA DIGITAL, una empresa chilena de ciberseguridad. Tu nombre es 'Cyber Asistente'. 
-
-Servicios que ofrecemos:
-1. **Revisión Completa de Seguridad**: Analizamos riesgos y vulnerabilidades
-2. **Vigilancia 24/7**: Monitoreo continuo de tu empresa
-3. **Cumplimiento Legal Simplificado**: Ayuda con normas y regulaciones
-4. **Capacitación Práctica**: Entrenamiento para tu equipo
-
-Misión: Proteger el ecosistema digital de empresas chilenas con soluciones comprensibles.
-Visión: Ser líderes en seguridad digital con innovación y profesionalismo.
-
-Contacto: contacto@guardiadigital.cl | +56 9 59978963 | Santiago, Chile
-
-Responde de forma amable, profesional y concisa en español. Si no sabes algo específico, ofrece contactar con un especialista.
-
-Pregunta: "${userInput}"`;
-
-                // Intentar con cada configuración de API
-                for (let i = 0; i < API_CONFIGS.length; i++) {
-                    const config = API_CONFIGS[i];
-                    
-                    try {
-                        console.log(`🔄 Intentando con ${config.name}...`);
-                        
-                        const controller = new AbortController();
-                        const timeoutId = setTimeout(() => controller.abort(), config.timeout);
-                        
-                        const response = await fetch(`${config.url}?key=${config.key}`, {
-                            method: 'POST',
-                            headers: { 
-                                'Content-Type': 'application/json',
-                                'User-Agent': 'GuardiaDigital-Chatbot/1.0'
-                            },
-                            body: JSON.stringify({
-                                contents: [{ parts: [{ text: prompt }] }],
-                                generationConfig: {
-                                    temperature: 0.7,
-                                    maxOutputTokens: 500
-                                }
-                            }),
-                            signal: controller.signal
-                        });
-
-                        clearTimeout(timeoutId);
-
-                        if (response.ok) {
-                            const result = await response.json();
-                            const botResponse = result.candidates?.[0]?.content?.parts?.[0]?.text;
-                            
-                            if (botResponse && botResponse.trim()) {
-                                console.log(`✅ Éxito con ${config.name}`);
-                                addMessage('bot', botResponse.trim());
-                                return;
-                            }
-                        } else {
-                            const errorData = await response.json();
-                            console.log(`❌ Error ${response.status} con ${config.name}:`, errorData.error?.message);
-                        }
-                        
-                    } catch (error) {
-                        console.log(`❌ Fallo con ${config.name}:`, error.message);
-                        // Continúa con la siguiente configuración
-                    }
-                }
-
-                // Si todas las APIs fallan, usar respuesta predeterminada
-                console.log('🔄 Usando respuesta de respaldo...');
-                const fallbackResponse = getFallbackResponse(userInput);
-                addMessage('bot', fallbackResponse);
-                
-                loadingIndicator.style.display = 'none';
-            };
-
-            // Manejo del formulario del chatbot
-            if (chatbotForm) {
-                chatbotForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    const userInput = chatbotInput.value.trim();
-                    if (userInput) {
-                        addMessage('user', userInput);
-                        chatbotInput.value = '';
-                        getAIResponse(userInput);
-                    }
-                });
-            }
-
-            // Mensaje de bienvenida al abrir el chatbot
-            let welcomeShown = false;
-            chatToggleButton.addEventListener('click', () => {
-                if (!welcomeShown && chatbotContainer.classList.contains('active')) {
-                    setTimeout(() => {
-                        addMessage('bot', '¡Hola! Soy el Cyber Asistente de Guardia Digital. ¿En qué puedo ayudarte hoy? Puedes preguntarme sobre nuestros servicios de ciberseguridad, consejos de seguridad, o información de contacto.');
-                        welcomeShown = true;
-                    }, 500);
-                }
-            });
-
-            // Diagnóstico automático al cargar la página
-            console.log('🔧 DIAGNÓSTICO DEL CHATBOT:');
-            console.log('📅 Fecha:', new Date().toISOString());
-            console.log('🌐 URL actual:', window.location.href);
-            console.log('🔑 APIs configuradas:', API_CONFIGS.length);
-            console.log('💾 Respuestas de respaldo:', Object.keys(FALLBACK_RESPONSES).length);
-            console.log('✅ Sistema iniciado correctamente');
         });
     </script>
-    
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
-    <script src="firebase-counter.js"></script>
-    <script src="pwa-install.js"></script>
+
+    <!-- Script optimizado para manejo del formulario -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Optimización: Variables pre-declaradas
+            let form = document.getElementById('contact-form');
+            let submitBtn = document.getElementById('submit-btn');
+            
+            if (!form || !submitBtn) return;
+
+            // Event listener optimizado para el formulario
+            form.addEventListener('submit', function(e) {
+                // Feedback inmediato al usuario
+                submitBtn.textContent = 'Enviando...';
+                submitBtn.disabled = true;
+                submitBtn.style.opacity = '0.7';
+                
+                // Simulación para desarrollo local
+                if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                    e.preventDefault();
+                    setTimeout(() => {
+                        alert('Simulación: Formulario enviado con éxito.');
+                        submitBtn.textContent = 'Suscribirse';
+                        submitBtn.disabled = false;
+                        submitBtn.style.opacity = '1';
+                        form.reset();
+                    }, 1000);
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>
