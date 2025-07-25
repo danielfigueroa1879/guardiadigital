@@ -31,7 +31,7 @@ const generateResponse = async (chatElement) => {
     };
 
     // Gemini API details. The API key is handled by the environment.
-    const apiKey = ""; 
+    const apiKey = "AIzaSyDwJx2U16H39dxdCN9SXkn-_AWyydTAx7U"; 
     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
     
     // **FIX:** Construct the payload with the 'system_instruction' field separate from 'contents'.
