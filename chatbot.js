@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
         Aquí está la pregunta del usuario: "${userInput}"`;
 
         // Clave de API proporcionada por el usuario
-        const apiKey = "AIzaSyAq7n6WM4WuPKR0CZzIUgAUdI53fm4CpoA";
+        const apiKey = "AIzaSyDwJx2U16H39dxdCN9SXkn-_AWyydTAx7U";
         const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
         try {
