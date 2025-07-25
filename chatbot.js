@@ -6,7 +6,8 @@ const sendChatBtn = document.querySelector(".chat-input span");
 
 let userMessage = null; // Variable to store user's message
 const inputInitHeight = chatInput.scrollHeight;
-const chatHistory = []; // Array to store conversation history
+// This will store the actual user-bot conversation
+const chatHistory = []; 
 
 const createChatLi = (message, className) => {
     // Create a chat <li> element with passed message and className
@@ -22,22 +23,32 @@ const generateResponse = async (chatElement) => {
     // This function uses the Gemini API and maintains conversation history
     const messageElement = chatElement.querySelector("p");
 
-    // Add the user's message to the history
+    // Add the user's current message to the persistent chat history
     chatHistory.push({ role: "user", parts: [{ text: userMessage }] });
 
-    // System instruction to give the chatbot context about its role
-    const systemInstruction = {
-        parts: [{ text: "Eres un asistente virtual para GuardiaDigital, una empresa de ciberseguridad. Responde de manera profesional, amigable y concisa. Ayuda a los usuarios con sus consultas sobre ciberseguridad y los servicios de la empresa: Auditorías de Seguridad, Consultoría, Implementación de Controles y Monitoreo de Seguridad." }]
-    };
+    // **NEW STRATEGY:** Create a temporary conversation array for the API call.
+    // This array includes a system-like prompt at the beginning to provide context,
+    // which is a more robust method than using 'system_instruction'.
+    const apiConversation = [
+        {
+            role: "user",
+            parts: [{ text: "Eres un asistente virtual para GuardiaDigital, una empresa de ciberseguridad. Responde de manera profesional, amigable y concisa. Ayuda a los usuarios con sus consultas sobre ciberseguridad y los servicios de la empresa: Auditorías de Seguridad, Consultoría, Implementación de Controles y Monitoreo de Seguridad." }]
+        },
+        {
+            role: "model",
+            parts: [{ text: "Entendido. Estoy listo para ayudar como asistente virtual de GuardiaDigital." }]
+        },
+        // Now add the actual conversation history
+        ...chatHistory
+    ];
 
     // Gemini API details. The API key is handled by the environment.
-    const apiKey = "AIzaSyDwJx2U16H39dxdCN9SXkn-_AWyydTAx7U"; 
+    const apiKey = ""; 
     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
     
-    // **FIX:** Construct the payload with the 'system_instruction' field separate from 'contents'.
+    // Construct the payload with the full conversation including the context prompt
     const payload = {
-        contents: chatHistory,
-        system_instruction: systemInstruction
+        contents: apiConversation // Send the temporary array with context
     };
 
     const requestOptions = {
@@ -64,10 +75,9 @@ const generateResponse = async (chatElement) => {
         if (result.candidates && result.candidates.length > 0 && result.candidates[0].content.parts[0].text) {
             const botResponse = result.candidates[0].content.parts[0].text.trim();
             messageElement.textContent = botResponse;
-            // Add the bot's response to the history
+            // Add the bot's actual response to the persistent chat history
             chatHistory.push({ role: "model", parts: [{ text: botResponse }] });
         } else {
-            // Handle cases where the response structure is unexpected
             throw new Error("Respuesta de API no válida o vacía.");
         }
     } catch (error) {
