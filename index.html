@@ -45,6 +45,14 @@
 
 
     
+    <!-- FONDO VERDE OSCURO FUERA DEL CONTAINER (solo PC) -->
+    <style>
+        @media (min-width: 1024px) {
+            html, body {
+                background-color: #0d2b17 !important;
+            }
+        }
+    </style>
 </head>
 <body>
     <header class="header" id="header">
@@ -222,7 +230,7 @@
                     <h3>Información de Contacto</h3>
                     <div class="contact-info-items">
                         <div class="contact-item"><i class="fas fa-map-marker-alt"></i><span>Santiago, Chile</span></div>
-                        <div class="contact-item"><i class="fas fa-envelope"></i><span>contacto@guardiadigital.cl</span></div>
+                        <div class="contact-item"><i class="fas fa-envelope"></i><span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d7b4b8b9a3b6b4a3b897b0a2b6a5b3beb6b3beb0bea3b6bbf9b4bb">[email&#160;protected]</a></span></div>
                         <div class="contact-item"><i class="fas fa-phone"></i><span>+56 9 XXXX XXXX</span></div>
                         <div class="contact-item"><i class="fab fa-whatsapp"></i><a href="#" target="_blank" rel="noopener noreferrer"><span>WhatsApp</span></a></div>
                     </div>
@@ -279,7 +287,7 @@
             <button type="submit" aria-label="Enviar"><i class="fas fa-paper-plane"></i></button>
         </form>
     </div>
- <script>
+ <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     document.addEventListener('DOMContentLoaded', function() {
         // --- Lógica General de la Página ---
         const header = document.getElementById('header');
@@ -394,9 +402,4 @@
     });
 </script>
     
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
-    <script src="firebase-counter.js"></script>
-
-</body>
-</html>
+    <
